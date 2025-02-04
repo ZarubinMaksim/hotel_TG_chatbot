@@ -20,7 +20,7 @@ const sendRoomsList = (bot, chatId) => {
 }
 
 
-const sendRoomInfo = async(bot, chatId, data, mediaGroupIdsToDelete) => {
+const sendRoomInfo = async(bot, chatId, data) => {
     await bot.sendMediaGroup(chatId, data.images);
     await bot.sendMessage(chatId, 'Нажмите ниже, для того, чтобы забронировать номер', {
       reply_markup: {

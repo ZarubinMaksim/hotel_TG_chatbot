@@ -103,10 +103,10 @@ Guest room and lastname - ${message.text}`
   return messageData
 }
 
-async function sendWithLoading(chatId, nextFunction) {
+const sendWithLoading = async(chatId, nextFunction, callback) => {
   try {
     await bot.sendChatAction(chatId, 'typing');
-    await nextFunction(bot, chatId)
+    await nextFunction(bot, chatId, callback)
   } catch (error) {
     console.log('Error', error)
   }
@@ -139,7 +139,7 @@ bot.on('message', (msg) => {
     const roomTitle = msg.text; // Тайтл комнаты из сообщения
     // Ищем комнату в списке по тайтлу
     const callback = Object.values(roomsDescriptions).find(value => value.title === roomTitle);
-    sendRoomInfo(bot, chatId, callback, mediaGroupIdsToDelete)
+    sendWithLoading(chatId, sendRoomInfo, callback)
   } 
   else if (/🛠 Что-то не работает|engineer/.test(text)) {
     keyRequest = 'Eng'
@@ -156,7 +156,7 @@ bot.on('message', (msg) => {
   else if (restaurantsRegex.test(text)) {
     const restaurantTitle = msg.text
     const callback = Object.values(restaurantsDescriptions).find(value => value.title === restaurantTitle)
-    sendRestaurantInfo(bot, chatId, callback)  
+    sendWithLoading(chatId, sendRestaurantInfo, callback)
   } 
   else if (/Спецпредложения|special/.test(text)) {
     keyRequest = 'offers'
@@ -165,7 +165,7 @@ bot.on('message', (msg) => {
   else if (specialOffersRegex.test(text)) {
     const specialOfferTitle = msg.text
     const callback = Object.values(specialOffersDescription).find(value => value.title === specialOfferTitle)
-    sendSpecialOfferInfo(bot, chatId, callback)  
+    sendWithLoading(chatId, sendSpecialOfferInfo, callback)
   } 
   else if (/Инфраструктура|infrastructure/.test(text)) {
     keyRequest = 'infrastructure'
@@ -174,7 +174,7 @@ bot.on('message', (msg) => {
   else if (infrastructuresRegex.test(text)) {
     const infrastructureTitle = msg.text
     const callback = Object.values(infrastructureDescriptions).find(value => value.title === infrastructureTitle)
-    sendInfrastructureInfo(bot, chatId, callback)  
+    sendWithLoading(chatId, sendInfrastructureInfo, callback)
   } 
   else if (/Спа|spa/.test(text)) { 
     keyRequest = 'spa'
@@ -183,7 +183,7 @@ bot.on('message', (msg) => {
   else if (spaRegex.test(text)) {
     const spaTitle = msg.text
     const callback = Object.values(spaDescriptions).find(value => value.title === spaTitle)
-    sendSpaDescription(bot, chatId, callback)  
+    sendWithLoading(chatId, sendSpaDescription, callback)
   } 
   else if (/Геолокация|location/.test(text)) {
     keyRequest = 'location'
@@ -196,7 +196,7 @@ bot.on('message', (msg) => {
   else if (servicesRegex.test(text)) {
     const serviceTitle = msg.text
     const callback = Object.values(servicesDescription).find(value => value.title === serviceTitle)
-    sendServiceDescription(bot, chatId, callback)
+    sendWithLoading(chatId, sendServiceDescription, callback)
   } 
   else if (/Оставить отзыв|review/.test(text)) {
     keyRequest = 'review'
@@ -209,12 +209,12 @@ bot.on('message', (msg) => {
   else if (surroundingsRegex.test(text)) {
     const surroundingTitle = msg.text
     const callback = Object.values(surroundingsDescriptions).find(value => value.title === surroundingTitle)
-    sendSurrounding(bot, chatId, callback)  
+    sendWithLoading(chatId, sendSurrounding, callback)
   } 
   else if (surroundingsTitlesAllRegEx.test(text)) {
     const surroundingTitle = msg.text
     const callback = Object.values(surroundingsDescriptions).flatMap(section => Object.values(section.items)).find(item => item.title === surroundingTitle)
-    sendExactSurrounding(bot, chatId, callback)  
+    sendWithLoading(chatId, sendExactSurrounding, callback)
   } 
   else {
     if (keyRequest === 'hsk') {
