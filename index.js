@@ -197,6 +197,7 @@ bot.on('message', (msg) => {
       managerBot.sendMessage(managerChatId, messageData)
     } else if (keyRequest === 'review') {
       getReview(bot,managerBot, chatId, msg)
+      keyRequest = ''
     } else if (keyRequest === 'signIn') {
       const messageData = handleSignInMessage(msg)
       managerBot.sendMessage(managerChatId, messageData)
