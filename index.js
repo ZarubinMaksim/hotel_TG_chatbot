@@ -5,6 +5,7 @@ const tokenManager = '7595558526:AAGVJLInp92m5MH0J-G4eczEfMen4Ma6YHI'
 const bot = new TelegramBot(token, { polling: true })
 module.exports = bot
 
+
 const managerBot = new TelegramBot(tokenManager, { polling: true })
 const mediaGroupIdsToDelete = []
 const sendMainMenu = require('./components/start')
@@ -102,93 +103,120 @@ Guest room and lastname - ${message.text}`
   return messageData
 }
 
+async function sendWithLoading(chatId, nextFunction) {
+  try {
+    await bot.sendChatAction(chatId, 'typing');
+    await nextFunction(bot, chatId)
+  } catch (error) {
+    console.log('Error', error)
+  }
+}
+
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
 
   if (/\/start/.test(text)) {
-    sendMainMenu(bot, chatId)
-  } else if (/В главное меню 🔙/.test(text)) {
+    sendWithLoading(chatId, sendMainMenu)
+  } 
+  else if (/В главное меню 🔙/.test(text)) {
     keyRequest = 'main_menu'
-    sendMainMenu(bot, chatId)
-  } else if (/Register/.test(text)) {
+    sendWithLoading(chatId, sendMainMenu)
+  } 
+  else if (/Register/.test(text)) {
     keyRequest = 'signIn' 
     bot.sendMessage(chatId, 'Для регистрации напишите Номер комнаты и фамилию латинскими буквами')
-  } else if (/Об Отеле/.test(text)) {
+  } 
+  else if (/Об Отеле/.test(text)) {
     keyRequest = 'about_hotel'
-    sendAbout(bot, chatId)
-  } else if (/Наши номера|rooms/.test(text)) {
+    sendWithLoading(chatId, sendAbout)
+  } 
+  else if (/Наши номера|rooms/.test(text)) {
     keyRequest = 'rooms'
-    sendRoomsList(bot, chatId)
-  } else if (roomsRegex.test(text)) {
+    sendWithLoading(chatId, sendRoomsList)
+  } 
+  else if (roomsRegex.test(text)) {
     const roomTitle = msg.text; // Тайтл комнаты из сообщения
     // Ищем комнату в списке по тайтлу
     const callback = Object.values(roomsDescriptions).find(value => value.title === roomTitle);
     sendRoomInfo(bot, chatId, callback, mediaGroupIdsToDelete)
-  } else if (/🛠 Что-то не работает|engineer/.test(text)) {
+  } 
+  else if (/🛠 Что-то не работает|engineer/.test(text)) {
     keyRequest = 'Eng'
-    console.log(keyRequest)
-    sendEngeners(bot, chatId)
-  } else if (/🧹 Нужна уборка|cleaning/.test(text)) {
+    sendWithLoading(chatId, sendEngeners)
+  } 
+  else if (/🧹 Нужна уборка|cleaning/.test(text)) {
     keyRequest = 'hsk'
-    sengHousekeeping(bot, chatId)
-  } else if (/Рестораны|restaurants/.test(text)) {
+    sendWithLoading(chatId, sengHousekeeping)
+  } 
+  else if (/Рестораны|restaurants/.test(text)) {
     keyRequest = 'restaurants'
-    sendRestaurantsList(bot, chatId)
-  } else if (restaurantsRegex.test(text)) {
+    sendWithLoading(chatId, sendRestaurantsList)
+  } 
+  else if (restaurantsRegex.test(text)) {
     const restaurantTitle = msg.text
     const callback = Object.values(restaurantsDescriptions).find(value => value.title === restaurantTitle)
     sendRestaurantInfo(bot, chatId, callback)  
-  } else if (/Спецпредложения|special/.test(text)) {
+  } 
+  else if (/Спецпредложения|special/.test(text)) {
     keyRequest = 'offers'
-    sendSpecialOffers(bot, chatId)
-  } else if (specialOffersRegex.test(text)) {
+    sendWithLoading(chatId, sendSpecialOffers)
+  } 
+  else if (specialOffersRegex.test(text)) {
     const specialOfferTitle = msg.text
     const callback = Object.values(specialOffersDescription).find(value => value.title === specialOfferTitle)
     sendSpecialOfferInfo(bot, chatId, callback)  
-  } else if (/Инфраструктура|infrastructure/.test(text)) {
+  } 
+  else if (/Инфраструктура|infrastructure/.test(text)) {
     keyRequest = 'infrastructure'
-    sendInfrastructureList(bot, chatId)
-  } else if (infrastructuresRegex.test(text)) {
+    sendWithLoading(chatId, sendInfrastructureList)
+  } 
+  else if (infrastructuresRegex.test(text)) {
     const infrastructureTitle = msg.text
     const callback = Object.values(infrastructureDescriptions).find(value => value.title === infrastructureTitle)
     sendInfrastructureInfo(bot, chatId, callback)  
-  } else if (/Спа|spa/.test(text)) { 
+  } 
+  else if (/Спа|spa/.test(text)) { 
     keyRequest = 'spa'
-    sendSpaInfo(bot, chatId)
-  } else if (spaRegex.test(text)) {
+    sendWithLoading(chatId, sendSpaInfo)
+  } 
+  else if (spaRegex.test(text)) {
     const spaTitle = msg.text
     const callback = Object.values(spaDescriptions).find(value => value.title === spaTitle)
     sendSpaDescription(bot, chatId, callback)  
-  } else if (/Геолокация|location/.test(text)) {
+  } 
+  else if (/Геолокация|location/.test(text)) {
     keyRequest = 'location'
-    sendHotelLocation(bot, chatId)
-  } else if (/Услуги|services/.test(text)) {
+    sendWithLoading(chatId, sendHotelLocation)
+  } 
+  else if (/Услуги|services/.test(text)) {
     keyRequest = 'services'
-    sendServicesList(bot, chatId)
-  } else if (servicesRegex.test(text)) {
+    sendWithLoading(chatId, sendServicesList)
+  } 
+  else if (servicesRegex.test(text)) {
     const serviceTitle = msg.text
     const callback = Object.values(servicesDescription).find(value => value.title === serviceTitle)
     sendServiceDescription(bot, chatId, callback)
-  } else if (/Оставить отзыв|review/.test(text)) {
-    keyRequest = 'review'
-    sendPlatformsForReview(bot, chatId)
   } 
-  // else if (/^отзыв[.,!?;:\s]/i.test(text)) {
-  //   getReview(bot,managerBot, chatId, msg)
-  // } 
+  else if (/Оставить отзыв|review/.test(text)) {
+    keyRequest = 'review'
+    sendWithLoading(chatId, sendPlatformsForReview)
+  } 
   else if (/(Что рядом|surroundings|Назад к выбору\s*🔙)$/i.test(text)) {
     keyRequest = 'surroundings'
-    sendSurroundingsList(bot, chatId);
-  } else if (surroundingsRegex.test(text)) {
+    sendWithLoading(chatId, sendSurroundingsList)
+  } 
+  else if (surroundingsRegex.test(text)) {
     const surroundingTitle = msg.text
     const callback = Object.values(surroundingsDescriptions).find(value => value.title === surroundingTitle)
     sendSurrounding(bot, chatId, callback)  
-  } else if (surroundingsTitlesAllRegEx.test(text)) {
+  } 
+  else if (surroundingsTitlesAllRegEx.test(text)) {
     const surroundingTitle = msg.text
     const callback = Object.values(surroundingsDescriptions).flatMap(section => Object.values(section.items)).find(item => item.title === surroundingTitle)
     sendExactSurrounding(bot, chatId, callback)  
-  } else {
+  } 
+  else {
     if (keyRequest === 'hsk') {
       const messageData = handleHskMessage(msg)
       managerBot.sendMessage(managerChatId, messageData)

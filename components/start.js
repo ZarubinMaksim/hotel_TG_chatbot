@@ -1,6 +1,6 @@
 
 const sendMainMenu = (bot, chatId) => {
-  bot.sendMessage(chatId, "Наши услуги", {
+  bot.sendMessage(chatId, "Всё, что вам нужно – в одном меню! 👇🏻 Выберите категорию, и мы подскажем нужную информацию.", {
     reply_markup: {
       keyboard: [
         ['🏨 Об Отеле', '🛏 Наши номера'],
