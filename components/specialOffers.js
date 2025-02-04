@@ -8,7 +8,7 @@ const sendSpecialOffers = (bot, chatId) => {
   .map(offer => offer.title)
   const keyboard = createTwoLinedKeyboard(offers)
 
-  bot.sendMessage(chatId, 'Вот наши спецпредложения', {
+  bot.sendMessage(chatId, 'Ловите лучшие предложения! 🎉 Вот список актуальных акций:', {
     reply_markup: {
       keyboard:  [
         ['В главное меню 🔙'],
