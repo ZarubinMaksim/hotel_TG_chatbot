@@ -13,9 +13,7 @@ const sendServicesList = (bot, chatId) => {
 }
 
 const sendServiceDescription = (bot, chatId, data) => {
-  bot.sendPhoto(chatId, data.img, {
-    caption: data.description
-  })
+  bot.sendMessage(chatId, data.description)
 }
 
 module.exports = { sendServicesList, sendServiceDescription }

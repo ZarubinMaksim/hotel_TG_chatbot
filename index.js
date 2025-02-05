@@ -103,6 +103,42 @@ Guest room and lastname - ${message.text}`
   return messageData
 }
 
+const handleTransferMessage = (message) => {
+  const messageData = `Guest wants to order a trasfet! Please contact guest!
+
+Guest Telegram ID - @${message.from.username},
+Guest Name - ${message.from.first_name}
+Guest room and lastname - ${message.text}`
+  return messageData
+}
+
+const handleWakeupMessage = (message) => {
+  const messageData = `Guest wants to order a wake up call! Please contact guest!
+
+Guest Telegram ID - @${message.from.username},
+Guest Name - ${message.from.first_name}
+Guest room and lastname - ${message.text}`
+  return messageData
+}
+
+const handleBreakfastMessage = (message) => {
+  const messageData = `Guest wants to order a brekfast box! Please contact guest!
+
+Guest Telegram ID - @${message.from.username},
+Guest Name - ${message.from.first_name}
+Guest room and lastname - ${message.text}`
+  return messageData
+}
+
+const handleLuggageMessage = (message) => {
+  const messageData = `Guest needs help with luggage! Please contact guest!
+
+Guest Telegram ID - @${message.from.username},
+Guest Name - ${message.from.first_name}
+Guest room and lastname - ${message.text}`
+  return messageData
+}
+
 const sendWithLoading = async(chatId, nextFunction, callback) => {
   try {
     await bot.sendChatAction(chatId, 'typing');
@@ -196,6 +232,7 @@ bot.on('message', (msg) => {
   else if (servicesRegex.test(text)) {
     const serviceTitle = msg.text
     const callback = Object.values(servicesDescription).find(value => value.title === serviceTitle)
+    keyRequest = callback.keyRequest
     sendWithLoading(chatId, sendServiceDescription, callback)
   } 
   else if (/Оставить отзыв|review/.test(text)) {
@@ -220,15 +257,34 @@ bot.on('message', (msg) => {
     if (keyRequest === 'hsk') {
       const messageData = handleHskMessage(msg)
       managerBot.sendMessage(managerChatId, messageData)
+      keyRequest = ''
     } else if (keyRequest === 'Eng') {
       const messageData = handleEngMessage(msg)
       managerBot.sendMessage(managerChatId, messageData)
+      keyRequest = ''
     } else if (keyRequest === 'review') {
       getReview(bot,managerBot, chatId, msg)
       keyRequest = ''
     } else if (keyRequest === 'signIn') {
       const messageData = handleSignInMessage(msg)
       managerBot.sendMessage(managerChatId, messageData)
+      keyRequest = ''
+    } else if (keyRequest === 'transfer') {
+      const messageData = handleTransferMessage(msg)
+      managerBot.sendMessage(managerChatId, messageData)
+      keyRequest = ''
+    } else if (keyRequest === 'wakeup') {
+      const messageData = handleWakeupMessage(msg)
+      managerBot.sendMessage(managerChatId, messageData)
+      keyRequest = ''
+    } else if (keyRequest === 'breakfast_box') {
+      const messageData = handleBreakfastMessage(msg)
+      managerBot.sendMessage(managerChatId, messageData)
+      keyRequest = ''
+    } else if (keyRequest === 'luggage_service') {
+      const messageData = handleLuggageMessage(msg)
+      managerBot.sendMessage(managerChatId, messageData)
+      keyRequest = ''
     } else {
       const messageData = handleUnidentifiedMessage(msg)
       managerBot.sendMessage(managerChatId, messageData)
