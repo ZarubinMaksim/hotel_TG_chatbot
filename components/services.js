@@ -1,4 +1,4 @@
-const servicesDescription = require("../texts/servicesAndRequestsText")
+const servicesDescription = require("../texts/servicesText")
 
 const sendServicesList = (bot, chatId) => {
   bot.sendMessage(chatId, 'Вот что мы можем предложить', {

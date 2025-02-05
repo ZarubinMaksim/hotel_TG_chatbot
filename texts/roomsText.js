@@ -2,6 +2,7 @@ const roomsDescriptions = {
   deluxe: {
     title: 'Deluxe, 28 м²',
     callback: 'deluxe',
+    keyRequest: 'Deluxe',
     book_url: 'https://lagreenhotel.com/rooms#deluxe',
     images: [
       { 
@@ -42,6 +43,7 @@ const roomsDescriptions = {
   lg_js: { 
     title: 'Junior Suite 45 м²', 
     callback: 'lg_js',
+    keyRequest: 'Junior Suite',
     book_url: 'https://lagreenhotel.com/rooms#juniorsuite',
     images: [
       { 
@@ -80,6 +82,7 @@ const roomsDescriptions = {
   studio: { 
     title: 'Studio 30 м²',
     callback: 'studio',
+    keyRequest: 'Studio',
     book_url: 'https://lagreenhotel.com/rooms#studio',
     images: [
       { 
@@ -121,6 +124,7 @@ const roomsDescriptions = {
   studio_dzh: { 
     title: 'Studio с джакузи, 30 м²',
     callback: 'studio_dzh',
+    keyRequest: 'Studio with Jacuzzi',
     book_url: 'https://lagreenhotel.com/rooms#studio_jacuzzi',
     images: [
       { 
@@ -163,6 +167,7 @@ const roomsDescriptions = {
   lg_js_dzh: { 
     title: 'Junior Suite с джакузи, 45 м²',
     callback: 'lg_js_dzh',
+    keyRequest: 'Junior Suite with Jacuzzi',
     book_url: 'https://lagreenhotel.com/rooms#juniorsuite_jacuzzi',
     images: [
       { 
@@ -203,6 +208,7 @@ const roomsDescriptions = {
   lg_js_pl: { 
     title: 'Junior Suite с доступом к бассейну, 45 м².',
     callback: 'lg_js_pl',
+    keyRequest: 'Junior Suite Pool Access',
     book_url: 'https://lagreenhotel.com/rooms#juniorsuite_poolaccess',
     images: [
       { 
@@ -243,6 +249,7 @@ const roomsDescriptions = {
   lg_js_2br: { 
     title: 'Junior Suite с 2 спальнями, 90 м².',
     callback: 'lg_js_2br',
+    keyRequest: 'Junior Suite 2 bedroom',
     book_url: 'https://lagreenhotel.com/rooms#2bdr',
     images: [
       { 
@@ -288,6 +295,7 @@ const roomsDescriptions = {
   lg_js_2br_dzh: { 
     title: 'Junior Suite с 2 спальнями с джакузи, 90 м².',
     callback: 'lg_js_2br_dzh',
+    keyRequest: 'Junior Suite 2 bedroom with jacuzzi',
     book_url: 'https://lagreenhotel.com/rooms#2bdr_jacuzzi',
     images: [
       { 
@@ -333,6 +341,7 @@ const roomsDescriptions = {
   lg_js_2br_pl: { 
     title: 'Junior Suite с 2 спальнями с доступом к бассейну, 90 м².',
     callback: 'lg_js_2br_pl',
+    keyRequest: 'Junior Suite 2 bedroom Pool Access',
     book_url: 'https://lagreenhotel.com/rooms#2bdr_poolaccess',
     images: [
       { 
@@ -372,6 +381,7 @@ const roomsDescriptions = {
   duplex_2br_pl: { 
     title: 'Duplex Suite с 2 спальнями с доступом к бассейну, 109 м².',
     callback: 'duplex_2br_pl',
+    keyRequest: 'Duplex Suite 2 bedroom Pool Access',
     book_url: 'https://lagreenhotel.com/rooms#duplex_2bdr_poolaccess',
     images: [
       { 
@@ -414,6 +424,7 @@ const roomsDescriptions = {
   lg_suite_3br: {
     title: 'La Green Suite с 3 спальнями, 130 м².',
     callback: 'lg_suite_3br',
+    keyRequest: 'La Green Suite 3 bedroom',
     book_url: 'https://lagreenhotel.com/rooms#duplex_3bdr',
     images: [
       { 
