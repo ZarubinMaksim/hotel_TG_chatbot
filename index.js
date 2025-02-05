@@ -33,7 +33,7 @@ const {sendPlatformsForReview, getReview} = require('./components/review')
 const { sendSurroundingsList, sendSurrounding, sendExactSurrounding } = require('./components/surround')
 const { surroundingsDescriptions } = require('./texts/surroundText')
 const {sendServicesList, sendServiceDescription} = require('./components/services')
-const servicesDescription = require('./texts/servicesText')
+const servicesDescription = require('./texts/servicesAndRequestsText')
 const { sendEngeners, sengHousekeeping } = require('./components/requests')
 const handleManagerBotMessage = require('./components/managerBotMessageHandler')
 const surroundingsTitles = Object.values(surroundingsDescriptions).map(surrounding => surrounding.title)
@@ -69,40 +69,6 @@ managerBot.on('message', (msg) => {
     managerBot.sendMessage(chatId, 'Error. Are you sure you replying message to confirm registration?')
   }
 })
-
-// этот текс можно запихнуть в реквесты и оттуда запрашивать сюда
-const handleUnidentifiedMessage = (message) => {
-  const messageData = `You have got new message from guest! 
-Guest Telegram ID - @${message.from.username},
-Guest Name - ${message.from.first_name}
-Message - ${message.text}`
-  return messageData
-}
-
-const handleHskMessage = (message) => {
-  const messageData = `🧹⚠️ You have got new request for Housekeeping! ⚠️🧹
-Guest Telegram ID - @${message.from.username},
-Guest Name - ${message.from.first_name}
-Message - ${message.text}`
-  return messageData
-}
-
-const handleEngMessage = (message) => {
-  const messageData = `🔧⚠️ You have got new request for Engeeniring! ⚠️🔧 
-Guest Telegram ID - @${message.from.username},
-Guest Name - ${message.from.first_name}
-Message - ${message.text}`
-  return messageData
-}
-
-const handleSignInMessage = (message) => {
-  const messageData = `Guest wants to sign in! Please reply for this message to confirm. Message shuld be A701/Petrov/21-01-2025
-
-Guest Telegram ID - @${message.from.username},
-Guest Name - ${message.from.first_name}
-Guest room and lastname - ${message.text}`
-  return messageData
-}
 
 const sendWithLoading = async(chatId, nextFunction, callback) => {
   try {
@@ -143,7 +109,7 @@ bot.on('message', (msg) => {
     sendWithLoading(chatId, sendRoomInfo, callback)
   } 
   else if (/🛠 Что-то не работает|engineer/.test(text)) {
-    keyRequest = 'Eng'
+    keyRequest = 'eng'
     sendWithLoading(chatId, sendEngeners)
   } 
   else if (/🧹 Нужна уборка|cleaning/.test(text)) {
@@ -220,18 +186,18 @@ bot.on('message', (msg) => {
   } 
   else {
     if (keyRequest === 'hsk') {
-      const messageData = handleHskMessage(msg)
+      const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
-    } else if (keyRequest === 'Eng') {
-      const messageData = handleEngMessage(msg)
+    } else if (keyRequest === 'eng') {
+      const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
     } else if (keyRequest === 'review') {
       getReview(bot,managerBot, chatId, msg)
       keyRequest = ''
     } else if (keyRequest === 'signIn') {
-      const messageData = handleSignInMessage(msg)
+      const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
     } else if (keyRequest === 'transfer') {
@@ -251,8 +217,10 @@ bot.on('message', (msg) => {
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
     } else {
-      const messageData = handleUnidentifiedMessage(msg)
+      keyRequest = 'unidentified'
+      const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
+      keyRequest = ''
     }
   }
 })
