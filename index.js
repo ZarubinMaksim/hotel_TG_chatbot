@@ -35,6 +35,7 @@ const { surroundingsDescriptions } = require('./texts/surroundText')
 const {sendServicesList, sendServiceDescription} = require('./components/services')
 const servicesDescription = require('./texts/servicesText')
 const { sendEngeners, sengHousekeeping } = require('./components/requests')
+const handleManagerBotMessage = require('./components/managerBotMessageHandler')
 const surroundingsTitles = Object.values(surroundingsDescriptions).map(surrounding => surrounding.title)
 const surroundingsRegex = new RegExp(`^(${surroundingsTitles.join('|')})$`)
 const spaTitles = Object.values(spaDescriptions).map(spa => spa.title)
@@ -96,42 +97,6 @@ Message - ${message.text}`
 
 const handleSignInMessage = (message) => {
   const messageData = `Guest wants to sign in! Please reply for this message to confirm. Message shuld be A701/Petrov/21-01-2025
-
-Guest Telegram ID - @${message.from.username},
-Guest Name - ${message.from.first_name}
-Guest room and lastname - ${message.text}`
-  return messageData
-}
-
-const handleTransferMessage = (message) => {
-  const messageData = `Guest wants to order a trasfet! Please contact guest!
-
-Guest Telegram ID - @${message.from.username},
-Guest Name - ${message.from.first_name}
-Guest room and lastname - ${message.text}`
-  return messageData
-}
-
-const handleWakeupMessage = (message) => {
-  const messageData = `Guest wants to order a wake up call! Please contact guest!
-
-Guest Telegram ID - @${message.from.username},
-Guest Name - ${message.from.first_name}
-Guest room and lastname - ${message.text}`
-  return messageData
-}
-
-const handleBreakfastMessage = (message) => {
-  const messageData = `Guest wants to order a brekfast box! Please contact guest!
-
-Guest Telegram ID - @${message.from.username},
-Guest Name - ${message.from.first_name}
-Guest room and lastname - ${message.text}`
-  return messageData
-}
-
-const handleLuggageMessage = (message) => {
-  const messageData = `Guest needs help with luggage! Please contact guest!
 
 Guest Telegram ID - @${message.from.username},
 Guest Name - ${message.from.first_name}
@@ -270,19 +235,19 @@ bot.on('message', (msg) => {
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
     } else if (keyRequest === 'transfer') {
-      const messageData = handleTransferMessage(msg)
+      const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
     } else if (keyRequest === 'wakeup') {
-      const messageData = handleWakeupMessage(msg)
+      const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
-    } else if (keyRequest === 'breakfast_box') {
-      const messageData = handleBreakfastMessage(msg)
+    } else if (keyRequest === 'breakfastBox') {
+      const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
-    } else if (keyRequest === 'luggage_service') {
-      const messageData = handleLuggageMessage(msg)
+    } else if (keyRequest === 'luggageDown') {
+      const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
     } else {
