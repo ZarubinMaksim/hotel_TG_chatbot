@@ -16,7 +16,6 @@ const menuButtons = {
   surroundings: '🚶🏼‍♂️ Что рядом',
   close_menu: '❌ Закрыть меню',
   sign_in: 'Register'
-
 }
 
 module.exports = menuButtons
