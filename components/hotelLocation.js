@@ -1,15 +1,12 @@
 const hotelLocationText = require("../texts/hotelLocationText")
 
-const sendHotelLocation = (bot, chatId) => {
-  bot.sendMessage(chatId, hotelLocationText.hotel_address)
-  bot.sendLocation(chatId, hotelLocationText.latitude, hotelLocationText.longitude, {
-    // reply_markup: {
-    //   keyboard: [
-    //     ['В главное меню 🔙']
-    //   ],
-    //   resize_keyboard: true
-    // }
-  })
+const sendHotelLocation = async(bot, chatId) => {
+  try {
+    await bot.sendLocation(chatId, hotelLocationText.latitude, hotelLocationText.longitude)
+    await bot.sendMessage(chatId, hotelLocationText.hotel_address)
+  } catch (error) {
+    console.log('Error', error)
+  }
 }
 
 module.exports = sendHotelLocation
