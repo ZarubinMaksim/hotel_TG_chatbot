@@ -4,7 +4,7 @@ const {createTwoLinedKeyboard} = require("./commomFunctions")
 const sendInfrastructureList = (bot, chatId) => {
   const infrastructures = Object.values(infrastructureDescriptions).filter(infrastructure => infrastructure.isActive).map(infrastructure => infrastructure.title)
   const keyboard = createTwoLinedKeyboard(infrastructures)
-console.log(keyboard)
+
   bot.sendMessage(chatId, infrastructureMainText, {
     reply_markup: {
       keyboard: [

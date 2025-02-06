@@ -1,5 +1,8 @@
 //reviewed on 26.12
 
+const bot = require("..");
+const handleCounter = require("./counter");
+
 const createOneLinedKeyboard = (data) => {
   const keyboard = [];
   for (let i = 0; i < data.length; i++) {
@@ -21,4 +24,14 @@ const createTwoLinedKeyboard = (data) => {
   return keyboard;
 }
 
-module.exports = {createTwoLinedKeyboard, createOneLinedKeyboard}
+const sendWithLoading = async(chatId, nextFunction, data) => {
+  try {
+    await bot.sendChatAction(chatId, 'typing');
+    await nextFunction(bot, chatId, data)
+    await handleCounter(data)
+  } catch (error) {
+    console.log('Error', error)
+  }
+}
+
+module.exports = {createTwoLinedKeyboard, createOneLinedKeyboard, sendWithLoading}

@@ -14,7 +14,6 @@ const sendRestaurantsList = (bot, chatId) => {
 }
 
 const sendRestaurantInfo = (bot, chatId, data) => {
-  console.log('thusis', data)
   bot.sendPhoto(chatId, data.image, {
     caption: data.description,
     reply_markup: {

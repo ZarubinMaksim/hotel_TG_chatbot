@@ -7,7 +7,6 @@ module.exports = bot
 
 
 const managerBot = new TelegramBot(tokenManager, { polling: true })
-const mediaGroupIdsToDelete = []
 const sendMainMenu = require('./components/start')
 const sendAbout = require('./components/about')
 const {sendRoomsList, sendRoomInfo} = require('./components/rooms')
@@ -36,7 +35,8 @@ const {sendServicesList, sendServiceDescription} = require('./components/service
 const servicesDescription = require('./texts/servicesText')
 const { sendEngeners, sengHousekeeping } = require('./components/requests')
 const handleManagerBotMessage = require('./components/managerBotMessageHandler')
-const handleCounter = require('./components/counter')
+const { sendWithLoading } = require('./components/commomFunctions')
+const keyRequests = require('./texts/keyRequests')
 const surroundingsTitles = Object.values(surroundingsDescriptions).map(surrounding => surrounding.title)
 const surroundingsRegex = new RegExp(`^(${surroundingsTitles.join('|')})$`)
 const spaTitles = Object.values(spaDescriptions).map(spa => spa.title)
@@ -71,38 +71,29 @@ managerBot.on('message', (msg) => {
   }
 })
 
-const sendWithLoading = async(chatId, nextFunction, data) => {
-  try {
-    await bot.sendChatAction(chatId, 'typing');
-    await nextFunction(bot, chatId, data)
-    await handleCounter(data)
-  } catch (error) {
-    console.log('Error', error)
-  }
-}
 
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
 
   if (/\/start/.test(text)) {
-    keyRequest = 'main_menu'
+    keyRequest = keyRequests.main_menu
     sendWithLoading(chatId, sendMainMenu, keyRequest)
   } 
   else if (/В главное меню 🔙/.test(text)) {
-    keyRequest = 'main_menu'
+    keyRequest = keyRequests.main_menu
     sendWithLoading(chatId, sendMainMenu, keyRequest)
   } 
   else if (/Register/.test(text)) {
-    keyRequest = 'signIn' 
+    keyRequest = keyRequests.sign_in
     bot.sendMessage(chatId, 'Для регистрации напишите Номер комнаты и фамилию латинскими буквами')
   } 
   else if (/Об Отеле/.test(text)) {
-    keyRequest = 'about_hotel'
+    keyRequest = keyRequests.about_hotel
     sendWithLoading(chatId, sendAbout, keyRequest)
   } 
   else if (/Наши номера|rooms/.test(text)) {
-    keyRequest = 'rooms'
+    keyRequest = keyRequests.rooms
     sendWithLoading(chatId, sendRoomsList, keyRequest)
   } 
   else if (roomsRegex.test(text)) {
@@ -112,15 +103,15 @@ bot.on('message', (msg) => {
     sendWithLoading(chatId, sendRoomInfo, callback)
   } 
   else if (/🛠 Что-то не работает|engineer/.test(text)) {
-    keyRequest = 'eng'
+    keyRequest = keyRequests.engeneers
     sendWithLoading(chatId, sendEngeners, keyRequest)
   } 
   else if (/🧹 Нужна уборка|cleaning/.test(text)) {
-    keyRequest = 'hsk'
+    keyRequest = keyRequests.housekeeping
     sendWithLoading(chatId, sengHousekeeping, keyRequest)
   } 
   else if (/Рестораны|restaurants/.test(text)) {
-    keyRequest = 'restaurants'
+    keyRequest = keyRequests.restaurants
     sendWithLoading(chatId, sendRestaurantsList, keyRequest)
   } 
   else if (restaurantsRegex.test(text)) {
@@ -129,7 +120,7 @@ bot.on('message', (msg) => {
     sendWithLoading(chatId, sendRestaurantInfo, callback)
   } 
   else if (/Спецпредложения|special/.test(text)) {
-    keyRequest = 'offers'
+    keyRequest = keyRequests.special_offers
     sendWithLoading(chatId, sendSpecialOffers, keyRequest)
   } 
   else if (specialOffersRegex.test(text)) {
@@ -138,7 +129,7 @@ bot.on('message', (msg) => {
     sendWithLoading(chatId, sendSpecialOfferInfo, callback)
   } 
   else if (/Инфраструктура|infrastructure/.test(text)) {
-    keyRequest = 'infrastructure'
+    keyRequest = keyRequests.infrastructure
     sendWithLoading(chatId, sendInfrastructureList, keyRequest)
   } 
   else if (infrastructuresRegex.test(text)) {
@@ -147,7 +138,7 @@ bot.on('message', (msg) => {
     sendWithLoading(chatId, sendInfrastructureInfo, callback)
   } 
   else if (/Спа|spa/.test(text)) { 
-    keyRequest = 'spa'
+    keyRequest = keyRequests.spa
     sendWithLoading(chatId, sendSpaInfo, keyRequest)
   } 
   else if (spaRegex.test(text)) {
@@ -156,11 +147,11 @@ bot.on('message', (msg) => {
     sendWithLoading(chatId, sendSpaDescription, callback)
   } 
   else if (/Геолокация|location/.test(text)) {
-    keyRequest = 'location'
+    keyRequest = keyRequests.location
     sendWithLoading(chatId, sendHotelLocation, keyRequest)
   } 
   else if (/Услуги|services/.test(text)) {
-    keyRequest = 'services'
+    keyRequest = keyRequests.services
     sendWithLoading(chatId, sendServicesList, keyRequest)
   } 
   else if (servicesRegex.test(text)) {
@@ -170,11 +161,11 @@ bot.on('message', (msg) => {
     sendWithLoading(chatId, sendServiceDescription, callback)
   } 
   else if (/Оставить отзыв|review/.test(text)) {
-    keyRequest = 'review'
+    keyRequest = keyRequests.review
     sendWithLoading(chatId, sendPlatformsForReview, keyRequest)
   } 
   else if (/(Что рядом|surroundings|Назад к выбору\s*🔙)$/i.test(text)) {
-    keyRequest = 'surroundings'
+    keyRequest = keyRequests.surroundings
     sendWithLoading(chatId, sendSurroundingsList, keyRequest)
   } 
   else if (surroundingsRegex.test(text)) {
@@ -188,39 +179,39 @@ bot.on('message', (msg) => {
     sendWithLoading(chatId, sendExactSurrounding, callback)
   } 
   else {
-    if (keyRequest === 'hsk') {
+    if (keyRequest === keyRequests.housekeeping) {
       const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
-    } else if (keyRequest === 'eng') {
+    } else if (keyRequest === keyRequests.engeneers) {
       const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
-    } else if (keyRequest === 'review') {
+    } else if (keyRequest === keyRequests.review) {
       getReview(bot,managerBot, chatId, msg)
       keyRequest = ''
-    } else if (keyRequest === 'signIn') {
+    } else if (keyRequest === keyRequests.sign_in) {
       const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
-    } else if (keyRequest === 'transfer') {
+    } else if (keyRequest === keyRequests.transportation) {
       const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
-    } else if (keyRequest === 'wakeup') {
+    } else if (keyRequest === keyRequests.wake_up_call) {
       const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
-    } else if (keyRequest === 'breakfastBox') {
+    } else if (keyRequest === keyRequests.breakfast_box) {
       const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
-    } else if (keyRequest === 'luggageDown') {
+    } else if (keyRequest === keyRequests.luggage) {
       const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
     } else {
-      keyRequest = 'unidentified'
+      keyRequest = keyRequests.unidentified
       const messageData = handleManagerBotMessage(msg, keyRequest)
       managerBot.sendMessage(managerChatId, messageData)
       keyRequest = ''
