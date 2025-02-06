@@ -1,19 +1,11 @@
 // const roomsListMainPhoto = 'images/rooms/roomsListMainImage.jpeg'
-const { roomsDescriptions } = require('../texts/roomsText')
+const {roomsKeyboard, bookingButton} = require('../keyboards/roomsKeyboard');
 
 const sendRoomsList = (bot, chatId) => {
   bot.sendMessage(chatId, 'Посмотрите все наши номера 👇🏻',
     {
       reply_markup: {
-        keyboard: [
-          ['В главное меню 🔙'],
-          ...Object.values(roomsDescriptions).map(roomsDescription => {
-            return [roomsDescription.title]
-          })
-        ]
-        // inline_keyboard: Object.values(roomsDescriptions).map(roomsDescription => {
-        //   return [{ text: roomsDescription.title, callback_data: roomsDescription.callback}]
-        // })
+        keyboard: roomsKeyboard.roomsList
       }
     }
   )
@@ -24,9 +16,7 @@ const sendRoomInfo = async(bot, chatId, data) => {
     await bot.sendMediaGroup(chatId, data.images);
     await bot.sendMessage(chatId, 'Нажмите ниже, для того, чтобы забронировать номер', {
       reply_markup: {
-        inline_keyboard: [
-          [{ text: 'Забронировать!', web_app: { url: data.book_url } }]
-        ]
+        inline_keyboard: bookingButton(data.book_url)
       }
     })
 
