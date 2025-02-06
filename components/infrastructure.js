@@ -1,4 +1,5 @@
 const { infrastructureMainText, infrastructureDescriptions } = require("../texts/infrastructureTexts")
+const menuButtons = require("../texts/menuButtons")
 const {createTwoLinedKeyboard} = require("./commomFunctions")
 
 const sendInfrastructureList = (bot, chatId) => {
@@ -8,7 +9,7 @@ const sendInfrastructureList = (bot, chatId) => {
   bot.sendMessage(chatId, infrastructureMainText, {
     reply_markup: {
       keyboard: [
-        ['В главное меню 🔙'],
+        [menuButtons.to_main_menu],
         ...keyboard
       ],
       resize_keyboard: true

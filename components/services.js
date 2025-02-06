@@ -1,7 +1,8 @@
 const servicesKeyboards = require("../keyboards/servicesKeyboards")
+const { servicesText } = require("../texts/servicesText")
 
 const sendServicesList = (bot, chatId) => {
-  bot.sendMessage(chatId, 'Вот что мы можем предложить', {
+  bot.sendMessage(chatId, servicesText.main_message, {
     reply_markup: {
       keyboard: servicesKeyboards.servicesList,
       resize_keyboard: true

@@ -112,5 +112,8 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
   },
 }
 
+const specialOffersTexts = {
+  main_message: 'Ловите лучшие предложения! 🎉 Вот список актуальных акций:'
+}
 
-module.exports = specialOffersDescription
+module.exports = {specialOffersDescription, specialOffersTexts}

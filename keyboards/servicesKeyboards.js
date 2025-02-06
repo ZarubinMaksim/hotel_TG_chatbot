@@ -1,4 +1,4 @@
-const servicesDescription = require("../texts/servicesText")
+const {servicesDescription} = require("../texts/servicesText")
 
 const servicesKeyboards = {
   servicesList: [

@@ -12,7 +12,7 @@ const sendAbout = require('./components/about')
 const {sendRoomsList, sendRoomInfo} = require('./components/rooms')
 const {sendRestaurantsList, sendRestaurantInfo} = require('./components/fnb')
 const {sendSpecialOffers, sendSpecialOfferInfo} = require('./components/specialOffers')
-const specialOffersDescription = require('./texts/specialOffersText')
+const {specialOffersDescription} = require('./texts/specialOffersText')
 const specialOffersTitles = Object.values(specialOffersDescription).filter(offer => offer.isActive).map(offer => offer.title)
 const specialOffersRegex = new RegExp(`^(${specialOffersTitles.join('|')})$`);
 const { roomsDescriptions } = require('./texts/roomsText')
@@ -32,11 +32,12 @@ const {sendPlatformsForReview, getReview} = require('./components/review')
 const { sendSurroundingsList, sendSurrounding, sendExactSurrounding } = require('./components/surround')
 const { surroundingsDescriptions } = require('./texts/surroundText')
 const {sendServicesList, sendServiceDescription} = require('./components/services')
-const servicesDescription = require('./texts/servicesText')
+const {servicesDescription} = require('./texts/servicesText')
 const { sendEngeners, sengHousekeeping } = require('./components/requests')
 const handleManagerBotMessage = require('./components/managerBotMessageHandler')
 const { sendWithLoading } = require('./components/commomFunctions')
 const keyRequests = require('./texts/keyRequests')
+const regexMenuButtons = require('./texts/regexMenuButtons')
 const surroundingsTitles = Object.values(surroundingsDescriptions).map(surrounding => surrounding.title)
 const surroundingsRegex = new RegExp(`^(${surroundingsTitles.join('|')})$`)
 const spaTitles = Object.values(spaDescriptions).map(spa => spa.title)
@@ -80,19 +81,19 @@ bot.on('message', (msg) => {
     keyRequest = keyRequests.main_menu
     sendWithLoading(chatId, sendMainMenu, keyRequest)
   } 
-  else if (/В главное меню 🔙/.test(text)) {
+  else if (regexMenuButtons.main_menu.test(text)) {
     keyRequest = keyRequests.main_menu
     sendWithLoading(chatId, sendMainMenu, keyRequest)
   } 
-  else if (/Register/.test(text)) {
+  else if (regexMenuButtons.sign_in.test(text)) {
     keyRequest = keyRequests.sign_in
     bot.sendMessage(chatId, 'Для регистрации напишите Номер комнаты и фамилию латинскими буквами')
   } 
-  else if (/Об Отеле/.test(text)) {
+  else if (regexMenuButtons.about_hotel.test(text)) {
     keyRequest = keyRequests.about_hotel
     sendWithLoading(chatId, sendAbout, keyRequest)
   } 
-  else if (/Наши номера|rooms/.test(text)) {
+  else if (regexMenuButtons.rooms.test(text)) {
     keyRequest = keyRequests.rooms
     sendWithLoading(chatId, sendRoomsList, keyRequest)
   } 
@@ -102,15 +103,15 @@ bot.on('message', (msg) => {
     const callback = Object.values(roomsDescriptions).find(value => value.title === roomTitle);
     sendWithLoading(chatId, sendRoomInfo, callback)
   } 
-  else if (/🛠 Что-то не работает|engineer/.test(text)) {
+  else if (regexMenuButtons.engeneers.test(text)) {
     keyRequest = keyRequests.engeneers
     sendWithLoading(chatId, sendEngeners, keyRequest)
   } 
-  else if (/🧹 Нужна уборка|cleaning/.test(text)) {
+  else if (regexMenuButtons.housekeeping.test(text)) {
     keyRequest = keyRequests.housekeeping
     sendWithLoading(chatId, sengHousekeeping, keyRequest)
   } 
-  else if (/Рестораны|restaurants/.test(text)) {
+  else if (regexMenuButtons.restaurants.test(text)) {
     keyRequest = keyRequests.restaurants
     sendWithLoading(chatId, sendRestaurantsList, keyRequest)
   } 
@@ -119,7 +120,7 @@ bot.on('message', (msg) => {
     const callback = Object.values(restaurantsDescriptions).find(value => value.title === restaurantTitle)
     sendWithLoading(chatId, sendRestaurantInfo, callback)
   } 
-  else if (/Спецпредложения|special/.test(text)) {
+  else if (regexMenuButtons.special_offers.test(text)) {
     keyRequest = keyRequests.special_offers
     sendWithLoading(chatId, sendSpecialOffers, keyRequest)
   } 
@@ -128,7 +129,7 @@ bot.on('message', (msg) => {
     const callback = Object.values(specialOffersDescription).find(value => value.title === specialOfferTitle)
     sendWithLoading(chatId, sendSpecialOfferInfo, callback)
   } 
-  else if (/Инфраструктура|infrastructure/.test(text)) {
+  else if (regexMenuButtons.infrastructure.test(text)) {
     keyRequest = keyRequests.infrastructure
     sendWithLoading(chatId, sendInfrastructureList, keyRequest)
   } 
@@ -137,7 +138,7 @@ bot.on('message', (msg) => {
     const callback = Object.values(infrastructureDescriptions).find(value => value.title === infrastructureTitle)
     sendWithLoading(chatId, sendInfrastructureInfo, callback)
   } 
-  else if (/Спа|spa/.test(text)) { 
+  else if (regexMenuButtons.spa.test(text)) { 
     keyRequest = keyRequests.spa
     sendWithLoading(chatId, sendSpaInfo, keyRequest)
   } 
@@ -146,11 +147,11 @@ bot.on('message', (msg) => {
     const callback = Object.values(spaDescriptions).find(value => value.title === spaTitle)
     sendWithLoading(chatId, sendSpaDescription, callback)
   } 
-  else if (/Геолокация|location/.test(text)) {
+  else if (regexMenuButtons.location.test(text)) {
     keyRequest = keyRequests.location
     sendWithLoading(chatId, sendHotelLocation, keyRequest)
   } 
-  else if (/Услуги|services/.test(text)) {
+  else if (regexMenuButtons.services.test(text)) {
     keyRequest = keyRequests.services
     sendWithLoading(chatId, sendServicesList, keyRequest)
   } 
@@ -160,11 +161,11 @@ bot.on('message', (msg) => {
     keyRequest = callback.keyRequest
     sendWithLoading(chatId, sendServiceDescription, callback)
   } 
-  else if (/Оставить отзыв|review/.test(text)) {
+  else if (regexMenuButtons.review.test(text)) {
     keyRequest = keyRequests.review
     sendWithLoading(chatId, sendPlatformsForReview, keyRequest)
   } 
-  else if (/(Что рядом|surroundings|Назад к выбору\s*🔙)$/i.test(text)) {
+  else if (regexMenuButtons.surroundings.test(text)) {
     keyRequest = keyRequests.surroundings
     sendWithLoading(chatId, sendSurroundingsList, keyRequest)
   } 

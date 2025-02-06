@@ -39,5 +39,8 @@ const servicesDescription = {
   }
 }
 
+const servicesText = {
+  main_message: 'Вот что мы можем предложить'
+}
 
-module.exports = servicesDescription
+module.exports = {servicesDescription, servicesText}

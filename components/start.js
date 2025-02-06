@@ -1,16 +1,10 @@
+const mainKeyboard = require("../keyboards/mainKeyboard");
+const startTexts = require("../texts/startTexts");
 
 const sendMainMenu = (bot, chatId) => {
-  bot.sendMessage(chatId, "Всё, что вам нужно – в одном меню! 👇🏻 Выберите категорию, и мы подскажем нужную информацию.", {
+  bot.sendMessage(chatId, startTexts.main_message, {
     reply_markup: {
-      keyboard: [
-        ['🏨 Об Отеле', '🛏 Наши номера'],
-        ['🛠 Что-то не работает', '🧹 Нужна уборка'],
-        ['📋 Услуги', '🍜 Рестораны и меню'],
-        ['🎉 Спецпредложения', '🏋🏼‍♂️ Инфраструктура'],
-        ['💆🏼‍♀️ Спа', '📍 Геолокация'],
-        ['🙏 Оставить отзыв', '🚶🏼‍♂️ Что рядом'],
-        ['❌ Закрыть меню', 'Register']
-    ],
+      keyboard: mainKeyboard,
     resize_keyboard: true,
     one_time_keyboard: false
     } 

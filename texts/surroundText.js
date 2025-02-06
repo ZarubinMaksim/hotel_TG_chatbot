@@ -50,4 +50,9 @@ const surroundingsDescriptions = {
 
 }
 
-module.exports = {surroundingsDescriptions}
+const surroundingsTexts = {
+  main_message: 'Test surroundings',
+  sub_main_message: 'Вот что мы можем предложить',
+}
+
+module.exports = {surroundingsDescriptions, surroundingsTexts}

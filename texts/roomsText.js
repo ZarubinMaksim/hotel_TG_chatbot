@@ -469,4 +469,9 @@ const roomsDescriptions = {
   },
 };
 
-module.exports = {roomsDescriptions}
+const roomsText = {
+  main_message: 'Посмотрите все наши номера 👇🏻',
+  book_the_room: 'Нажмите ниже, для того, чтобы забронировать номер'
+}
+
+module.exports = {roomsDescriptions, roomsText}

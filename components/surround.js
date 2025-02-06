@@ -1,4 +1,5 @@
-const { surroundingsDescriptions } = require("../texts/surroundText")
+const menuButtons = require("../texts/menuButtons")
+const { surroundingsDescriptions, surroundingsTexts } = require("../texts/surroundText")
 const { createTwoLinedKeyboard } = require("./commomFunctions")
 
 const sendSurroundingsList = (bot, chatId) => {
@@ -6,10 +7,10 @@ const sendSurroundingsList = (bot, chatId) => {
   const surroundings = Object.values(surroundingsDescriptions).map(surrounding => surrounding.title)
   const keyboard = createTwoLinedKeyboard(surroundings)
   console.log(keyboard)
-  bot.sendMessage(chatId, 'Test surroundings', {
+  bot.sendMessage(chatId, surroundingsTexts.main_message, {
     reply_markup: {
       keyboard: [
-        ['В главное меню 🔙'],
+        [menuButtons.to_main_menu],
         ...keyboard
       ],
       resize_keyboard: true
@@ -18,13 +19,12 @@ const sendSurroundingsList = (bot, chatId) => {
 } 
 
 const sendSurrounding =  async (bot, chatId, data) => {
-  console.log('data', data)
   // data.items.map(item => console.log('eto item', item))
   // console.log(surroundingsDescriptions[data].items)
-  bot.sendMessage(chatId, 'Вот что мы можем предложить',{ 
+  bot.sendMessage(chatId, surroundingsTexts.sub_main_message,{ 
     reply_markup: {
       keyboard: [
-        ['Назад к выбору 🔙'],
+        [menuButtons.back],
         ...Object.values(data.items).map(item => [item.title])
       ]
     }

@@ -1,4 +1,5 @@
-const specialOffersDescription = require('../texts/specialOffersText')
+const menuButtons = require('../texts/menuButtons')
+const {specialOffersDescription, specialOffersTexts} = require('../texts/specialOffersText')
 const {createTwoLinedKeyboard} = require('./commomFunctions')
 
 const sendSpecialOffers = (bot, chatId) => {
@@ -8,10 +9,10 @@ const sendSpecialOffers = (bot, chatId) => {
   .map(offer => offer.title)
   const keyboard = createTwoLinedKeyboard(offers)
 
-  bot.sendMessage(chatId, 'Ловите лучшие предложения! 🎉 Вот список актуальных акций:', {
+  bot.sendMessage(chatId, specialOffersTexts.main_message, {
     reply_markup: {
       keyboard:  [
-        ['В главное меню 🔙'],
+        [menuButtons.to_main_menu],
       ...keyboard
       ],
       resize_keyboard: true

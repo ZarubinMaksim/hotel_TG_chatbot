@@ -1,6 +1,8 @@
+const hotelLocationText = require("../texts/hotelLocationText")
+
 const sendHotelLocation = (bot, chatId) => {
-  bot.sendMessage(chatId, 'Наш адрес: 149 Moo 6 Cherngtalay, Thalang District, Phuket 83110')
-  bot.sendLocation(chatId, 8.028443, 98.295394, {
+  bot.sendMessage(chatId, hotelLocationText.hotel_address)
+  bot.sendLocation(chatId, hotelLocationText.latitude, hotelLocationText.longitude, {
     // reply_markup: {
     //   keyboard: [
     //     ['В главное меню 🔙']

@@ -1,4 +1,5 @@
-const { spaMainText, spaDescriptions } = require("../texts/spaTexts")
+const menuButtons = require("../texts/menuButtons")
+const { spaDescriptions, spaTexts } = require("../texts/spaTexts")
 const { createOneLinedKeyboard } = require("./commomFunctions")
 
 const spaMainPhoto = 'images/spa/spaMainPhoto.jpeg'
@@ -7,10 +8,10 @@ const keyboard = createOneLinedKeyboard(spaInfo)
 
 const sendSpaInfo = (bot, chatId) => {
   bot.sendPhoto(chatId, spaMainPhoto, {
-    caption: spaMainText,
+    caption: spaTexts.main_message,
     reply_markup: {
       keyboard: [
-        ['В главное меню 🔙'],
+        [menuButtons.to_main_menu],
         ...keyboard
       //   ...Object.values(spaDescriptions).map((object) => {
       //   return [{ text: object.title }];
@@ -31,12 +32,12 @@ const sendSpaInfo = (bot, chatId) => {
 }
 
 const sendSpaDescription = (bot, chatId, data) => {
-  console.log('data', data)
+
   if (data.callback === 'spaMenu') {
-    bot.sendMessage(chatId, 'Check our menue', {
+    bot.sendMessage(chatId, spaTexts.menu, {
       reply_markup: {
         inline_keyboard: [
-          [{ text: 'Menu', web_app: { url: data.url }}]
+          [{ text: menuButtons.spa_menu, web_app: { url: data.url }}]
         ]
       }
     })

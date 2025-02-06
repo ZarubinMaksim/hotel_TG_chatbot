@@ -1,4 +1,4 @@
-const servicesDescriptions = require("../texts/servicesText")
+const {servicesDescriptions} = require("../texts/servicesText")
 const requestDescriptions = require("../texts/requestsText")
 
 const handleManagerBotMessage = (msg, keyRequest) => {

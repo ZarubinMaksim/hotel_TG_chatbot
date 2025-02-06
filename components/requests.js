@@ -1,14 +1,13 @@
 const bot = require("..")
+const requestDescriptions = require("../texts/requestsText")
 
-const engMessage = 'Если что-то не работает, пожалуйста, напишите в чат - мы пришлем специалистов.'
-const hskMessage = 'Если нужна уборка или нужно принести что-то из косметических принадллежностей, напишите в чат - мы пришлем коллег.'
 
 const sendEngeners = (bot, chatId) => {
-  bot.sendMessage(chatId, engMessage)
+  bot.sendMessage(chatId, requestDescriptions.eng.userMessage)
 }
 
 const sengHousekeeping = (bot, chatId) => {
-  bot.sendMessage(chatId, hskMessage)
+  bot.sendMessage(chatId, requestDescriptions.hsk.userMessage)
 }
 
 
