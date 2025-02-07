@@ -15,26 +15,11 @@ const sendRoomsList = (bot, chatId) => {
 
 const sendRoomInfo = async(bot, chatId, data) => {
     await bot.sendMediaGroup(chatId, data.images);
-    await bot.sendMessage(chatId, roomsText.book_the_room, {
+    await bot.sendMessage(chatId, data.description, {
       reply_markup: {
-        inline_keyboard: bookingButton(data.book_url)
+        inline_keyboard: bookingButton (data.book_url)
       }
     })
-
-    //Для удаления медиа гуппы 
-    // const messageIds = sentMessages.map(msg => msg.message_id)
-    
-    // messageIds.forEach(id => {
-    //   mediaGroupIdsToDelete.push(id)
-    // })
-
-    // await bot.sendMessage(chatId, 'Вернуться к списку номеров', {
-    //   reply_markup: {
-    //     inline_keyboard: [
-    //       [{ text: 'Назад', callback_data: 'deleteMediaGroup' }]
-    //     ]
-    //   }
-    // })
-}
+  }
 
 module.exports = {sendRoomsList, sendRoomInfo}

@@ -14,13 +14,17 @@ const sendRestaurantsList = (bot, chatId) => {
   })
 }
 
-const sendRestaurantInfo = (bot, chatId, data) => {
-  bot.sendPhoto(chatId, data.image, {
-    caption: data.description,
-    reply_markup: {
-      inline_keyboard: restaurantsKeyboards[`${data.callback}Keyboard`]
-    } 
-  })
+const sendRestaurantInfo = async (bot, chatId, data) => {
+  try {
+    await bot.sendMediaGroup(chatId, data.images)
+    await bot.sendMessage(chatId, data.description, {
+      reply_markup: {
+        inline_keyboard: restaurantsKeyboards[`${data.callback}Keyboard`]
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 module.exports = {sendRestaurantsList, sendRestaurantInfo}

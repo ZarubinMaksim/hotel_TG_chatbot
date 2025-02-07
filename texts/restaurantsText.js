@@ -11,7 +11,13 @@ const restaurantsNameList = `
 const restaurantsDescriptions = {
   jaakdin: {
     title: '🥐 JaakDin',
-    image: 'images/restaurants/jaakdin.jpeg',
+    images: [
+      { type: 'photo', media: 'images/restaurants/jaakdin/jaakdin.jpeg' },
+      { type: 'photo', media: 'images/restaurants/jaakdin/jaakdin2.jpeg' },
+      { type: 'photo', media: 'images/restaurants/jaakdin/jaakdin3.jpeg' },
+      { type: 'photo', media: 'images/restaurants/jaakdin/jaakdin4.jpeg' },
+      { type: 'photo', media: 'images/restaurants/jaakdin/jaakdin5.jpeg' },
+    ],
     callback: 'jaakdin',
     description: `
     Ресторан и пекарня JaakDin | Полезные органические продукты и свежая выпечка
@@ -29,7 +35,13 @@ JaakDin — это заведение, где можно поесть в люб�
   },
   sanook: {
     title: '🍜 Sanook',
-    image: 'images/restaurants/sanook.jpeg',
+    images: [
+      { type: 'photo', media: 'images/restaurants/sanook/sanook.jpeg' },
+      { type: 'photo', media: 'images/restaurants/sanook/sanook2.jpeg' },
+      { type: 'photo', media: 'images/restaurants/sanook/sanook3.jpeg' },
+      { type: 'photo', media: 'images/restaurants/sanook/sanook4.jpeg' },
+      { type: 'photo', media: 'images/restaurants/sanook/sanook5.jpeg' },
+    ],
     callback: 'sanook',
     description: `
     Ресторан Sanook | Южнотайская Кухня
@@ -45,7 +57,13 @@ JaakDin — это заведение, где можно поесть в люб�
   },
   overgrown: {
     title: '🍹 OverGrown',
-    image: 'images/restaurants/overgrown.jpeg',
+    images: [
+      { type: 'photo', media: 'images/restaurants/overgrown/overgrown.jpeg' },
+      { type: 'photo', media: 'images/restaurants/overgrown/overgrown2.jpeg' },
+      { type: 'photo', media: 'images/restaurants/overgrown/overgrown3.jpeg' },
+      { type: 'photo', media: 'images/restaurants/overgrown/overgrown4.jpeg' },
+      { type: 'photo', media: 'images/restaurants/overgrown/overgrown5.jpeg' },
+    ],
     callback: 'overgrown',
     description: `
     Overgrown | Лаунж и Коктейльный Бар
@@ -62,7 +80,12 @@ JaakDin — это заведение, где можно поесть в люб�
   },
   manaw: {
     title: '🏖 Manaw Manaw',
-    image: 'images/restaurants/manaw.jpeg',
+    images: [
+      { type: 'photo', media: 'images/restaurants/manaw/manaw.jpeg' },
+      { type: 'photo', media: 'images/restaurants/manaw/manaw2.jpeg' },
+      { type: 'photo', media: 'images/restaurants/manaw/manaw3.jpeg' },
+      { type: 'photo', media: 'images/restaurants/manaw/manaw4.jpeg' },
+    ],
     callback: 'manaw',
     description: `
     Manaw Manaw | Пул Бар
