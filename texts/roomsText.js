@@ -2,6 +2,7 @@ const roomsDescriptions = {
   deluxe: {
     title: 'Deluxe, 28 м²',
     callback: 'deluxe',
+    isActive: true,
     keyRequest: 'Deluxe',
     book_url: 'https://lagreenhotel.com/rooms#deluxe',
     description: `<b>Deluxe</b> - Просторные апартаменты для двоих гостей с одной двуспальной или двумя раздельными кроватями. 
@@ -41,6 +42,7 @@ const roomsDescriptions = {
   lg_js: { 
     title: 'Junior Suite 45 м²', 
     callback: 'lg_js',
+    isActive: true,
     keyRequest: 'Junior Suite',
     book_url: 'https://lagreenhotel.com/rooms#juniorsuite',
     description: `Просторные однокомнатные апартаменты с полноразмерной кухней и балконом. 
@@ -78,6 +80,7 @@ const roomsDescriptions = {
   studio: { 
     title: 'Studio 30 м²',
     callback: 'studio',
+    isActive: true,
     keyRequest: 'Studio',
     book_url: 'https://lagreenhotel.com/rooms#studio',
     description: `Studio - Комфортная студия с продуманной планировкой, большим количеством мест для хранения и оборудованной 
@@ -117,6 +120,7 @@ const roomsDescriptions = {
   studio_dzh: { 
     title: 'Studio с джакузи, 30 м²',
     callback: 'studio_dzh',
+    isActive: true,
     keyRequest: 'Studio with Jacuzzi',
     book_url: 'https://lagreenhotel.com/rooms#studio_jacuzzi',
     description: `Studio - Эксклюзивная студия с отдельной спальней, полностью оборудованной кухней-гостиной и ванной комнатой.
@@ -157,6 +161,7 @@ const roomsDescriptions = {
   lg_js_dzh: { 
     title: 'Junior Suite с джакузи, 45 м²',
     callback: 'lg_js_dzh',
+    isActive: true,
     keyRequest: 'Junior Suite with Jacuzzi',
     book_url: 'https://lagreenhotel.com/rooms#juniorsuite_jacuzzi',
     description: `La Green Junior Suite - Просторные апартаменты с одной спальней и гостиной, где можно отдохнуть на удобном раскладывающемся диване и насладиться обеденной зоной. Для вашего комфорта в номере есть балкон и собственная терраса с джакузи, где можно расслабиться в течение дня.
@@ -195,6 +200,7 @@ const roomsDescriptions = {
   lg_js_pl: { 
     title: 'Junior Suite с доступом к бассейну, 45 м².',
     callback: 'lg_js_pl',
+    isActive: true,
     keyRequest: 'Junior Suite Pool Access',
     book_url: 'https://lagreenhotel.com/rooms#juniorsuite_poolaccess',
     description: `La Green Junior Suite - Специальный номер на первом этаже с прямым доступом к главному бассейну комплекса через собственную террасу. В апартаментах есть одна спальня, гостиная с оборудованной кухней и ванная комната, чтобы обеспечить вам максимальный комфорт.
@@ -233,6 +239,7 @@ const roomsDescriptions = {
   lg_js_2br: { 
     title: 'Junior Suite с 2 спальнями, 90 м².',
     callback: 'lg_js_2br',
+    isActive: true,
     keyRequest: 'Junior Suite 2 bedroom',
     book_url: 'https://lagreenhotel.com/rooms#2bdr',
     description: `La Green Junior Suite - Просторный семейный номер с террасой и большой гостиной зоной, объединяющей столовую и кухню в одном жилом пространстве. Номер включает две изолированные спальни, два санузла с ванной и душевой кабиной для вашего удобства.
@@ -276,6 +283,7 @@ const roomsDescriptions = {
   lg_js_2br_dzh: { 
     title: 'Junior Suite с 2 спальнями с джакузи, 90 м².',
     callback: 'lg_js_2br_dzh',
+    isActive: true,
     keyRequest: 'Junior Suite 2 bedroom with jacuzzi',
     book_url: 'https://lagreenhotel.com/rooms#2bdr_jacuzzi',
     description: `La Green Junior Suite - Просторный люкс с двумя спальнями и собственной террасой с зоной джакузи. Удобная гостиная с кухней и обеденной зоной, две ванные комнаты и изолированные спальни сделают отдых комфортным для всей семьи.
@@ -319,6 +327,7 @@ const roomsDescriptions = {
   lg_js_2br_pl: { 
     title: 'Junior Suite с 2 спальнями с доступом к бассейну, 90 м².',
     callback: 'lg_js_2br_pl',
+    isActive: true,
     keyRequest: 'Junior Suite 2 bedroom Pool Access',
     book_url: 'https://lagreenhotel.com/rooms#2bdr_poolaccess',
     description: `La Green Junior Suite - Семейный номер с двумя изолированными спальнями и гостиной, совмещенной с полноразмерной кухней-столовой. Номер расположен на первом этаже и предоставляет эксклюзивный доступ к главному бассейну через собственную террасу.
@@ -357,6 +366,7 @@ const roomsDescriptions = {
   duplex_2br_pl: { 
     title: 'Duplex Suite с 2 спальнями с доступом к бассейну, 109 м².',
     callback: 'duplex_2br_pl',
+    isActive: true,
     keyRequest: 'Duplex Suite 2 bedroom Pool Access',
     book_url: 'https://lagreenhotel.com/rooms#duplex_2bdr_poolaccess',
     description: `Duplex Suite - Роскошные двухэтажные апартаменты площадью 109 м². На первом этаже расположены просторная кухня-гостиная, ванная комната и выход к главному бассейну. На втором этаже находятся две спальни и общая ванная комната для вашего комфорта.
@@ -397,6 +407,7 @@ const roomsDescriptions = {
   lg_suite_3br: {
     title: 'La Green Suite с 3 спальнями, 130 м².',
     callback: 'lg_suite_3br',
+    isActive: true,
     keyRequest: 'La Green Suite 3 bedroom',
     book_url: 'https://lagreenhotel.com/rooms#duplex_3bdr',
     description: `La Green Suite - Просторные апартаменты с тремя спальнями, тремя санузлами и большим количеством удобств для комфортного отдыха. Идеально подходит для семейного проживания или групп.

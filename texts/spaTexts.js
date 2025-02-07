@@ -18,11 +18,13 @@ const spaDescriptions = {
   spaMenu: {
     title: 'Меню',
     callback: 'spaMenu',
+    isActive: true,
     url: 'https://drive.google.com/drive/u/3/folders/1TjV8pCfGiwbi36PwJ-ym08em-AOppuzV'
   },
   spaPolicy: {
     title: 'Правила посещения',
     callback: 'spaPolicy', 
+    isActive: true,
     description: `
     ЭТИКЕТ
 
@@ -79,6 +81,7 @@ const spaDescriptions = {
     title: 'Акции',
     callback: 'spaOffers', 
     description: 'Our offers',
+    isActive: true,
     keyboard: [
       [{text:'hui', callback_data:'hui'}],
       [{text:'hui', callback_data:'hui'}],

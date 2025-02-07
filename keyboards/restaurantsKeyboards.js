@@ -1,3 +1,7 @@
+const { createTwoLinedKeyboard } = require("../components/commomFunctions")
+const menuButtons = require("../texts/menuButtons")
+const { restaurantsDescriptions } = require("../texts/restaurantsText")
+
 const jaakdinUrl = 'https://menu.in.th/JaakDin-Restaurant'
 const jaakdinKids = 'https://drive.google.com/file/d/1dnMDhIK1tcZLW239bMtzQBSEn-QqQzjo/view'
 const sanookUrl = 'https://menu.in.th/Sanook-Restaurant?qr-id=4PZkWoeTMePDvIHwV8pp100%3D'
@@ -7,20 +11,15 @@ const overgrownCocktails = 'https://drive.google.com/drive/folders/14lxbzQ0eja4B
 const manawHappyUrl = 'https://drive.google.com/file/d/1achKz__fQyXl6MbpKxD-H4wtlh1MjSLd/view'
 const manawUrl = 'https://menu.in.th/Manaw-Bar'
 
-
+const activeRestaurants = Object.values(restaurantsDescriptions).filter(restaurant => restaurant.isActive).map(restaurant => restaurant.title)
+const keyboard = createTwoLinedKeyboard(activeRestaurants)
 
 const restaurantsKeyboards = {
   restaurantsListKeyboard: [
-    [{text: '🥐 JaakDin'}, {text: '🍜 Sanook'}],
-    [{text: '🍹 OverGrown'}, {text: '🏖 Manaw Manaw'}],
+    [menuButtons.to_main_menu],
+    ...keyboard
   ],
-  //below is for inline_keyboard
-  // restaurantsListKeyboard: [
-  //   [{text: '🥐 JaakDin', callback_data: 'jaakdin'}],
-  //   [{text: '🍜 Sanook', callback_data: 'sanook'}],
-  //   [{text: '🍹 Overgrown', callback_data: 'overgrown'}],
-  //   [{text: '🏖 Manaw Manaw', callback_data: 'manaw'}]
-  // ],
+  
   restaurantsMenuesListKeyboad: [
     [
       {

@@ -1,22 +1,13 @@
+const spaKeyboards = require("../keyboards/spaKeyboards")
 const menuButtons = require("../texts/menuButtons")
-const { spaDescriptions, spaTexts } = require("../texts/spaTexts")
-const { createOneLinedKeyboard } = require("./commomFunctions")
-
+const { spaTexts } = require("../texts/spaTexts")
 const spaMainPhoto = 'images/spa/spaMainPhoto.jpeg'
-const spaInfo = Object.values(spaDescriptions).map(spaDescription => spaDescription.title)
-const keyboard = createOneLinedKeyboard(spaInfo)
 
 const sendSpaInfo = (bot, chatId) => {
   bot.sendPhoto(chatId, spaMainPhoto, {
     caption: spaTexts.main_message,
     reply_markup: {
-      keyboard: [
-        [menuButtons.to_main_menu],
-        ...keyboard
-      //   ...Object.values(spaDescriptions).map((object) => {
-      //   return [{ text: object.title }];
-      // })
-    ],
+      keyboard: spaKeyboards.spaKeyboard,
       resize_keyboard: true, // Опционально: делает клавиатуру компактнее
     }
     // reply_markup: {

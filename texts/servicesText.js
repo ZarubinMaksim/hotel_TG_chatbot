@@ -4,6 +4,7 @@ const servicesDescription = {
     keyRequest: 'transfer',
     managerBotMessage: 'Guest wants to order a trasfet! Please contact guest!',
     img: 'images/rooms/lg_suite_3br/lg_suite_3br9.jpeg',
+    isActive: true,
     description: `Если вам необходимо заказать трансфер в аэропорт, пожалуйста, предоставьте нам: 
   
     1. Дата и время - 
@@ -21,6 +22,7 @@ const servicesDescription = {
     keyRequest: 'wakeup',
     managerBotMessage: 'Guest wants to order a wake up call! Please contact guest!',
     img: 'images/rooms/lg_suite_3br/lg_suite_3br9.jpeg',
+    isActive: true,
     description: 'Если вас нуно разбудить, пожалуйста, напишите нам в какое время. МЫ свяжемся с вами чтобы подтвердить заказ.'
   },
   breakfastBox: {
@@ -28,6 +30,7 @@ const servicesDescription = {
     keyRequest: 'breakfastBox',
     managerBotMessage: 'Guest wants to order a brekfast box! Please contact guest!',
     img: 'images/rooms/lg_suite_3br/lg_suite_3br9.jpeg',
+    isActive: true,
     description: 'Есть у вас ранний выезд, закажите завтрак с собой! Пожалуйста, напишите время вашего выезда. Мы свяжемся с вами чтобы подтвердить заказ.'
   },
   luggageDown: {
@@ -35,6 +38,7 @@ const servicesDescription = {
     keyRequest: 'luggageDown',
     managerBotMessage: 'Guest needs help with luggage! Please contact guest!',
     img: 'images/rooms/lg_suite_3br/lg_suite_3br9.jpeg',
+    isActive: true,
     description: 'Если нужна помощь с багажем напишите во сколько нам нужно подойти.'
   }
 }

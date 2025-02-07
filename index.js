@@ -16,10 +16,10 @@ const {specialOffersDescription} = require('./texts/specialOffersText')
 const specialOffersTitles = Object.values(specialOffersDescription).filter(offer => offer.isActive).map(offer => offer.title)
 const specialOffersRegex = new RegExp(`^(${specialOffersTitles.join('|')})$`);
 const { roomsDescriptions } = require('./texts/roomsText')
-const roomsTitles = Object.values(roomsDescriptions).map(room => room.title)
+const roomsTitles = Object.values(roomsDescriptions).filter(room => room.isActive).map(room => room.title)
 const roomsRegex = new RegExp(`^(${roomsTitles.join('|')})$`);
 const { restaurantsDescriptions } = require('./texts/restaurantsText')
-const restaurantsTitles = Object.values(restaurantsDescriptions).map(restaurant => restaurant.title)
+const restaurantsTitles = Object.values(restaurantsDescriptions).filter(restaurant => restaurant.isActive).map(restaurant => restaurant.title)
 const restaurantsRegex = new RegExp(`^(${restaurantsTitles.join('|')})$`)
 const { sendInfrastructureList, sendInfrastructureInfo } = require('./components/infrastructure')
 const { infrastructureDescriptions } = require('./texts/infrastructureTexts')
@@ -40,14 +40,15 @@ const keyRequests = require('./texts/keyRequests')
 const regexMenuButtons = require('./texts/regexMenuButtons')
 const surroundingsTitles = Object.values(surroundingsDescriptions).map(surrounding => surrounding.title)
 const surroundingsRegex = new RegExp(`^(${surroundingsTitles.join('|')})$`)
-const spaTitles = Object.values(spaDescriptions).map(spa => spa.title)
+const spaTitles = Object.values(spaDescriptions).filter(spa => spa.isActive).map(spa => spa.title)
 const spaRegex = new RegExp(`^(${spaTitles.join('|')})$`)
-const servicesTitles = Object.values(servicesDescription).map(service => service.title)
+const servicesTitles = Object.values(servicesDescription).filter(service => service.isActive).map(service => service.title)
 const servicesRegex = new RegExp(`^(${servicesTitles.join('|')})$`)
 const surroundingsTitlesAll = Object.values(surroundingsDescriptions).flatMap(section => Object.values(section.items).map(item => item.title))
 const surroundingsTitlesAllRegEx = new RegExp(`^(${surroundingsTitlesAll.join('|')})$`)
 let keyRequest = ''
 const managerChatId = 317138824
+
 // ******
     // Показываем всплывающее уведомление
     // bot.answerCallbackQuery(callbackQuery.id, {

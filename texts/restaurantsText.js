@@ -19,6 +19,7 @@ const restaurantsDescriptions = {
       { type: 'photo', media: 'images/restaurants/jaakdin/jaakdin5.jpeg' },
     ],
     callback: 'jaakdin',
+    isActive: true,
     description: `
     Ресторан и пекарня JaakDin | Полезные органические продукты и свежая выпечка
 
@@ -43,6 +44,7 @@ JaakDin — это заведение, где можно поесть в люб�
       { type: 'photo', media: 'images/restaurants/sanook/sanook5.jpeg' },
     ],
     callback: 'sanook',
+    isActive: true,
     description: `
     Ресторан Sanook | Южнотайская Кухня
 
@@ -65,6 +67,7 @@ JaakDin — это заведение, где можно поесть в люб�
       { type: 'photo', media: 'images/restaurants/overgrown/overgrown5.jpeg' },
     ],
     callback: 'overgrown',
+    isActive: true,
     description: `
     Overgrown | Лаунж и Коктейльный Бар
 
@@ -87,6 +90,7 @@ JaakDin — это заведение, где можно поесть в люб�
       { type: 'photo', media: 'images/restaurants/manaw/manaw4.jpeg' },
     ],
     callback: 'manaw',
+    isActive: true,
     description: `
     Manaw Manaw | Пул Бар
 
