@@ -1,7 +1,9 @@
 const specialOffersDescription = {
   loykrahtong: {
     title: '🎉 Loykrahtong',
-    image: 'images/specialOffers/loykrahtong.jpeg',
+    images: [
+      {type: 'photo', media: 'images/specialOffers/loykrahtong.jpeg'}
+    ],
     description: `
     This Loy Krathong, let Sanook Restaurant take you on a flavorful journey with our special Thai Set Menu!
 🚩 November 15, 2024
@@ -24,7 +26,9 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
   specialCocktails:
   {
     title: '🍹 Special cocktails',
-    image: 'images/specialOffers/specialCocktails.jpeg',
+    images: [
+      {type: 'photo', media: 'images/specialOffers/specialCocktails.jpeg'}
+    ],
     description: `🍸 Sip in Style with our exclusive Grey Goose Martini Flight! Experience three unique twists, each crafted to elevate your cocktail journey. Perfect for an unforgettable night at Overgrown Lounge & Cocktail Bar.
 
     Flight of 3 Martinis | THB 790
@@ -42,7 +46,9 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
   sevenDaysMenu:
   {
     title: '📆 Еженедельные предложения',
-    image: 'images/specialOffers/sevendays.jpeg',
+    images: [
+      {type: 'photo', media: 'images/specialOffers/sevendays.jpeg'}
+    ],
     description: `В ресторане JaakDin
 
     Понедельник – Привет, Пицца: Купи 1, получи 1 бесплатно (пицца на дровах в неаполитанском стиле).
@@ -58,7 +64,9 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
   happyHours:
   {
     title: '🤩 Счастливые часы',
-    image: 'images/specialOffers/happyhours.jpeg',
+    images: [
+      {type: 'photo', media: 'images/specialOffers/happyhours.jpeg'}
+    ],
     description: `В баре Manaw Manaw у бассейна
 
     Наслаждайтесь нашими фирменными коктейлями и освежающими напитками по специальным ценам с 12:00 до 13:00 и с 16:00 до 17:00!`,
@@ -68,7 +76,9 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
   longTermLiving:
   {
     title: '♾ Длительное проживание',
-    image: 'images/specialOffers/longtermliving.jpeg',
+    images: [
+      {type: 'photo', media: 'images/specialOffers/longtermliving.jpeg'}
+    ],
     description: `💚 Loving your time at La Green Hotel? 
 
     Book your next long-term stay of 20 nights or more directly with us and enjoy exclusive rates crafted just for you!
@@ -80,7 +90,9 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
   stayAndPlay:
   {
     title: '🎾 Живи и играй',
-    image: 'images/specialOffers/liveandplay.jpeg',
+    images: [
+      {type: 'photo', media: 'images/specialOffers/liveandplay.jpeg'}
+    ],
     description: `Enjoy a complimentary for an hour of tennis, and get 10% off on Food & Beverage credit at SiamSportsPro Tennis Academy Phuket.
 
 
@@ -91,7 +103,9 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
   specialCakes:
   {
     title: '🎂 Индивидуальные торты',
-    image: 'images/specialOffers/specialCakes.jpeg',
+    images: [
+      {type: 'photo', media: 'images/specialOffers/specialCakes.jpeg'}
+    ],
     description: `В ресторане JaakDin
 
     Каждое празднование имеет свою историю, и наши кастомизированные торты – идеальный способ её рассказать.
@@ -103,7 +117,9 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
   aperol:
   {
     title: '🍸 Полуденное удовольствие с Aperol',
-    image: 'images/specialOffers/aperol.jpeg',
+    images: [
+      {type: 'photo', media: 'images/specialOffers/aperol.jpeg'}
+    ],
     description: `С 12:00 до 16:00 ежедневно
 
     Наслаждайтесь коктейлями Aperol Spritz: 2 бокала всего за 500 THB в нашем Лобби-баре!`,
