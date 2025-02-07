@@ -27,15 +27,13 @@ const sendInfrastructureList = (bot, chatId) => {
   // })
 }
 
-const sendInfrastructureInfo = (bot, chatId, data) => {
-  bot.sendPhoto(chatId, data.image, {
-    caption: data.description,
-    // reply_markup: {
-    //   inline_keyboard: [
-    //     [{ text: 'Назад', callback_data: 'back'}]
-    //   ]
-    // }
-  })
+const sendInfrastructureInfo = async(bot, chatId, data) => {
+  try {
+    await bot.sendMediaGroup(chatId, data.images)
+    await bot.sendMessage(chatId, data.description)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 module.exports = {sendInfrastructureList, sendInfrastructureInfo}

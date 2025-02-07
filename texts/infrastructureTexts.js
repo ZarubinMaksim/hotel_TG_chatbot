@@ -3,7 +3,11 @@ const infrastructureMainText = `This is infrastructure`;
 const infrastructureDescriptions = {
   pool: {
     title: '🏊🏻‍♀️ Бассейн',
-    image: 'images/infrastructure/pool.jpeg',
+    images: [
+      { type: 'photo', media: 'images/infrastructure/pool/pool.jpeg' },
+      { type: 'photo', media: 'images/infrastructure/pool/pool2.jpeg' },
+      { type: 'photo', media: 'images/infrastructure/pool/pool3.jpeg' },
+    ],
     callback: 'pool',
     description: `СИСТЕМА ОЧИСТКИ ВОДЫ ОТ POOLNOLOGIES | ПРОШЛА ТЕСТИРОВАНИЕ NSF
 
@@ -15,7 +19,11 @@ const infrastructureDescriptions = {
   },
   lobby: {
     title: '🛎 Лобби',
-    image: 'images/infrastructure/lobby.jpeg',
+    images: [
+      { type: 'photo', media: 'images/infrastructure/lobby/lobby.jpeg' },
+      { type: 'photo', media: 'images/infrastructure/lobby/lobby2.jpeg' },
+      { type: 'photo', media: 'images/infrastructure/lobby/lobby3.jpeg' },
+    ],
     callback: 'lobby',
     description: `24-ЧАСОВЫЕ УСЛУГИ В ЛОББИ
 
@@ -26,7 +34,11 @@ const infrastructureDescriptions = {
   },
   gym: {
     title: '🏋🏼‍♂️ Фитнес-центр',
-    image: 'images/infrastructure/gym.jpeg',
+    images: [
+      { type: 'photo', media: 'images/infrastructure/gym/gym.jpeg' },
+      { type: 'photo', media: 'images/infrastructure/gym/gym2.jpeg' },
+      { type: 'photo', media: 'images/infrastructure/gym/gym3.jpeg' },
+    ],
     callback: 'gym',
     description: `ФИТНЕС-ЦЕНТР
 
@@ -37,7 +49,9 @@ const infrastructureDescriptions = {
   },
   sauna: {
     title: '🧖🏼‍♂️ Сауна',
-    image: 'images/infrastructure/sauna.jpeg',
+    images: [
+      { type: 'photo', media: 'images/infrastructure/sauna/sauna.jpeg' },
+    ],
     callback: 'sauna',
     description: `Повысьте эффективность своих тренировок с бесплатной сауной в фитнес-центре La Green Hotel! 
     После интенсивной тренировки расслабьтесь в успокаивающем тепле сауны, чтобы снять напряжение в мышцах, детоксифицировать организм и обновить ум. 
@@ -48,14 +62,18 @@ const infrastructureDescriptions = {
   },
   yoga_terrace: {
     title: '🧘🏼‍♂️ Терраса для йоги',
-    image: 'images/infrastructure/yoga_terrace.jpeg',
+    images: [
+      { type: 'photo', media: 'images/infrastructure/yoga_terrace/yoga_terrace.jpeg' },
+    ],
     callback: 'yoga_terrace',
     description: `В процессе строительства`,
     isActive: true
   },
   running_lines: {
     title: '🏃🏽‍♂️ Дорожки для бега',
-    image: 'images/infrastructure/running_lines.jpeg',
+    images: [
+      { type: 'photo', media: 'images/infrastructure/running_lines/running_lines.jpeg' },
+    ],
     callback: 'running_lines',
     description: `Наслаждайтесь утренней пробежкой перед завтраком или вечерней прогулкой по нашим дорожкам. 
     Для гостей отеля доступны три отдельных дорожки по 100 метров. Мягкое покрытие дорожек создаёт отличные условия 
@@ -66,7 +84,9 @@ const infrastructureDescriptions = {
   },
   workout: {
     title: '🤸🏽‍♂️ Спортивная площадка',
-    image: 'images/infrastructure/workout.jpeg',
+    images: [
+      { type: 'photo', media: 'images/infrastructure/workout/workout.jpeg' },
+    ],
     callback: 'workout',
     description: `На открытой спортивной площадке отеля предусмотрена зона для любителей активного образа жизни. 
     Просторная площадка площадью 430 м² предлагает тренажёрные брусья, гантели и разнообразное современное оборудование для 
