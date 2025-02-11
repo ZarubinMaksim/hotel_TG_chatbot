@@ -1,6 +1,7 @@
 const surroundingsDescriptions = {
   beach: {
     title: '🏝 Пляжи', 
+    isActive: true,
     items: {
       layan_beach: {
         title: 'Пляж Лаян',
@@ -67,6 +68,7 @@ const surroundingsDescriptions = {
   }, 
   temples: {
     title: '🛕 Храмы',
+    isActive: true,
     items: {
       wat_phra_thong: {
         title: 'Ват Пратхонг',
