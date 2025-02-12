@@ -1,7 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api')
 const token = '7641248146:AAENDL-yedY7xYkQcSQdfduibKCMt3VIy28'
 const tokenManager = '7595558526:AAGVJLInp92m5MH0J-G4eczEfMen4Ma6YHI'
-
+const cron = require('node-cron')
 const bot = new TelegramBot(token, { polling: true })
 module.exports = bot
 
@@ -38,6 +38,7 @@ const handleManagerBotMessage = require('./components/managerBotMessageHandler')
 const { sendWithLoading } = require('./components/commomFunctions')
 const keyRequests = require('./texts/keyRequests')
 const regexMenuButtons = require('./texts/regexMenuButtons')
+const sendPromotion = require('./components/sendPromotion')
 const surroundingsTitles = Object.values(surroundingsDescriptions).filter(surrounding => surrounding.isActive).map(surrounding => surrounding.title)
 const surroundingsRegex = new RegExp(`^(${surroundingsTitles.join('|')})$`)
 const spaTitles = Object.values(spaDescriptions).filter(spa => spa.isActive).map(spa => spa.title)
@@ -57,6 +58,8 @@ const managerChatId = 317138824
     // });
 // ******
 
+
+
 managerBot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   managerBot.sendMessage(chatId, 'this is manager bot')
@@ -64,8 +67,8 @@ managerBot.onText(/\/start/, (msg) => {
 
 managerBot.on('message', (msg) => {
   const chatId = msg.chat.id;
-  if (msg.reply_to_message) {
 
+  if (msg.reply_to_message) {
     // вот тут мы конфирмем что все ок и отправляем на сервер
   } else {
     console.log(chatId)
@@ -77,6 +80,8 @@ managerBot.on('message', (msg) => {
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
+
+  sendPromotion(chatId)
 
   if (/\/start/.test(text)) {
     keyRequest = keyRequests.main_menu

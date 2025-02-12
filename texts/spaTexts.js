@@ -84,19 +84,22 @@ const spaDescriptions = {
     isActive: true,
     offers: {
       one: {
-        isActive: false,
+        isActive: true,
+        sendTime: '17:45',
         images: [
           { type: 'photo', media: 'images/about.jpg'}
         ]
       },
       two: {
         isActive: true,
+        sendTime: '17:47',
         images: [
           { type: 'photo', media: 'images/about.jpg'}
         ]
       },
       three: {
         isActive: true,
+        sendTime: '17:50',
         images: [
           { type: 'photo', media: 'images/about.jpg'}
         ]
