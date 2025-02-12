@@ -5,7 +5,7 @@ const { spaDescriptions } = require('../texts/spaTexts')
 const scheduledOffers = {}
 
 const updatePromotionsList = () => {
-  Object.values(spaDescriptions.spaOffers.offers).filter(offer => offer.isActive).map(offer => {
+  Object.values(spaDescriptions.spaOffers.offers).filter(offer => offer.isActive && offer.sendTime).map(offer => {
     scheduledOffers[offer.sendTime] = scheduledOffers[offer.sendTime] || []
     scheduledOffers[offer.sendTime].push(...offer.images)
 })

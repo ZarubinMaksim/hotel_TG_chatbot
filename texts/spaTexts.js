@@ -99,7 +99,7 @@ const spaDescriptions = {
       },
       three: {
         isActive: true,
-        sendTime: '17:50',
+        // sendTime: '17:50',
         images: [
           { type: 'photo', media: 'images/about.jpg'}
         ]
