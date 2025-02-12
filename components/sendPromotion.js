@@ -1,6 +1,7 @@
 const cron = require('node-cron')
 const bot = require('..')
 const { spaDescriptions } = require('../texts/spaTexts')
+const { specialOffersDescription } = require('../texts/specialOffersText')
 
 const scheduledOffers = {}
 
@@ -9,6 +10,11 @@ const updatePromotionsList = () => {
     scheduledOffers[offer.sendTime] = scheduledOffers[offer.sendTime] || []
     scheduledOffers[offer.sendTime].push(...offer.images)
 })
+
+  Object.values(specialOffersDescription).filter(offer => offer.isActive && offer.sendTime).map(offer => {
+    scheduledOffers[offer.sendTime] = scheduledOffers[offer.sendTime] || []
+    scheduledOffers[offer.sendTime].push(...offer.images)
+  })
 }
 
 
@@ -19,6 +25,7 @@ const updatePromotionsList = () => {
 
 const sendPromotion = (chatId) => {
   updatePromotionsList()
+  console.log(scheduledOffers)
   Object.entries(scheduledOffers).forEach(([time, images]) => {
     const [hours, minutes] = time.split(':')
     cron.schedule(`${minutes} ${hours} * * *`, () => {

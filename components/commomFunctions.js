@@ -1,6 +1,7 @@
 //reviewed on 26.12
 
 const bot = require("..");
+const startTexts = require("../texts/startTexts");
 const handleCounter = require("./counter");
 
 const createOneLinedKeyboard = (data) => {
@@ -34,4 +35,12 @@ const sendWithLoading = async(chatId, nextFunction, data) => {
   }
 }
 
-module.exports = {createTwoLinedKeyboard, createOneLinedKeyboard, sendWithLoading}
+const hideMainMenu = (chatID) => {
+  bot.sendMessage(chatID, startTexts.hide_menu, {
+    reply_markup: {
+      remove_keyboard: true
+    }
+  })
+}
+
+module.exports = {createTwoLinedKeyboard, createOneLinedKeyboard, sendWithLoading, hideMainMenu}

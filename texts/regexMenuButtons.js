@@ -13,6 +13,7 @@ const regexMenuButtons = {
   services: /Услуги|services/,
   review: /Оставить отзыв|review/,
   surroundings: /(Что рядом|surroundings|Назад к выбору\s*🔙)$/i,
+  hide_menu: /Закрыть меню|hidemenu/
 }
 
 module.exports = regexMenuButtons

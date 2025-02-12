@@ -35,10 +35,11 @@ const {sendServicesList, sendServiceDescription} = require('./components/service
 const {servicesDescription} = require('./texts/servicesText')
 const { sendEngeners, sengHousekeeping } = require('./components/requests')
 const handleManagerBotMessage = require('./components/managerBotMessageHandler')
-const { sendWithLoading } = require('./components/commomFunctions')
+const { sendWithLoading, hideMainMenu } = require('./components/commomFunctions')
 const keyRequests = require('./texts/keyRequests')
 const regexMenuButtons = require('./texts/regexMenuButtons')
 const sendPromotion = require('./components/sendPromotion')
+const startTexts = require('./texts/startTexts')
 const surroundingsTitles = Object.values(surroundingsDescriptions).filter(surrounding => surrounding.isActive).map(surrounding => surrounding.title)
 const surroundingsRegex = new RegExp(`^(${surroundingsTitles.join('|')})$`)
 const spaTitles = Object.values(spaDescriptions).filter(spa => spa.isActive).map(spa => spa.title)
@@ -90,8 +91,9 @@ bot.on('message', (msg) => {
   else if (regexMenuButtons.main_menu.test(text)) {
     keyRequest = keyRequests.main_menu
     sendWithLoading(chatId, sendMainMenu, keyRequest)
-  } 
-  else if (regexMenuButtons.sign_in.test(text)) {
+  } else if (regexMenuButtons.hide_menu.test(text)) {
+    hideMainMenu(chatId)
+  } else if (regexMenuButtons.sign_in.test(text)) {
     keyRequest = keyRequests.sign_in
     bot.sendMessage(chatId, 'Для регистрации напишите Номер комнаты и фамилию латинскими буквами')
   } 

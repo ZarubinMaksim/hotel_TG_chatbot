@@ -21,7 +21,8 @@ Join us for an unforgettable culinary experience! 🌕🏮🍽️✨ Only THB 99
 Book now! available exclusively at Sanook Restaurant on November 15, 2024.
  `,
     isActive: true,
-    callback: 'loykrahtong'
+    callback: 'loykrahtong',
+    sendTime: '15:00'
   },
   specialCocktails:
   {
@@ -41,7 +42,8 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
     
     📍 Only at Overgrown Lounge, open daily from 15:00 - 24:00`,
     isActive: true,
-    callback: 'specialCocktails'
+    callback: 'specialCocktails',
+    sendTime: '15:00'
   },
   sevenDaysMenu:
   {
@@ -59,7 +61,8 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
     Суббота – День стейков: безлимитный стейк из филейной части за 990 THB.
     Воскресенье – День любителей хлеба: все сэндвичи и бургеры – купи 1, получи 1 бесплатно.`,
     isActive: true,
-    callback: 'sevenDaysMenu'
+    callback: 'sevenDaysMenu',
+    sendTime: '15:00'
   },
   happyHours:
   {
@@ -71,7 +74,8 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
 
     Наслаждайтесь нашими фирменными коктейлями и освежающими напитками по специальным ценам с 12:00 до 13:00 и с 16:00 до 17:00!`,
     isActive: true,
-    callback: 'happyHours'
+    callback: 'happyHours',
+    sendTime: '15:00'
   },
   longTermLiving:
   {
