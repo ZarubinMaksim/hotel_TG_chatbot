@@ -80,13 +80,28 @@ const spaDescriptions = {
   spaOffers: {
     title: 'Акции',
     callback: 'spaOffers', 
-    description: 'Our offers',
+    description: 'Вот актуальные акции в спа',
     isActive: true,
-    keyboard: [
-      [{text:'hui', callback_data:'hui'}],
-      [{text:'hui', callback_data:'hui'}],
-      [{ text: 'Назад', callback_data: 'back' }]
-    ],
+    offers: {
+      one: {
+        isActive: false,
+        images: [
+          { type: 'photo', media: 'images/about.jpg'}
+        ]
+      },
+      two: {
+        isActive: true,
+        images: [
+          { type: 'photo', media: 'images/about.jpg'}
+        ]
+      },
+      three: {
+        isActive: true,
+        images: [
+          { type: 'photo', media: 'images/about.jpg'}
+        ]
+      }
+    }
   },
 
 }
