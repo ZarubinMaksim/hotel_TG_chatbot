@@ -11,7 +11,7 @@ eng: {
 },
 signIn: {
   keyRequest: 'signIn',
-  managerBotMessage: 'Guest wants to sign in! Please reply for this message to confirm. Message shuld be A701/Petrov/21-01-2025'
+  managerBotMessage: 'Guest wants to sign in! Please reply for this message to confirm. Message shuld be ROOM NUMBER/LAST NAME/FIRST NAME/CHECK IN DATE/CHECK OUT DAY'
 },
 unidentified: {
   keyRequest: 'unidentified',

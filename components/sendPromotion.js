@@ -25,7 +25,7 @@ const updatePromotionsList = () => {
 
 const sendPromotion = (chatId) => {
   updatePromotionsList()
-  console.log(scheduledOffers)
+  // console.log(scheduledOffers)
   Object.entries(scheduledOffers).forEach(([time, images]) => {
     const [hours, minutes] = time.split(':')
     cron.schedule(`${minutes} ${hours} * * *`, () => {
