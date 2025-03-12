@@ -2,8 +2,8 @@
 const aboutMainPic = 'images/about.jpg';
 const { aboutMainMsg } = require('../texts/aboutTexts');
 
-const sendAbout = (bot, chatId) => {
-  bot.sendPhoto(chatId, aboutMainPic, { 
+const sendAbout = (mainBot, chatId) => {
+  mainBot.sendPhoto(chatId, aboutMainPic, { 
     caption: aboutMainMsg,
   })
 };

@@ -1,6 +1,5 @@
 //reviewed on 26.12
 
-const bot = require("../../");
 const startTexts = require("../texts/startTexts");
 const handleCounter = require("./counter");
 
@@ -25,18 +24,18 @@ const createTwoLinedKeyboard = (data) => {
   return keyboard;
 }
 
-const sendWithLoading = async(chatId, nextFunction, data) => {
+const sendWithLoading = async(mainBot, chatId, nextFunction, data) => {
   try {
-    await bot.sendChatAction(chatId, 'typing');
-    await nextFunction(bot, chatId, data)
+    await mainBot.sendChatAction(chatId, 'typing');
+    await nextFunction(mainBot, chatId, data)
     await handleCounter(data)
   } catch (error) {
     console.log('Error', error)
   }
 }
 
-const hideMainMenu = (chatID) => {
-  bot.sendMessage(chatID, startTexts.hide_menu, {
+const hideMainMenu = (mainBot, chatID) => {
+  mainBot.sendMessage(chatID, startTexts.hide_menu, {
     reply_markup: {
       remove_keyboard: true
     }
