@@ -1,6 +1,6 @@
 //reviewed on 26.12
 
-const bot = require("..");
+const bot = require("../../");
 const startTexts = require("../texts/startTexts");
 const handleCounter = require("./counter");
 

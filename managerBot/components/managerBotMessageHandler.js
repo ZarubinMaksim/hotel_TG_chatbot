@@ -1,5 +1,5 @@
-const {servicesDescription} = require("../texts/servicesText")
-const requestDescriptions = require("../texts/requestsText")
+const {servicesDescription} = require("../../mainBot/texts/servicesText")
+const requestDescriptions = require("../../mainBot/texts/requestsText")
 
 const handleManagerBotMessage = (msg, keyRequest, chatId) => {
   console.log('мы в хендлмессадж', msg, keyRequest, chatId)

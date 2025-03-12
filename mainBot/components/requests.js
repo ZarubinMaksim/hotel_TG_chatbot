@@ -1,4 +1,4 @@
-const bot = require("..")
+const bot = require("../..")
 const requestDescriptions = require("../texts/requestsText")
 
 

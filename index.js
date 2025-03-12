@@ -1,45 +1,46 @@
 const TelegramBot = require('node-telegram-bot-api')
 const token = '7641248146:AAENDL-yedY7xYkQcSQdfduibKCMt3VIy28'
-const tokenManager = '7595558526:AAGVJLInp92m5MH0J-G4eczEfMen4Ma6YHI'
+// const tokenManager = '7595558526:AAGVJLInp92m5MH0J-G4eczEfMen4Ma6YHI'
 const bot = new TelegramBot(token, { polling: true })
 module.exports = bot
 
 
-const managerBot = new TelegramBot(tokenManager, { polling: true })
-const sendMainMenu = require('./components/start')
-const sendAbout = require('./components/about')
-const {sendRoomsList, sendRoomInfo} = require('./components/rooms')
-const {sendRestaurantsList, sendRestaurantInfo} = require('./components/fnb')
-const {sendSpecialOffers, sendSpecialOfferInfo} = require('./components/specialOffers')
-const {specialOffersDescription} = require('./texts/specialOffersText')
+// const managerBot = new TelegramBot(tokenManager, { polling: true })
+const sendMainMenu = require('./mainBot/components/start')
+const sendAbout = require('./mainBot/components/about')
+const {sendRoomsList, sendRoomInfo} = require('./mainBot/components/rooms')
+const {sendRestaurantsList, sendRestaurantInfo} = require('./mainBot/components/fnb')
+const {sendSpecialOffers, sendSpecialOfferInfo} = require('./mainBot/components/specialOffers')
+const {specialOffersDescription} = require('./mainBot/texts/specialOffersText')
 const specialOffersTitles = Object.values(specialOffersDescription).filter(offer => offer.isActive).map(offer => offer.title)
 const specialOffersRegex = new RegExp(`^(${specialOffersTitles.join('|')})$`);
-const { roomsDescriptions } = require('./texts/roomsText')
+const { roomsDescriptions } = require('./mainBot/texts/roomsText')
 const roomsTitles = Object.values(roomsDescriptions).filter(room => room.isActive).map(room => room.title)
 const roomsRegex = new RegExp(`^(${roomsTitles.join('|')})$`);
-const { restaurantsDescriptions } = require('./texts/restaurantsText')
+const { restaurantsDescriptions } = require('./mainBot/texts/restaurantsText')
 const restaurantsTitles = Object.values(restaurantsDescriptions).filter(restaurant => restaurant.isActive).map(restaurant => restaurant.title)
 const restaurantsRegex = new RegExp(`^(${restaurantsTitles.join('|')})$`)
-const { sendInfrastructureList, sendInfrastructureInfo } = require('./components/infrastructure')
-const { infrastructureDescriptions } = require('./texts/infrastructureTexts')
+const { sendInfrastructureList, sendInfrastructureInfo } = require('./mainBot/components/infrastructure')
+const { infrastructureDescriptions } = require('./mainBot/texts/infrastructureTexts')
 const infrastructuresTitles = Object.values(infrastructureDescriptions).map(infrastructure => infrastructure.title)
 const infrastructuresRegex = new RegExp(`^(${infrastructuresTitles.join('|')})$`)
-const { sendSpaInfo, sendSpaDescription} = require('./components/spa')
-const { spaDescriptions } = require('./texts/spaTexts')
-const sendHotelLocation = require('./components/hotelLocation')
-const {sendPlatformsForReview, getReview} = require('./components/review')
-const { sendSurroundingsList, sendSurrounding, sendExactSurrounding } = require('./components/surround')
-const { surroundingsDescriptions } = require('./texts/surroundText')
-const {sendServicesList, sendServiceDescription} = require('./components/services')
-const {servicesDescription} = require('./texts/servicesText')
-const { sendEngeners, sengHousekeeping } = require('./components/requests')
-const handleManagerBotMessage = require('./components/managerBotMessageHandler')
-const { sendWithLoading, hideMainMenu } = require('./components/commomFunctions')
-const keyRequests = require('./texts/keyRequests')
-const regexMenuButtons = require('./texts/regexMenuButtons')
-const sendPromotion = require('./components/sendPromotion')
-const startTexts = require('./texts/startTexts')
-const {signUp, checkPersonalDetails} = require('./components/signUp')
+const { sendSpaInfo, sendSpaDescription} = require('./mainBot/components/spa')
+const { spaDescriptions } = require('./mainBot/texts/spaTexts')
+const sendHotelLocation = require('./mainBot/components/hotelLocation')
+const {sendPlatformsForReview, getReview} = require('./mainBot/components/review')
+const { sendSurroundingsList, sendSurrounding, sendExactSurrounding } = require('./mainBot/components/surround')
+const { surroundingsDescriptions } = require('./mainBot/texts/surroundText')
+const {sendServicesList, sendServiceDescription} = require('./mainBot/components/services')
+const {servicesDescription} = require('./mainBot/texts/servicesText')
+const { sendEngeners, sengHousekeeping } = require('./mainBot/components/requests')
+const handleManagerBotMessage = require('./managerBot/components/managerBotMessageHandler')
+const { sendWithLoading, hideMainMenu } = require('./mainBot/components/commomFunctions')
+const keyRequests = require('./mainBot/texts/keyRequests')
+const regexMenuButtons = require('./mainBot/texts/regexMenuButtons')
+const sendPromotion = require('./mainBot/components/sendPromotion')
+const startTexts = require('./mainBot/texts/startTexts')
+const {signUp, checkPersonalDetails} = require('./mainBot/components/signUp')
+const managerBot = require('./managerBot/managerBot')
 const surroundingsTitles = Object.values(surroundingsDescriptions).filter(surrounding => surrounding.isActive).map(surrounding => surrounding.title)
 const surroundingsRegex = new RegExp(`^(${surroundingsTitles.join('|')})$`)
 const spaTitles = Object.values(spaDescriptions).filter(spa => spa.isActive).map(spa => spa.title)
@@ -72,38 +73,39 @@ bot.setMyCommands([
   { command: '/start', description: startTexts.show_menu },
 ]);
 
-managerBot.onText(/\/start/, (msg) => {
-  const chatId = msg.chat.id;
-  managerBot.sendMessage(chatId, 'this is manager bot')
-});
+// managerBot.onText(/\/start/, (msg) => {
+//   const chatId = msg.chat.id;
+//   managerBot.sendMessage(chatId, 'this is manager bot')
+// });
 
-async function setMessageReaction(chatId, messageId, emoji) {
-  await fetch(`https://api.telegram.org/bot${tokenManager}/setMessageReaction`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-          chat_id: chatId,
-          message_id: messageId,
-          reaction: [{ type: "emoji", emoji: emoji }]
-      })
-  });
-}
+// async function setMessageReaction(chatId, messageId, emoji) {
+//   await fetch(`https://api.telegram.org/bot${tokenManager}/setMessageReaction`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//           chat_id: chatId,
+//           message_id: messageId,
+//           reaction: [{ type: "emoji", emoji: emoji }]
+//       })
+//   });
+// }
 
-managerBot.on('message', async (msg) => {
-  const chatId = msg.chat.id;
+// managerBot.on('message', async (msg) => {
+//   const chatId = msg.chat.id;
 
-  if (msg.reply_to_message) { 
-      const originalChatId = msg.reply_to_message.text.split('ChatID - ')[1]?.trim()
-      // console.log(msg.reply_to_message.text.split('ChatID - '))
-      await setMessageReaction(chatId, msg.reply_to_message.message_id, '👍');
-      await bot.sendMessage(originalChatId, 'Вы успешно зарегистрировались')
-      // await checkPersonalDetails()
+//   if (msg.reply_to_message) { 
+//       const originalChatId = msg.reply_to_message.text.split('ChatID - ')[1]?.trim()
+//       // console.log(msg.reply_to_message.text.split('ChatID - '))
+//       await setMessageReaction(chatId, msg.reply_to_message.message_id, '👍');
+//       await bot.sendMessage(originalChatId, 'Вы успешно зарегистрировались')
+//       console.log('msg', msg.text)
+//       // await checkPersonalDetails()
       
-  } else {
-      // console.log(chatId);
-      managerBot.sendMessage(chatId, 'Error. Are you sure you replying message to confirm registration?');
-  }
-});
+//   } else {
+//       // console.log(chatId);
+//       managerBot.sendMessage(chatId, 'Error. Are you sure you replying message to confirm registration?');
+//   }
+// });
 
 
 bot.on('message', (msg) => {

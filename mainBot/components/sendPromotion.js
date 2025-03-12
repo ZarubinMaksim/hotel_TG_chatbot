@@ -1,5 +1,5 @@
 const cron = require('node-cron')
-const bot = require('..')
+const bot = require('../..')
 const { spaDescriptions } = require('../texts/spaTexts')
 const { specialOffersDescription } = require('../texts/specialOffersText')
 
