@@ -12,7 +12,7 @@ async function setMessageReaction(token, chatId, messageId, emoji) {
   });
 }
 
-const managerBotFunctions = (mainBot, managerBot, token) => {
+const startManagerBot = (mainBot, managerBot, token) => {
 
   managerBot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
@@ -38,4 +38,4 @@ const managerBotFunctions = (mainBot, managerBot, token) => {
 
 }
 
-module.exports = managerBotFunctions
+module.exports = startManagerBot

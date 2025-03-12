@@ -52,7 +52,7 @@ const getUserState = (chatId) => {
   return userStates[chatId] || ''
 }
 
-const mainBotFunctions = (mainBot, managerBot) => {
+const startMainBot = (mainBot, managerBot) => {
 
   mainBot.setMyCommands([
     { command: '/start', description: startTexts.show_menu },
@@ -230,4 +230,4 @@ const mainBotFunctions = (mainBot, managerBot) => {
 
 
 
-module.exports = {mainBotFunctions}
+module.exports = {startMainBot}

@@ -1,13 +1,13 @@
 const TelegramBot = require('node-telegram-bot-api');
-const {mainBotFunctions} = require('./mainBot/mainBot');
-const managerBotFunctions = require('./managerBot/managerBot');
+const {startMainBot} = require('./mainBot/mainBot');
+const startManagerBot = require('./managerBot/managerBot');
 const mainToken = '7641248146:AAENDL-yedY7xYkQcSQdfduibKCMt3VIy28'
 const managerToken = '7595558526:AAGVJLInp92m5MH0J-G4eczEfMen4Ma6YHI'
 const managerBot = new TelegramBot(managerToken, { polling: true })
 const mainBot = new TelegramBot(mainToken, { polling: true })
 
-mainBotFunctions(mainBot, managerBot)
-managerBotFunctions(mainBot, managerBot, managerToken)
+startMainBot(mainBot, managerBot)
+startManagerBot(mainBot, managerBot, managerToken)
 
 
 
