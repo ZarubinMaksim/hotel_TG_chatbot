@@ -51,7 +51,7 @@ const setUserState = (chatId, keyRequest) => {
 const getUserState = (chatId) => {
   return userStates[chatId] || ''
 }
-
+const User = require('../db/models/user')
 const startMainBot = (mainBot, managerBot) => {
 
   mainBot.setMyCommands([
@@ -63,11 +63,20 @@ const startMainBot = (mainBot, managerBot) => {
     const text = msg.text;
   
     sendPromotion(chatId)
-  
+
     if (/\/start/.test(text)) {
       setUserState(chatId, keyRequests.main_menu)
       const keyRequest = getUserState(chatId)
       sendWithLoading(mainBot, chatId, sendMainMenu, keyRequest)
+      User.findOne({chatId: chatId})
+      .then(user => {
+        if (user) {
+          console.log('Пользователь уже существует');
+          return
+        } else {
+          User.create({chatId: chatId, keyRequest: text })
+        }
+      })
     } 
     else if (regexMenuButtons.main_menu.test(text)) {
       setUserState(chatId, keyRequests.main_menu)
@@ -230,4 +239,4 @@ const startMainBot = (mainBot, managerBot) => {
 
 
 
-module.exports = {startMainBot}
+module.exports = {startMainBot, setUserState}

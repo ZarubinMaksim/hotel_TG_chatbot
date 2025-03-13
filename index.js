@@ -6,6 +6,15 @@ const managerToken = '7595558526:AAGVJLInp92m5MH0J-G4eczEfMen4Ma6YHI'
 const managerBot = new TelegramBot(managerToken, { polling: true })
 const mainBot = new TelegramBot(mainToken, { polling: true })
 
+const express = require('express')
+const mongoose = require('mongoose')
+const app = express()
+
+mongoose.connect('mongodb://localhost:27017/laGreenBot')
+
+
+app.listen(3000)
+
 startMainBot(mainBot, managerBot)
 startManagerBot(mainBot, managerBot, managerToken)
 
