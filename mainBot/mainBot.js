@@ -7,7 +7,7 @@ const { sendEngeners, sengHousekeeping } = require('./components/requests');
 const { sendPlatformsForReview, getReview } = require('./components/review');
 const { sendRoomsList, sendRoomInfo } = require('./components/rooms');
 const { sendServicesList, sendServiceDescription } = require('./components/services');
-const { signUp } = require('./components/signUp');
+const { checkIfRegistered } = require('./components/signUp');
 const { sendSpaInfo, sendSpaDescription } = require('./components/spa');
 const { sendSpecialOffers, sendSpecialOfferInfo } = require('./components/specialOffers');
 const sendMainMenu = require('./components/start');
@@ -42,16 +42,19 @@ const surroundingsTitlesAll = Object.values(surroundingsDescriptions).flatMap(se
 const surroundingsTitlesAllRegEx = new RegExp(`^(${surroundingsTitlesAll.join('|')})$`)
 
 const managerChatId = 317138824
-const userStates = {}
+// const userStates = {}
 
-const setUserState = (chatId, keyRequest) => {
-  userStates[chatId] = keyRequest
-}
+// const setUserState = (chatId, keyRequest) => {
+//   userStates[chatId] = keyRequest
+// }
 
-const getUserState = (chatId) => {
-  return userStates[chatId] || ''
-}
-const User = require('../db/models/user')
+// const getKeyRequest = (chatId) => {
+//   return userStates[chatId] || ''
+// }
+
+
+const User = require('../db/models/user');
+const { userStates, setKeyRequest, getKeyRequest, createLocalUser } = require('./components/currentUsers');
 const startMainBot = (mainBot, managerBot) => {
 
   mainBot.setMyCommands([
@@ -65,40 +68,45 @@ const startMainBot = (mainBot, managerBot) => {
     sendPromotion(chatId)
 
     if (/\/start/.test(text)) {
-      setUserState(chatId, keyRequests.main_menu)
-      const keyRequest = getUserState(chatId)
-      sendWithLoading(mainBot, chatId, sendMainMenu, keyRequest)
+      sendWithLoading(mainBot, chatId, sendMainMenu)
+
       User.findOne({chatId: chatId})
       .then(user => {
         if (user) {
           console.log('Пользователь уже существует');
+          createLocalUser(user)
+          console.log(userStates)
           return
         } else {
-          User.create({chatId: chatId, keyRequest: text })
+          User.create({chatId: chatId, keyRequest: '', lastname: '', name: '', room: '', arrival: '', departure: '' })
+            .then(user => {
+              createLocalUser(user)
+              console.log(userStates)
+            })
         }
       })
     } 
     else if (regexMenuButtons.main_menu.test(text)) {
-      setUserState(chatId, keyRequests.main_menu)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.main_menu)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendMainMenu, keyRequest)
     } 
     else if (regexMenuButtons.hide_menu.test(text)) {
       hideMainMenu(mainBot, chatId)
     } 
     else if (regexMenuButtons.sign_in.test(text)) {
-      setUserState(chatId, keyRequests.sign_in)
-      const keyRequest = getUserState(chatId)
-      sendWithLoading(mainBot, chatId, signUp)
+      setKeyRequest(chatId, keyRequests.sign_in)
+      const keyRequest = getKeyRequest(chatId)
+      sendWithLoading(mainBot, chatId, checkIfRegistered)
     } 
     else if (regexMenuButtons.about_hotel.test(text)) {
-      setUserState(chatId, keyRequests.about_hotel)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.about_hotel)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendAbout, keyRequest)
     } 
     else if (regexMenuButtons.rooms.test(text)) {
-      setUserState(chatId, keyRequests.room)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.room)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendRoomsList, keyRequest)
     } 
     else if (roomsRegex.test(text)) {
@@ -108,18 +116,18 @@ const startMainBot = (mainBot, managerBot) => {
       sendWithLoading(mainBot, chatId, sendRoomInfo, callback)
     } 
     else if (regexMenuButtons.engeneers.test(text)) {
-      setUserState(chatId, keyRequests.engeneers)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.engeneers)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendEngeners, keyRequest)
     } 
     else if (regexMenuButtons.housekeeping.test(text)) {
-      setUserState(chatId, keyRequests.housekeeping)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.housekeeping)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sengHousekeeping, keyRequest)
     } 
     else if (regexMenuButtons.restaurants.test(text)) {
-      setUserState(chatId, keyRequests.restaurants)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.restaurants)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendRestaurantsList, keyRequest)
     } 
     else if (restaurantsRegex.test(text)) {
@@ -128,8 +136,8 @@ const startMainBot = (mainBot, managerBot) => {
       sendWithLoading(mainBot, chatId, sendRestaurantInfo, callback)
     } 
     else if (regexMenuButtons.special_offers.test(text)) {
-      setUserState(chatId, keyRequests.special_offers)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.special_offers)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendSpecialOffers, keyRequest)
     } 
     else if (specialOffersRegex.test(text)) {
@@ -138,8 +146,8 @@ const startMainBot = (mainBot, managerBot) => {
       sendWithLoading(mainBot, chatId, sendSpecialOfferInfo, callback)
     } 
     else if (regexMenuButtons.infrastructure.test(text)) {
-      setUserState(chatId, keyRequests.infrastructure)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.infrastructure)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendInfrastructureList, keyRequest)
     } 
     else if (infrastructuresRegex.test(text)) {
@@ -148,8 +156,8 @@ const startMainBot = (mainBot, managerBot) => {
       sendWithLoading(mainBot, chatId, sendInfrastructureInfo, callback)
     } 
     else if (regexMenuButtons.spa.test(text)) { 
-      setUserState(chatId, keyRequests.spa)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.spa)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendSpaInfo, keyRequest)
     } 
     else if (spaRegex.test(text)) {
@@ -158,30 +166,30 @@ const startMainBot = (mainBot, managerBot) => {
       sendWithLoading(mainBot, chatId, sendSpaDescription, callback)
     } 
     else if (regexMenuButtons.location.test(text)) {
-      setUserState(chatId, keyRequests.location)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.location)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendHotelLocation, keyRequest)
     } 
     else if (regexMenuButtons.services.test(text)) {
-      setUserState(chatId, keyRequests.services)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.services)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendServicesList, keyRequest)
     } 
     else if (servicesRegex.test(text)) {
       const serviceTitle = msg.text
       const callback = Object.values(servicesDescription).find(value => value.title === serviceTitle)
-      setUserState(chatId, callback.keyRequest)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, callback.keyRequest)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendServiceDescription, callback)
     } 
     else if (regexMenuButtons.review.test(text)) {
-      setUserState(chatId, keyRequests.review)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.review)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendPlatformsForReview, keyRequest)
     } 
     else if (regexMenuButtons.surroundings.test(text)) {
-      setUserState(chatId, keyRequests.surroundings)
-      const keyRequest = getUserState(chatId)
+      setKeyRequest(chatId, keyRequests.surroundings)
+      const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendSurroundingsList, keyRequest)
     } 
     else if (surroundingsRegex.test(text)) {
@@ -195,42 +203,42 @@ const startMainBot = (mainBot, managerBot) => {
       sendWithLoading(mainBot, chatId, sendExactSurrounding, callback)
     } 
     else {
-      const keyRequest = getUserState(chatId)
+      const keyRequest = getKeyRequest(chatId)
       if (keyRequest === keyRequests.housekeeping) {
         const messageData = handleManagerBotMessage(msg, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
-        setUserState(chatId, '')
+        setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.engeneers) {
         const messageData = handleManagerBotMessage(msg, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
-        setUserState(chatId, '')
+        setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.review) {
         getReview(mainBot, managerBot, chatId, msg)
-        setUserState(chatId, '')
+        setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.sign_in) {
         const messageData = handleManagerBotMessage(msg, keyRequest, chatId)
         managerBot.sendMessage(managerChatId, messageData)
-        setUserState(chatId, '')
+        setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.transportation) {
         const messageData = handleManagerBotMessage(msg, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
-        setUserState(chatId, '')
+        setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.wake_up_call) {
         const messageData = handleManagerBotMessage(msg, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
-        setUserState(chatId, '')
+        setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.breakfast_box) {
         const messageData = handleManagerBotMessage(msg, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
-        setUserState(chatId, '')
+        setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.luggage) {
         const messageData = handleManagerBotMessage(msg, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
-        setUserState(chatId, '')
+        setKeyRequest(chatId, '')
       } else {
         const messageData = handleManagerBotMessage(msg, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
-        setUserState(chatId, '')
+        setKeyRequest(chatId, '')
       }
     }
   })
@@ -239,4 +247,4 @@ const startMainBot = (mainBot, managerBot) => {
 
 
 
-module.exports = {startMainBot, setUserState}
+module.exports = {startMainBot}

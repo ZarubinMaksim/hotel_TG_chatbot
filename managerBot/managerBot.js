@@ -1,5 +1,6 @@
 
-const User = require('../db/models/user')
+const User = require('../db/models/user');
+const { createLocalUser } = require('../mainBot/components/currentUsers');
 
 async function setMessageReaction(token, chatId, messageId, emoji) {
   await fetch(`https://api.telegram.org/bot${token}/setMessageReaction`, {
@@ -41,7 +42,7 @@ const startManagerBot = (mainBot, managerBot, token) => {
               }, 
               { new: true })
               .then(updatedUser => {
-                console.log('User was updated', updatedUser)
+                createLocalUser(updatedUser)
               })
             } else {
               console.log('Пользователь не найден')
