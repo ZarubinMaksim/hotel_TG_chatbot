@@ -73,15 +73,16 @@ const startMainBot = (mainBot, managerBot) => {
       User.findOne({chatId: chatId})
       .then(user => {
         if (user) {
-          console.log('Пользователь уже существует');
+          console.log('Пользователь уже существует', userStates); //check here if exist in userStates
           createLocalUser(user)
-          console.log(userStates)
+
+
           return
         } else {
           User.create({chatId: chatId, keyRequest: '', lastname: '', name: '', room: '', arrival: '', departure: '' })
             .then(user => {
               createLocalUser(user)
-              console.log(userStates)
+
             })
         }
       })

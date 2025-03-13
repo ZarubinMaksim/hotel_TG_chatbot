@@ -50,11 +50,9 @@ const startManagerBot = (mainBot, managerBot, token) => {
             }
           })
         await setMessageReaction(token, chatId, msg.reply_to_message.message_id, '👍');
-        await mainBot.sendMessage(originalChatId, 'Вы успешно зарегистрировались')
-        // await checkPersonalDetails()
+        await mainBot.sendMessage(originalChatId, 'Вы успешно зарегистрировались! Для полного доступа нажмите /start')
         
     } else {
-        // console.log(chatId);
         managerBot.sendMessage(chatId, 'Error. Are you sure you replying message to confirm registration?');
     }
   });

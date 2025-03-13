@@ -7,7 +7,8 @@ const managerBot = new TelegramBot(managerToken, { polling: true })
 const mainBot = new TelegramBot(mainToken, { polling: true })
 
 const express = require('express')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { syncUserStates } = require('./mainBot/components/currentUsers');
 const app = express()
 
 mongoose.connect('mongodb://localhost:27017/laGreenBot')
@@ -17,6 +18,7 @@ app.listen(3000)
 
 startMainBot(mainBot, managerBot)
 startManagerBot(mainBot, managerBot, managerToken)
+syncUserStates() //синхронизируем при запуске приложения пользователей локально
 
 
 
