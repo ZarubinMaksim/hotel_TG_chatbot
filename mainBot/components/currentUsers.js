@@ -40,7 +40,6 @@ const createLocalUser = (user) => {
 
 const setKeyRequest = (chatId, keyRequest) => {
   userStates[chatId].keyRequest = keyRequest
-  
 }
 
 const getKeyRequest = (chatId) => {

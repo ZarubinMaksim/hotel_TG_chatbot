@@ -2,6 +2,7 @@
 
 const startTexts = require("../texts/startTexts");
 const handleCounter = require("./counter");
+const { userStates } = require("./currentUsers");
 
 const createOneLinedKeyboard = (data) => {
   const keyboard = [];
@@ -34,6 +35,20 @@ const sendWithLoading = async(mainBot, chatId, nextFunction, data) => {
   }
 }
 
+const checkUserAndSendWithLoading = async(mainBot, chatId, nextFunction, data) => {
+  try {
+    await mainBot.sendChatAction(chatId, 'typing');
+    if (userStates[chatId].room !== '') {
+      await nextFunction(mainBot, chatId, data)
+    } else{
+      mainBot.sendMessage(chatId, 'Кажется, что вы еще не зарегистрированы чтобы пользоваться данной опцией')
+    }
+    await handleCounter(data)
+  } catch (error) {
+    console.log('Error', error)
+  }
+}
+
 const hideMainMenu = (mainBot, chatID) => {
   mainBot.sendMessage(chatID, startTexts.hide_menu, {
     reply_markup: {
@@ -42,4 +57,4 @@ const hideMainMenu = (mainBot, chatID) => {
   })
 }
 
-module.exports = {createTwoLinedKeyboard, createOneLinedKeyboard, sendWithLoading, hideMainMenu}
+module.exports = {createTwoLinedKeyboard, createOneLinedKeyboard, sendWithLoading, hideMainMenu, checkUserAndSendWithLoading}

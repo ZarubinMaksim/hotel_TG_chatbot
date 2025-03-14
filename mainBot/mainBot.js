@@ -1,5 +1,5 @@
 const sendAbout = require('./components/about');
-const { sendWithLoading, hideMainMenu } = require('./components/commomFunctions');
+const { sendWithLoading, hideMainMenu, checkUserAndSendWithLoading } = require('./components/commomFunctions');
 const { sendRestaurantsList, sendRestaurantInfo } = require('./components/fnb');
 const sendHotelLocation = require('./components/hotelLocation');
 const { sendInfrastructureList, sendInfrastructureInfo } = require('./components/infrastructure');
@@ -119,12 +119,12 @@ const startMainBot = (mainBot, managerBot) => {
     else if (regexMenuButtons.engeneers.test(text)) {
       setKeyRequest(chatId, keyRequests.engeneers)
       const keyRequest = getKeyRequest(chatId)
-      sendWithLoading(mainBot, chatId, sendEngeners, keyRequest)
+      checkUserAndSendWithLoading(mainBot, chatId, sendEngeners, keyRequest)
     } 
     else if (regexMenuButtons.housekeeping.test(text)) {
       setKeyRequest(chatId, keyRequests.housekeeping)
       const keyRequest = getKeyRequest(chatId)
-      sendWithLoading(mainBot, chatId, sengHousekeeping, keyRequest)
+      checkUserAndSendWithLoading(mainBot, chatId, sengHousekeeping, keyRequest)
     } 
     else if (regexMenuButtons.restaurants.test(text)) {
       setKeyRequest(chatId, keyRequests.restaurants)
@@ -174,19 +174,19 @@ const startMainBot = (mainBot, managerBot) => {
     else if (regexMenuButtons.services.test(text)) {
       setKeyRequest(chatId, keyRequests.services)
       const keyRequest = getKeyRequest(chatId)
-      sendWithLoading(mainBot, chatId, sendServicesList, keyRequest)
+      checkUserAndSendWithLoading(mainBot, chatId, sendServicesList, keyRequest)
     } 
     else if (servicesRegex.test(text)) {
       const serviceTitle = msg.text
       const callback = Object.values(servicesDescription).find(value => value.title === serviceTitle)
       setKeyRequest(chatId, callback.keyRequest)
       const keyRequest = getKeyRequest(chatId)
-      sendWithLoading(mainBot, chatId, sendServiceDescription, callback)
+      checkUserAndSendWithLoading(mainBot, chatId, sendServiceDescription, callback)
     } 
     else if (regexMenuButtons.review.test(text)) {
       setKeyRequest(chatId, keyRequests.review)
       const keyRequest = getKeyRequest(chatId)
-      sendWithLoading(mainBot, chatId, sendPlatformsForReview, keyRequest)
+      checkUserAndSendWithLoading(mainBot, chatId, sendPlatformsForReview, keyRequest)
     } 
     else if (regexMenuButtons.surroundings.test(text)) {
       setKeyRequest(chatId, keyRequests.surroundings)
