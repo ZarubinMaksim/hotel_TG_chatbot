@@ -1,6 +1,9 @@
 
 const User = require('../db/models/user');
 const { createLocalUser } = require('../mainBot/components/currentUsers');
+const handleManagerBotMessage = require('./components/managerBotMessageHandler');
+const { profileMainMenu, updateProfileMenu } = require('./keyboards/managerBotKeyboards');
+const managerBotDescriptions = require('./texts/managerBotDescriptions');
 let keyRequest 
 let changingUser
 
@@ -33,13 +36,7 @@ const startManagerBot = (mainBot, managerBot, token) => {
     if (data === 'update_guest_details') {
       managerBot.sendMessage(chatId, message.text, {
         reply_markup: {
-          inline_keyboard: [
-            [{text: 'Update lastname', callback_data: 'update_guest_lastname'}],
-            [{text: 'Update name', callback_data: 'update_guest_name'}],
-            [{text: 'Update room', callback_data: 'update_guest_room'}],
-            [{text: 'Update arrival', callback_data: 'update_guest_arrival'}],
-            [{text: 'Update departure', callback_data: 'update_guest_departure'}],
-          ]
+          inline_keyboard: updateProfileMenu
         }
       })
     } else if (data === 'update_guest_lastname') {
@@ -57,10 +54,6 @@ const startManagerBot = (mainBot, managerBot, token) => {
     managerBot.sendMessage(chatId, 'this is manager bot')
   });
 
-  // managerBot.onText(/\/manage_guest/, (msg) => {
-  //   const chatId = msg.chat.id;
-  //   managerBot.sendMessage(chatId, 'lets manage guest details')
-  // });
 
   managerBot.on('message', async (msg) => {
 
@@ -102,22 +95,12 @@ const startManagerBot = (mainBot, managerBot, token) => {
         $or: [{ room: userData}, {lastname: userData}] 
       })
         .then(result => {
-          console.log('hhfhfhf', result)
+          managerBot.sendMessage(chatId, managerBotDescriptions.findGuestsResult)
           result.forEach(guestData => {
-            managerBot.sendMessage(chatId, `Here are guests i can found: 
-            Lastname - ${guestData.lastname}
-            Name - ${guestData.name}
-            Room - ${guestData.room}
-            Arrival date - ${guestData.arrival}
-            Departure date - ${guestData.departure}
-            Guest ID - ${guestData.chatId}
-           `, {
+            const guestDetails = handleManagerBotMessage(msg, guestData, keyRequest)
+            managerBot.sendMessage(chatId, guestDetails, {
             reply_markup: {
-              inline_keyboard: [
-                [{ text: 'Update guest', callback_data: 'update_guest_details'}],
-                [{ text: 'Check out guest', callback_data: 'main_menu'}],
-                [{ text: 'Заполнить форму', switch_inline_query_current_chat: 'Пример текста' }]
-              ]
+              inline_keyboard: profileMainMenu
             }
            })
           })

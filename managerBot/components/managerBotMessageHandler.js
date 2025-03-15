@@ -1,16 +1,25 @@
 const {servicesDescription} = require("../../mainBot/texts/servicesText")
 const requestDescriptions = require("../../mainBot/texts/requestsText")
 
-const handleManagerBotMessage = (msg, keyRequest, chatId) => {
-  console.log('мы в хендлмессадж', msg, keyRequest, chatId)
-
+const handleManagerBotMessage = (msg, guestDetails, keyRequest) => {
+console.log(guestDetails)
   const description = servicesDescription[keyRequest] || requestDescriptions[keyRequest]
-
-  const messageData = `${description.managerBotMessage} 
-  Telegram ID - @${msg.from.username},
-  Telegram Name - ${msg.from.first_name}
-  Guest details - ${msg.text}
-  ChatID - ${chatId}`
+  const messageTitle = description?.managerBotMessage || ''
+  const guestInfo = `
+  ChatId - ${guestDetails.chatId}
+  Guest name - ${guestDetails.lastname} ${guestDetails.name}
+  Room - ${guestDetails.room}
+  Arrival - ${guestDetails.arrival} 
+  Departure -  ${guestDetails.departure}
+  `
+  const guestRequest = `Request - ${msg.text}`
+  
+  const messageData = `
+  ${messageTitle} 
+  ${guestInfo}
+  ${guestRequest}
+  `
+  
     return messageData
 } 
 

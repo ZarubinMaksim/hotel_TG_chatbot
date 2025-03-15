@@ -205,8 +205,9 @@ const startMainBot = (mainBot, managerBot) => {
     } 
     else {
       const keyRequest = getKeyRequest(chatId)
+      const guestDetails = userStates[chatId]
       if (keyRequest === keyRequests.housekeeping) {
-        const messageData = handleManagerBotMessage(msg, keyRequest)
+        const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.engeneers) {
