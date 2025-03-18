@@ -1,8 +1,9 @@
 
+const { updateGuestDetailsDB, findGuestDB, registerGuestDB } = require('../db/controllers/guest');
 const User = require('../db/models/user');
 const { createLocalUser } = require('../mainBot/components/currentUsers');
 const handleManagerBotMessage = require('./components/managerBotMessageHandler');
-const { profileMainMenu, updateProfileMenu } = require('./keyboards/managerBotKeyboards');
+const { profileMainMenu, updateProfileMenu, deleteGuestMenu } = require('./keyboards/managerBotKeyboards');
 const managerBotDescriptions = require('./texts/managerBotDescriptions');
 let keyRequest 
 let changingUser
@@ -19,43 +20,33 @@ async function setMessageReaction(token, chatId, messageId, emoji) {
   });
 }
 
-const setRequestUserAndSendMsg = (chatId, managerBot, callback_data, userData, option) => {
+const setRequestUserAndSendMsg = (chatId, managerBot, callback_data, userData) => {
   keyRequest = callback_data
   changingUser = userData
-  managerBot.sendMessage(chatId, `Now please send new ${option}`)
+  changeField = keyRequest.split('_').pop()
+  managerBot.sendMessage(chatId, `${managerBotDescriptions.sendNewInfo} ${changeField}`)
 }
 
 const updateGuestDetails = (chatId, managerBot, changingData, msg, keyRequest ) => {
   const guestId = changingUser.split('\n')[0].split(' - ')[1]
   const guestRoom = changingUser.split('\n')[2].split(' - ')[1]
-  User.findOneAndUpdate({ chatId: guestId, room: guestRoom}, { $set: {[changingData]: msg.text}}, {new:true})
-  .then(user => {
-    managerBot.sendMessage(chatId, handleManagerBotMessage(chatId, user, keyRequest), {
-      reply_markup: {
-        inline_keyboard: updateProfileMenu
-      }
-    })
-    createLocalUser(user)
-  })
+  updateGuestDetailsDB(chatId, managerBot, guestId, guestRoom, changingData, msg, keyRequest)
 }
 
 const findGuest = (chatId, managerBot, msg) => {
   const searchingData = msg.text
-  User.find({ 
-    $or: [{ room: searchingData}, {lastname: searchingData}] 
-  })
-    .then(guests => {
-      managerBot.sendMessage(chatId, managerBotDescriptions.findGuestsResult)
-      guests.forEach(guest => {
-        const guestDetails = handleManagerBotMessage(msg, guest, keyRequest)
-        managerBot.sendMessage(chatId, guestDetails, {
-        reply_markup: {
-          inline_keyboard: profileMainMenu
-        }
-       })
-      })
+  findGuestDB(chatId, managerBot, searchingData, msg, keyRequest)
+}
 
-    })
+const setRequestAndSendDeleteConfirmation = (chatId, managerBot, callback_data, userData) => {
+  keyRequest = callback_data
+  changingUser = userData
+  console.log('ytytyty')
+  managerBot.sendMessage(chatId, 'Please confirm you would like to check out guest', {
+    reply_markup: {
+      inline_keyboard: deleteGuestMenu
+    }
+  })
 }
 
 
@@ -80,8 +71,23 @@ const startManagerBot = (mainBot, managerBot, token) => {
       // здесь обрабатываем колбеки на обновление фамилии/имени/комнаты/тд
       //если data === колбеку из updateProfileMenu то выполняем функцию где обновляем киреквест и бзера и отправляем в менеджер бот
     } else if (updateProfileMenu.map(item => item[0].callback_data).includes(keyRequest)) {
-        setRequestUserAndSendMsg(chatId, managerBot, keyRequest, message.text, keyRequest.split('_')[2])
-    } 
+        setRequestUserAndSendMsg(chatId, managerBot, keyRequest, message.text)
+    } else if(keyRequest === 'request_delete-guest') {
+      setRequestAndSendDeleteConfirmation(chatId, managerBot, keyRequest, message.text)
+    } else if(keyRequest === 'delete_guest') {
+      console.log('TTRTRTRT')
+      const guestId = changingUser.split('\n')[0].split(' - ')[1]
+
+      User.findOneAndDelete({chatId: guestId})
+        .then(user => {
+          if (user) {
+            managerBot.sendMessage(chatId, `${user.lastname} ${user.name} from room ${user.room} checked out`)
+          } else {
+            console.log('error')
+          }
+        })
+
+    }
   
     // Не забудь подтвердить callback, чтобы кнопка перестала "крутиться"
     managerBot.answerCallbackQuery(callbackQuery.id);
@@ -98,32 +104,11 @@ const startManagerBot = (mainBot, managerBot, token) => {
     const chatId = msg.chat.id;
   
     if (msg.reply_to_message) { 
-        const originalChatId = msg.reply_to_message.text.split('ChatID - ')[1]?.trim()
-        const guestDetails = msg.text.split('/')
-
-        User.findOne({chatId: originalChatId})
-          .then(user => {
-            if (user) {
-              User.findByIdAndUpdate(user._id,
-                {
-                lastname: guestDetails[1],
-                name: guestDetails[2],
-                room: guestDetails[0],
-                arrival: guestDetails[3],
-                departure: guestDetails[4]
-              }, 
-              { new: true })
-              .then(updatedUser => {
-                createLocalUser(updatedUser)
-              })
-            } else {
-              console.log('Пользователь не найден')
-              return
-            }
-          })
-        await setMessageReaction(token, chatId, msg.reply_to_message.message_id, '👍');
-        await mainBot.sendMessage(originalChatId, 'Вы успешно зарегистрировались! Для полного доступа нажмите /start')
-        
+      const originalChatId = msg.reply_to_message.text.split('ChatId - ')[1].split('\n')[0]
+      const guestDetails = msg.text.split('/')
+      await registerGuestDB(originalChatId, guestDetails)
+      await setMessageReaction(token, chatId, msg.reply_to_message.message_id, '👍');
+      await mainBot.sendMessage(originalChatId, 'Вы успешно зарегистрировались! Для полного доступа нажмите /start')
     } else if (msg.text === '/manage_guest') {
       managerBot.sendMessage(chatId, 'Please write room number or guest Last name')
       keyRequest = 'find_user'

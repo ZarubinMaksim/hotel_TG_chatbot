@@ -219,7 +219,7 @@ const startMainBot = (mainBot, managerBot) => {
         getReview(mainBot, managerBot, chatId, msg)
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.sign_in) {
-        const messageData = handleManagerBotMessage(msg, keyRequest, chatId)
+        const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.transportation) {
