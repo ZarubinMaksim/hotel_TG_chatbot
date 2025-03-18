@@ -5,6 +5,7 @@ const User = require('../../db/models/user')
 const syncUserStates = async () => {
   try {
     const usersFromDB = await User.find()
+    console.log(usersFromDB)
     Object.keys(userStates).forEach(key => delete userStates[key]);
 
     usersFromDB.forEach(user => {

@@ -10,7 +10,7 @@ console.log(guestDetails)
   Guest name - ${guestDetails.lastname} ${guestDetails.name}
   Room - ${guestDetails.room}
   Arrival - ${guestDetails.arrival} 
-  Departure -  ${guestDetails.departure}
+  Departure - ${guestDetails.departure}
   `
   const guestRequest = `Request - ${msg.text}`
   

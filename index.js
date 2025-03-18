@@ -16,9 +16,15 @@ mongoose.connect('mongodb://localhost:27017/laGreenBot')
 
 app.listen(3000)
 
-startMainBot(mainBot, managerBot)
-startManagerBot(mainBot, managerBot, managerToken)
-syncUserStates() //синхронизируем при запуске приложения пользователей локально
+const startApp = async () => {
+  await syncUserStates() //синхронизируем при запуске приложения пользователей локально
+  await startMainBot(mainBot, managerBot)
+  await startManagerBot(mainBot, managerBot, managerToken)
+}
+
+startApp()
+
+ 
 
 
 

@@ -55,6 +55,7 @@ const managerChatId = 317138824
 
 const User = require('../db/models/user');
 const { userStates, setKeyRequest, getKeyRequest, createLocalUser } = require('./components/currentUsers');
+
 const startMainBot = (mainBot, managerBot) => {
 
   mainBot.setMyCommands([

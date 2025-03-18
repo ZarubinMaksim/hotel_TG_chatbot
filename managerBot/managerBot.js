@@ -19,6 +19,45 @@ async function setMessageReaction(token, chatId, messageId, emoji) {
   });
 }
 
+const setRequestUserAndSendMsg = (chatId, managerBot, callback_data, userData, option) => {
+  keyRequest = callback_data
+  changingUser = userData
+  managerBot.sendMessage(chatId, `Now please send new ${option}`)
+}
+
+const updateGuestDetails = (chatId, managerBot, changingData, msg, keyRequest ) => {
+  const guestId = changingUser.split('\n')[0].split(' - ')[1]
+  const guestRoom = changingUser.split('\n')[2].split(' - ')[1]
+  User.findOneAndUpdate({ chatId: guestId, room: guestRoom}, { $set: {[changingData]: msg.text}}, {new:true})
+  .then(user => {
+    managerBot.sendMessage(chatId, handleManagerBotMessage(chatId, user, keyRequest), {
+      reply_markup: {
+        inline_keyboard: updateProfileMenu
+      }
+    })
+    createLocalUser(user)
+  })
+}
+
+const findGuest = (chatId, managerBot, msg) => {
+  const searchingData = msg.text
+  User.find({ 
+    $or: [{ room: searchingData}, {lastname: searchingData}] 
+  })
+    .then(guests => {
+      managerBot.sendMessage(chatId, managerBotDescriptions.findGuestsResult)
+      guests.forEach(guest => {
+        const guestDetails = handleManagerBotMessage(msg, guest, keyRequest)
+        managerBot.sendMessage(chatId, guestDetails, {
+        reply_markup: {
+          inline_keyboard: profileMainMenu
+        }
+       })
+      })
+
+    })
+}
+
 
 
 const startManagerBot = (mainBot, managerBot, token) => {
@@ -30,20 +69,19 @@ const startManagerBot = (mainBot, managerBot, token) => {
   managerBot.on('callback_query', callbackQuery => {
     const message = callbackQuery.message;
     const chatId = message.chat.id;
-    const data = callbackQuery.data; 
-    console.log(message, chatId, data)
+    const keyRequest = callbackQuery.data; 
   
-    if (data === 'update_guest_details') {
+    if (keyRequest === 'update_guest_details') {
       managerBot.sendMessage(chatId, message.text, {
         reply_markup: {
           inline_keyboard: updateProfileMenu
         }
       })
-    } else if (data === 'update_guest_lastname') {
-      keyRequest = data
-      changingUser = message.text
-      console.log(keyRequest)
-    }
+      // здесь обрабатываем колбеки на обновление фамилии/имени/комнаты/тд
+      //если data === колбеку из updateProfileMenu то выполняем функцию где обновляем киреквест и бзера и отправляем в менеджер бот
+    } else if (updateProfileMenu.map(item => item[0].callback_data).includes(keyRequest)) {
+        setRequestUserAndSendMsg(chatId, managerBot, keyRequest, message.text, keyRequest.split('_')[2])
+    } 
   
     // Не забудь подтвердить callback, чтобы кнопка перестала "крутиться"
     managerBot.answerCallbackQuery(callbackQuery.id);
@@ -90,24 +128,9 @@ const startManagerBot = (mainBot, managerBot, token) => {
       managerBot.sendMessage(chatId, 'Please write room number or guest Last name')
       keyRequest = 'find_user'
     } else if (keyRequest === 'find_user') {
-      const userData = msg.text
-      User.find({ 
-        $or: [{ room: userData}, {lastname: userData}] 
-      })
-        .then(result => {
-          managerBot.sendMessage(chatId, managerBotDescriptions.findGuestsResult)
-          result.forEach(guestData => {
-            const guestDetails = handleManagerBotMessage(msg, guestData, keyRequest)
-            managerBot.sendMessage(chatId, guestDetails, {
-            reply_markup: {
-              inline_keyboard: profileMainMenu
-            }
-           })
-          })
-
-        })
-    } else if (keyRequest === 'update_guest_lastname') {
-      console.log('hahahah ya tut', msg.text, changingUser)
+      findGuest(chatId, managerBot, msg)
+    } else if (updateProfileMenu.map(item => item[0].callback_data).includes(keyRequest)) {
+      updateGuestDetails(chatId, managerBot, keyRequest.split('_')[2], msg, keyRequest )
     } else {
       managerBot.sendMessage(chatId, 'Error. Are you sure you replying message to confirm registration?');
     }
