@@ -54,9 +54,9 @@ const setRequestAndSendDeleteConfirmation = (chatId, managerBot, callback_data, 
 
 const startManagerBot = (mainBot, managerBot, token) => {
 
-  mainBot.setMyCommands([
-    { command: '/start', description: 'Manage guest' },
-  ]);
+  // mainBot.setMyCommands([
+  //   { command: '/start', description: 'Manage guest' },
+  // ]);
 
   managerBot.on('callback_query', callbackQuery => {
     const message = callbackQuery.message;
@@ -81,9 +81,7 @@ const startManagerBot = (mainBot, managerBot, token) => {
       User.findOneAndDelete({chatId: guestId})
         .then(user => {
           if (user) {
-            console.log('before', userStates)
             checkOutGuest(guestId)
-            console.log('after', userStates)
             managerBot.sendMessage(chatId, `${user.lastname} ${user.name} from room ${user.room} checked out`)
           } else {
             console.log('error')
@@ -113,10 +111,25 @@ const startManagerBot = (mainBot, managerBot, token) => {
       keyRequest = 'find_user'
     } else if (keyRequest === 'find_user') {
       findGuest(chatId, managerBot, msg)
+      keyRequest = ''
     } else if (updateProfileMenu.map(item => item[0].callback_data).includes(keyRequest)) {
       updateGuestDetails(chatId, managerBot, keyRequest.split('_')[2], msg, keyRequest )
-    } else if ('/start') {
+    } else if (msg.text === '/start') {
       managerBot.sendMessage(chatId, 'this is manager bot')
+    } else if (msg.text === '/show_all_guests') {
+      User.find()
+        .then(guests => {
+          managerBot.sendMessage(chatId, managerBotDescriptions.findGuestsResult)
+          guests.forEach(guest => {
+            const guestDetails = handleManagerBotMessage(msg, guest, keyRequest)
+            managerBot.sendMessage(chatId, guestDetails, {
+            reply_markup: {
+              inline_keyboard: profileMainMenu
+            }
+            })
+          })
+    
+        })
     } else {
       managerBot.sendMessage(chatId, 'Error. Are you sure you replying message to confirm registration?');
     }
