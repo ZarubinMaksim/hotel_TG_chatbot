@@ -39,6 +39,10 @@ const createLocalUser = (user) => {
   }
 }
 
+const checkOutGuest = (guestId) => {
+  delete userStates[guestId]
+}
+
 const setKeyRequest = (chatId, keyRequest) => {
   userStates[chatId].keyRequest = keyRequest
 }
@@ -47,4 +51,4 @@ const getKeyRequest = (chatId) => {
   return userStates[chatId].keyRequest || ''
 }
 
-module.exports = {userStates, createLocalUser, setKeyRequest, getKeyRequest, syncUserStates}
+module.exports = {userStates, createLocalUser, setKeyRequest, getKeyRequest, syncUserStates, checkOutGuest}

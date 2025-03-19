@@ -1,7 +1,7 @@
 
 const { updateGuestDetailsDB, findGuestDB, registerGuestDB } = require('../db/controllers/guest');
 const User = require('../db/models/user');
-const { createLocalUser } = require('../mainBot/components/currentUsers');
+const { createLocalUser, checkOutGuest, userStates } = require('../mainBot/components/currentUsers');
 const handleManagerBotMessage = require('./components/managerBotMessageHandler');
 const { profileMainMenu, updateProfileMenu, deleteGuestMenu } = require('./keyboards/managerBotKeyboards');
 const managerBotDescriptions = require('./texts/managerBotDescriptions');
@@ -43,7 +43,6 @@ const findGuest = (chatId, managerBot, msg) => {
 const setRequestAndSendDeleteConfirmation = (chatId, managerBot, callback_data, userData) => {
   keyRequest = callback_data
   changingUser = userData
-  console.log('ytytyty')
   managerBot.sendMessage(chatId, 'Please confirm you would like to check out guest', {
     reply_markup: {
       inline_keyboard: deleteGuestMenu
@@ -77,18 +76,19 @@ const startManagerBot = (mainBot, managerBot, token) => {
     } else if(keyRequest === 'request_delete-guest') {
       setRequestAndSendDeleteConfirmation(chatId, managerBot, keyRequest, message.text)
     } else if(keyRequest === 'delete_guest') {
-      console.log('TTRTRTRT')
       const guestId = changingUser.split('\n')[0].split(' - ')[1]
 
       User.findOneAndDelete({chatId: guestId})
         .then(user => {
           if (user) {
+            console.log('before', userStates)
+            checkOutGuest(guestId)
+            console.log('after', userStates)
             managerBot.sendMessage(chatId, `${user.lastname} ${user.name} from room ${user.room} checked out`)
           } else {
             console.log('error')
           }
         })
-        
     }
   
     // Не забудь подтвердить callback, чтобы кнопка перестала "крутиться"

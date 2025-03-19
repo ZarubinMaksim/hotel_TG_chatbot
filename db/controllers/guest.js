@@ -1,4 +1,4 @@
-const { createLocalUser } = require('../../mainBot/components/currentUsers')
+const { createLocalUser, userStates } = require('../../mainBot/components/currentUsers')
 const handleManagerBotMessage = require('../../managerBot/components/managerBotMessageHandler')
 const { updateProfileMenu, profileMainMenu } = require('../../managerBot/keyboards/managerBotKeyboards')
 const managerBotDescriptions = require('../../managerBot/texts/managerBotDescriptions')
