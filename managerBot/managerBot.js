@@ -119,17 +119,26 @@ const startManagerBot = (mainBot, managerBot, token) => {
     } else if (msg.text === '/show_all_guests') {
       User.find()
         .then(guests => {
-          managerBot.sendMessage(chatId, managerBotDescriptions.findGuestsResult)
-          guests.forEach(guest => {
-            const guestDetails = handleManagerBotMessage(msg, guest, keyRequest)
-            managerBot.sendMessage(chatId, guestDetails, {
-            reply_markup: {
-              inline_keyboard: profileMainMenu
-            }
-            })
-          })
+          
     
         })
+    } else if (msg.text === '/show_checkout_by_date') {
+      managerBot.sendMessage(chatId, 'Write now arrival date in format DD-MM-YYYY')
+      keyRequest = 'show_checkout_by_date'
+    } else if (keyRequest === 'show_checkout_by_date') {
+      User.find({departure: msg.text})
+      .then(guests => {
+        managerBot.sendMessage(chatId, managerBotDescriptions.findGuestsResult)
+        guests.forEach(guest => {
+          const guestDetails = handleManagerBotMessage(msg, guest, keyRequest)
+          managerBot.sendMessage(chatId, guestDetails, {
+          reply_markup: {
+            inline_keyboard: profileMainMenu
+          }
+          })
+        })
+      })
+
     } else {
       managerBot.sendMessage(chatId, 'Error. Are you sure you replying message to confirm registration?');
     }
