@@ -7,6 +7,8 @@ const { profileMainMenu, updateProfileMenu, deleteGuestMenu } = require('./keybo
 const managerBotDescriptions = require('./texts/managerBotDescriptions');
 let keyRequest 
 let changingUser
+const allowedUsers = [317138824]
+
 
 async function setMessageReaction(token, chatId, messageId, emoji) {
   await fetch(`https://api.telegram.org/bot${token}/setMessageReaction`, {
@@ -86,23 +88,20 @@ const startManagerBot = (mainBot, managerBot, token) => {
             console.log('error')
           }
         })
-
+        
     }
   
     // Не забудь подтвердить callback, чтобы кнопка перестала "крутиться"
     managerBot.answerCallbackQuery(callbackQuery.id);
   });
 
-  managerBot.onText(/\/start/, (msg) => {
-    const chatId = msg.chat.id;
-    managerBot.sendMessage(chatId, 'this is manager bot')
-  });
-
-
   managerBot.on('message', async (msg) => {
 
     const chatId = msg.chat.id;
-  
+    if (!allowedUsers.includes(chatId)) {
+      managerBot.sendMessage(chatId, 'You are not allowed to use this bot')
+      return
+    }
     if (msg.reply_to_message) { 
       const originalChatId = msg.reply_to_message.text.split('ChatId - ')[1].split('\n')[0]
       const guestDetails = msg.text.split('/')
@@ -116,6 +115,8 @@ const startManagerBot = (mainBot, managerBot, token) => {
       findGuest(chatId, managerBot, msg)
     } else if (updateProfileMenu.map(item => item[0].callback_data).includes(keyRequest)) {
       updateGuestDetails(chatId, managerBot, keyRequest.split('_')[2], msg, keyRequest )
+    } else if ('/start') {
+      managerBot.sendMessage(chatId, 'this is manager bot')
     } else {
       managerBot.sendMessage(chatId, 'Error. Are you sure you replying message to confirm registration?');
     }
