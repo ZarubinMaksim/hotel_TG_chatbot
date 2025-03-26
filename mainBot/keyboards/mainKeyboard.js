@@ -3,7 +3,8 @@ const menuButtons = require("../texts/menuButtons");
 const mainKeyboardFull = [
   [menuButtons.about_hotel, menuButtons.rooms],
   [menuButtons.engeneers, menuButtons.housekeeping],
-  [menuButtons.services, menuButtons.restaurants],
+  [menuButtons.services, menuButtons.weeklyGroup],
+  [menuButtons.restaurants],
   [menuButtons.special_offers, menuButtons.infrastructure],
   [menuButtons.spa, menuButtons.location],
   [menuButtons.leave_review, menuButtons.surroundings],
@@ -13,7 +14,8 @@ const mainKeyboardFull = [
 const mainKeyboardShort = [
   [menuButtons.sign_in],
   [menuButtons.about_hotel, menuButtons.rooms],
-  [menuButtons.infrastructure, menuButtons.restaurants],
+  [menuButtons.infrastructure, menuButtons.weeklyGroup],
+  [menuButtons.restaurants],
   [menuButtons.special_offers, menuButtons.spa],
   [menuButtons.surroundings, menuButtons.location],
   [menuButtons.close_menu]

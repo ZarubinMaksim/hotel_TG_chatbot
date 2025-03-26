@@ -55,6 +55,7 @@ const managerChatId = 317138824
 
 const User = require('../db/models/user');
 const { userStates, setKeyRequest, getKeyRequest, createLocalUser } = require('./components/currentUsers');
+const sendWeeklyGroup = require('./components/weeklyGroup');
 
 const startMainBot = (mainBot, managerBot) => {
 
@@ -152,6 +153,11 @@ const startMainBot = (mainBot, managerBot) => {
       const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendInfrastructureList, keyRequest)
     } 
+    else if (regexMenuButtons.weeklyGroup.test(text)) {
+      setKeyRequest(chatId, keyRequests.weeklyGroup)
+      const keyRequest = getKeyRequest(chatId)
+      sendWithLoading(mainBot, chatId, sendWeeklyGroup, keyRequest)
+    }
     else if (infrastructuresRegex.test(text)) {
       const infrastructureTitle = msg.text
       const callback = Object.values(infrastructureDescriptions).find(value => value.title === infrastructureTitle)

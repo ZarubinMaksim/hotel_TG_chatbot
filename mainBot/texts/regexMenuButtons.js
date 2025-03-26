@@ -8,6 +8,7 @@ const regexMenuButtons = {
   restaurants: /Рестораны|restaurants/,
   special_offers: /Спецпредложения|special/,
   infrastructure: /Инфраструктура|infrastructure/,
+  weeklyGroup: /Ежедневные программы|weeklyGroup/,
   spa: /Спа|spa/,
   location: /Геолокация|location/,
   services: /Услуги|services/,

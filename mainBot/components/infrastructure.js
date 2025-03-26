@@ -30,7 +30,9 @@ const sendInfrastructureList = (bot, chatId) => {
 const sendInfrastructureInfo = async(bot, chatId, data) => {
   try {
     await bot.sendMediaGroup(chatId, data.images)
-    await bot.sendMessage(chatId, data.description)
+    await bot.sendMessage(chatId, data.description, {
+      parse_mode: "HTML" 
+    })
   } catch (error) {
     console.log(error)
   }

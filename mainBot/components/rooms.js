@@ -19,7 +19,8 @@ const sendRoomInfo = async(bot, chatId, data) => {
     await bot.sendMessage(chatId, data.description, {
       reply_markup: {
         inline_keyboard: bookingButton (data.book_url)
-      }
+      },
+      parse_mode: "HTML" 
     })
   }
 

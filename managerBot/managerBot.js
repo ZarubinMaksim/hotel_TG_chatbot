@@ -3,7 +3,7 @@ const { updateGuestDetailsDB, findGuestDB, registerGuestDB } = require('../db/co
 const User = require('../db/models/user');
 const { createLocalUser, checkOutGuest, userStates } = require('../mainBot/components/currentUsers');
 const handleManagerBotMessage = require('./components/managerBotMessageHandler');
-const { profileMainMenu, updateProfileMenu, deleteGuestMenu } = require('./keyboards/managerBotKeyboards');
+const { profileMainMenu, updateProfileMenu, deleteGuestMenu, checkoutAllGuests } = require('./keyboards/managerBotKeyboards');
 const managerBotDescriptions = require('./texts/managerBotDescriptions');
 let keyRequest 
 let changingUser
@@ -72,7 +72,7 @@ const startManagerBot = (mainBot, managerBot, token) => {
       // здесь обрабатываем колбеки на обновление фамилии/имени/комнаты/тд
       //если data === колбеку из updateProfileMenu то выполняем функцию где обновляем киреквест и бзера и отправляем в менеджер бот
     } else if (updateProfileMenu.map(item => item[0].callback_data).includes(keyRequest)) {
-        setRequestUserAndSendMsg(chatId, managerBot, keyRequest, message.text)
+      setRequestUserAndSendMsg(chatId, managerBot, keyRequest, message.text)
     } else if(keyRequest === 'request_delete-guest') {
       setRequestAndSendDeleteConfirmation(chatId, managerBot, keyRequest, message.text)
     } else if(keyRequest === 'delete_guest') {
@@ -87,6 +87,10 @@ const startManagerBot = (mainBot, managerBot, token) => {
             console.log('error')
           }
         })
+    } else if (keyRequest === 'confirm_checkout_all') {
+      managerBot.sendMessage(chatId, 'Confirmed')
+      User.deleteMany({departure: '25-02-2025'}) //тут нужно будет создать сегодняшнее число
+      .then(result => console.log('dddd', result))
     }
   
     // Не забудь подтвердить callback, чтобы кнопка перестала "крутиться"
@@ -147,6 +151,12 @@ const startManagerBot = (mainBot, managerBot, token) => {
         })
       })
 
+    } else if (msg.text === '/check_out_all_departing') {
+      managerBot.sendMessage(chatId, 'Confirm you would like to check out all departing guest for today', {
+        reply_markup: {
+          inline_keyboard: checkoutAllGuests
+        }
+      })
     } else {
       managerBot.sendMessage(chatId, 'Error. Are you sure you replying message to confirm registration?');
     }

@@ -11,6 +11,7 @@ const keyRequests = {
   spa: 'spa',
   location: 'location',
   services: 'services',
+  weeklyGroup: 'weeklyGroup',
   review: 'review',
   surroundings: 'surroundings',
   transportation: 'transfer',

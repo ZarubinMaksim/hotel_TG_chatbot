@@ -15,7 +15,10 @@ const updateProfileMenu = [
 const deleteGuestMenu = [
   [{ text: '❌ Check out guest', callback_data: 'delete_guest'}],
   [{ text: 'Cancel', callback_data: '1'}],
-
 ]
 
-module.exports = { profileMainMenu, updateProfileMenu, deleteGuestMenu}
+const checkoutAllGuests = [
+  [{ text: '👍', callback_data: 'confirm_checkout_all'}, { text: '👎', callback_data: 'cancel_checkout_all'}]
+]
+
+module.exports = { profileMainMenu, updateProfileMenu, deleteGuestMenu, checkoutAllGuests}
