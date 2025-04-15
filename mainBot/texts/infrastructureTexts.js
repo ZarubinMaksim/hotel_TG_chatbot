@@ -1,4 +1,4 @@
-const infrastructureMainText = `This is infrastructure`;
+const infrastructureMainText = `Исследуйте возможности нашего отеля для отдыха и активного образа жизни! 🏊‍♂️🏋️‍♀️`;
 
 const infrastructureDescriptions = {
   pool: {

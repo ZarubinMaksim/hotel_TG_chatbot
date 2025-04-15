@@ -1,3 +1,5 @@
+//presents main menu buttons as written here
+
 const menuButtons = {
   to_main_menu: 'В главное меню 🔙',
   back: 'Назад к выбору 🔙',
@@ -10,13 +12,14 @@ const menuButtons = {
   restaurants: '🍜 Рестораны и меню',
   special_offers: '🎉 Спецпредложения',
   infrastructure: '🏋🏼‍♂️ Инфраструктура',
+  car_rent: '🚘 Прокат авто и мото',
   weeklyGroup: '🧘‍♀️ Ежедневные программы',
   spa: '💆🏼‍♀️ Спа',
   location: '📍 Геолокация',
   leave_review: '🙏 Оставить отзыв',
   surroundings: '🚶🏼‍♂️ Что рядом',
   close_menu: '❌ Закрыть меню',
-  sign_in: 'Register'
+  sign_in: '✍️ Регистрация'
 }
 
 module.exports = menuButtons

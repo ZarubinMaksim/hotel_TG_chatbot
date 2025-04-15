@@ -56,6 +56,7 @@ const managerChatId = 317138824
 const User = require('../db/models/user');
 const { userStates, setKeyRequest, getKeyRequest, createLocalUser } = require('./components/currentUsers');
 const sendWeeklyGroup = require('./components/weeklyGroup');
+const sendCarRent = require('./components/carRent');
 
 const startMainBot = (mainBot, managerBot) => {
 
@@ -157,6 +158,11 @@ const startMainBot = (mainBot, managerBot) => {
       setKeyRequest(chatId, keyRequests.weeklyGroup)
       const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendWeeklyGroup, keyRequest)
+    } 
+    else if (regexMenuButtons.car_rent.test(text)) {
+      setKeyRequest(chatId, keyRequests.car_rent)
+      const keyRequest = getKeyRequest(chatId)
+      sendWithLoading(mainBot, chatId, sendCarRent, keyRequest)
     }
     else if (infrastructuresRegex.test(text)) {
       const infrastructureTitle = msg.text
@@ -229,23 +235,27 @@ const startMainBot = (mainBot, managerBot) => {
         managerBot.sendMessage(managerChatId, messageData)
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.transportation) {
-        const messageData = handleManagerBotMessage(msg, keyRequest)
+        const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.wake_up_call) {
-        const messageData = handleManagerBotMessage(msg, keyRequest)
+        const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.breakfast_box) {
-        const messageData = handleManagerBotMessage(msg, keyRequest)
+        const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.luggage) {
-        const messageData = handleManagerBotMessage(msg, keyRequest)
+        const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
+        managerBot.sendMessage(managerChatId, messageData)
+        setKeyRequest(chatId, '')
+      } else if (keyRequest === keyRequests.car_rent) {
+        const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
         setKeyRequest(chatId, '')
       } else {
-        const messageData = handleManagerBotMessage(msg, keyRequest)
+        const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
         setKeyRequest(chatId, '')
       }

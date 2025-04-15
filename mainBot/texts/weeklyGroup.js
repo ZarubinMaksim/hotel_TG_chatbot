@@ -1,5 +1,5 @@
 const weeklyGroupDeskription = {
-  text: `Вот что проходит каждый день`,
+  text: `Присоединяйтесь к нашим ежедневным спортивным группам! 🧘‍♂️🥊 `,
   images: [
     {type: 'photo', media: 'images/weeklyGroup.jpeg'},
   ]

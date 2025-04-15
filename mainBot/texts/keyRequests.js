@@ -1,3 +1,5 @@
+//keyRequest after click on the button to proceed accordingly
+
 const keyRequests = {
   main_menu: 'main_menu',
   sign_in: 'signIn',
@@ -8,6 +10,7 @@ const keyRequests = {
   restaurants: 'restaurants',
   special_offers: 'offers',
   infrastructure: 'infrastructure',
+  car_rent: 'car_rent',
   spa: 'spa',
   location: 'location',
   services: 'services',

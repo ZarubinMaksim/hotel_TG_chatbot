@@ -20,7 +20,8 @@ const sendRestaurantInfo = async (bot, chatId, data) => {
     await bot.sendMessage(chatId, data.description, {
       reply_markup: {
         inline_keyboard: restaurantsKeyboards[`${data.callback}Keyboard`]
-      }
+      },
+      parse_mode: "HTML" 
     })
   } catch (error) {
     console.log(error)

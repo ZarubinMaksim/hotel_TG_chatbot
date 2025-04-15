@@ -1,8 +1,9 @@
+require('dotenv').config()
 const TelegramBot = require('node-telegram-bot-api');
 const {startMainBot} = require('./mainBot/mainBot');
 const startManagerBot = require('./managerBot/managerBot');
-const mainToken = '7641248146:AAENDL-yedY7xYkQcSQdfduibKCMt3VIy28'
-const managerToken = '7595558526:AAGVJLInp92m5MH0J-G4eczEfMen4Ma6YHI'
+const mainToken = process.env.MAIN_TOKEN
+const managerToken = process.env.MANAGER_TOKEN
 const managerBot = new TelegramBot(managerToken, { polling: true })
 const mainBot = new TelegramBot(mainToken, { polling: true, parse_mode: "HTML" })
 

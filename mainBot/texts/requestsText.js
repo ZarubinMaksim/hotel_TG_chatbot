@@ -13,6 +13,10 @@ signIn: {
   keyRequest: 'signIn',
   managerBotMessage: 'Guest wants to sign in! Please reply for this message to confirm. Message shuld be ROOM NUMBER/LAST NAME/FIRST NAME/CHECK IN DATE/CHECK OUT DAY'
 },
+car_rent: {
+  keyRequest: 'car_rent',
+  managerBotMessage: 'Guest wants to rent a car! Please contact to the guest'
+},
 unidentified: {
   keyRequest: 'unidentified',
   managerBotMessage: 'You have got new message from guest!'

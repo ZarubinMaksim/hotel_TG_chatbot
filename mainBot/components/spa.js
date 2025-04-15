@@ -10,7 +10,8 @@ const sendSpaInfo = (bot, chatId) => {
     reply_markup: {
       keyboard: spaKeyboards.spaKeyboard,
       resize_keyboard: true, // Опционально: делает клавиатуру компактнее
-    }
+    },
+    parse_mode: "HTML" 
   })
 }
 
@@ -31,7 +32,9 @@ const sendSpaDescription = async (bot, chatId, data) => {
       await bot.sendMessage(chatId, data.description)
       await bot.sendMediaGroup(chatId, activeOffers)
     } else {
-      bot.sendMessage(chatId, data.description)
+      bot.sendMessage(chatId, data.description, {
+        parse_mode: "HTML" 
+      })
     }
   } catch (error) {
     console.log(error)
