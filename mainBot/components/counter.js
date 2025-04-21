@@ -4,7 +4,6 @@ const requestsList = {}
 const handleCounter = (data) => {
   let keyRequest 
 
-  console.log('3434', data)
   if (typeof(data) === 'string') {
     keyRequest = data
   } else if (typeof(data) === 'object' && data !== null) {

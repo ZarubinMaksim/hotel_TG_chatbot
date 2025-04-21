@@ -8,7 +8,7 @@ const { sendPlatformsForReview, getReview } = require('./components/review');
 const { sendRoomsList, sendRoomInfo } = require('./components/rooms');
 const { sendServicesList, sendServiceDescription } = require('./components/services');
 const { checkIfRegistered } = require('./components/signUp');
-const { sendSpaInfo, sendSpaDescription } = require('./components/spa');
+const { sendSpaInfo, sendSpaDescription, sendSpaOffer} = require('./components/spa');
 const { sendSpecialOffers, sendSpecialOfferInfo } = require('./components/specialOffers');
 const sendMainMenu = require('./components/start');
 const sendPromotion = require('./components/sendPromotion');
@@ -34,6 +34,8 @@ const infrastructuresTitles = Object.values(infrastructureDescriptions).map(infr
 const infrastructuresRegex = new RegExp(`^(${infrastructuresTitles.join('|')})$`)
 const spaTitles = Object.values(spaDescriptions).filter(spa => spa.isActive).map(spa => spa.title)
 const spaRegex = new RegExp(`^(${spaTitles.join('|')})$`)
+const spaTitlesAll = Object.values(spaDescriptions).flatMap(section => section.offers ? Object.values(section.offers).filter(offer => offer.isActive).map(offer => offer.title) : [])
+const spaTitlesAllRegEx = new RegExp(`^(${spaTitlesAll.join('|')})$`)
 const servicesTitles = Object.values(servicesDescription).filter(service => service.isActive).map(service => service.title)
 const servicesRegex = new RegExp(`^(${servicesTitles.join('|')})$`)
 const surroundingsTitles = Object.values(surroundingsDescriptions).filter(surrounding => surrounding.isActive).map(surrounding => surrounding.title)
@@ -51,6 +53,7 @@ const managerChatId = 317138824
 // const getKeyRequest = (chatId) => {
 //   return userStates[chatId] || ''
 // }
+console.log('HUUUUUHUH', spaTitlesAllRegEx)
 
 
 const User = require('../db/models/user');
@@ -179,6 +182,12 @@ const startMainBot = (mainBot, managerBot) => {
       const callback = Object.values(spaDescriptions).find(value => value.title === spaTitle)
       sendWithLoading(mainBot, chatId, sendSpaDescription, callback)
     } 
+    else if (spaTitlesAllRegEx.test(text)) {
+      const spaOfferTitle = msg.text
+      const callback = Object.values(spaDescriptions).flatMap(section => section.offers ? Object.values(section.offers) : []).find(offer => offer.title === spaOfferTitle);      
+      console.log('spa', callback)
+      sendWithLoading(mainBot, chatId, sendSpaOffer, callback)
+    } 
     else if (regexMenuButtons.location.test(text)) {
       setKeyRequest(chatId, keyRequests.location)
       const keyRequest = getKeyRequest(chatId)
@@ -214,6 +223,7 @@ const startMainBot = (mainBot, managerBot) => {
     else if (surroundingsTitlesAllRegEx.test(text)) {
       const surroundingTitle = msg.text
       const callback = Object.values(surroundingsDescriptions).flatMap(section => Object.values(section.items)).find(item => item.title === surroundingTitle)
+      console.log('surr', callback)
       sendWithLoading(mainBot, chatId, sendExactSurrounding, callback)
     } 
     else {

@@ -6,7 +6,7 @@ const { userStates } = require("./currentUsers");
 const sendMainMenu = (bot, chatId) => {
 
   if (userStates[chatId]) {
-    console.log(userStates[chatId])
+    // console.log(userStates[chatId])
   }
 
   bot.sendMessage(chatId, startTexts.main_message, {

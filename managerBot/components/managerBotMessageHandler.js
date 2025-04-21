@@ -2,7 +2,7 @@ const {servicesDescription} = require("../../mainBot/texts/servicesText")
 const requestDescriptions = require("../../mainBot/texts/requestsText")
 
 const handleManagerBotMessage = (msg, guestDetails, keyRequest) => {
-  console.log(keyRequest, 'ya')
+
   const description = servicesDescription[keyRequest] || requestDescriptions[keyRequest]
 
   const messageTitle = description?.managerBotMessage || ''

@@ -14,7 +14,7 @@ const sendRoomsList = (bot, chatId) => {
 }
 
 const sendRoomInfo = async(bot, chatId, data) => {
-  console.log(data)
+
     await bot.sendMediaGroup(chatId, data.images);
     await bot.sendMessage(chatId, data.description, {
       reply_markup: {

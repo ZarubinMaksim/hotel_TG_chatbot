@@ -9,8 +9,13 @@ const spaKeyboards = {
   spaKeyboard: [
     [menuButtons.to_main_menu],
     ...keyboard,
-
   ]
 }
 
-module.exports = spaKeyboards
+const spaSubKeyboard = (data) => [
+  [menuButtons.to_main_menu],
+  [menuButtons.back],
+  ...Object.values(data.offers).filter(item => item.isActive).map(item => [item.title])
+]
+
+module.exports = {spaKeyboards, spaSubKeyboard}

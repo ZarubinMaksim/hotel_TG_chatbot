@@ -1,4 +1,4 @@
-const spaKeyboards = require("../keyboards/spaKeyboards")
+const {spaKeyboards, spaSubKeyboard} = require("../keyboards/spaKeyboards")
 const menuButtons = require("../texts/menuButtons")
 const { spaTexts } = require("../texts/spaTexts")
 const { sendWithLoading } = require("./commomFunctions")
@@ -15,6 +15,14 @@ const sendSpaInfo = (bot, chatId) => {
   })
 }
 
+const sendSpaOffer =  async (bot, chatId, data) => {
+  try {
+    await bot.sendMediaGroup(chatId, data.images)
+    await bot.sendMessage(chatId, data.description)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const sendSpaDescription = async (bot, chatId, data) => {
   try {
@@ -27,10 +35,15 @@ const sendSpaDescription = async (bot, chatId, data) => {
         }
       })
     } else if (data.callback === 'spaOffers') {
-      const activeOffers = Object.values(data.offers).filter(offer => offer.isActive).map(offer => offer.images).flat()
+      // const activeOffers = Object.values(data.offers).filter(offer => offer.isActive).map(offer => offer.images).flat()
       await bot.sendChatAction(chatId, 'typing')
-      await bot.sendMessage(chatId, data.description)
-      await bot.sendMediaGroup(chatId, activeOffers)
+      await bot.sendMessage(chatId, 'Вот наши акции', {
+        reply_markup: {
+          keyboard: spaSubKeyboard(data)
+        }
+      })
+      // await bot.sendMessage(chatId, data.description)
+      // await bot.sendMediaGroup(chatId, activeOffers)
     } else {
       bot.sendMessage(chatId, data.description, {
         parse_mode: "HTML" 
@@ -42,4 +55,4 @@ const sendSpaDescription = async (bot, chatId, data) => {
   
 }
 
-module.exports = {sendSpaInfo, sendSpaDescription}
+module.exports = {sendSpaInfo, sendSpaDescription, sendSpaOffer}

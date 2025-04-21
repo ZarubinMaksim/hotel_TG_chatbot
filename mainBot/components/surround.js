@@ -23,6 +23,7 @@ const sendSurrounding =  async (bot, chatId, data) => {
 }
 
 const sendExactSurrounding = async (bot, chatId, data) => {
+  console.log(data)
   try {
     await bot.sendMediaGroup(chatId, data.images)
     await bot.sendMessage(chatId, data.description)

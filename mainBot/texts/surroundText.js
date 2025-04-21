@@ -101,13 +101,70 @@ const surroundingsDescriptions = {
         isActive: true
       }, 
     }
-  }
-
+  },
+  zoo: {
+    title: '🐘 Зоопарки',
+    isActive: true,
+    items: {
+      elephant_retirement_park_phuket: {
+        title: 'Парк спасённых слонов',
+        images: [
+          { type: 'photo', media: 'images/surroundings/elephant_retirement_park_phuket_zoo/elephant_retirement_park_phuket.jpeg' },
+          { type: 'photo', media: 'images/surroundings/elephant_retirement_park_phuket_zoo/elephant_retirement_park_phuket2.jpeg' },
+          { type: 'photo', media: 'images/surroundings/elephant_retirement_park_phuket_zoo/elephant_retirement_park_phuket3.jpeg' },
+        ],
+        callback: 'elephant_retirement_park_phuket',
+        description: `Парк Спасённых Слонов  — это уникальное место, где забота, любовь и уважение к животным становятся стилем жизни. Это не просто парк, а настоящий дом для слонов, которые после многих лет тяжёлой работы наконец могут наслаждаться свободой, спокойствием и вниманием.
+Гостей ждут искренние, трогательные и незабываемые моменты — купание со слонами, кормление, прогулки и живое общение с этими удивительными животными. Это возможность не только прикоснуться к миру слонов, но и научиться понимать, как важно их защищать и уважать.
+Парк Спасённых Слонов — первый, кто сделал ставку на по-настоящему этичное общение с животными. Он предлагает насыщенные и познавательные программы, которые подходят как для взрослых, так и для детей.
+Здесь царит душевная атмосфера, а каждая встреча со слоном становится особенной. Это место, куда хочется возвращаться — с улыбкой, с открытым сердцем и, конечно, с фотоаппаратом в руках.`,
+        latitude: 12.345,
+        longtitude: 14.435,
+        isActive: true
+      }, 
+    }
+  },
+  aquaparks: {
+    title: '🏄🏽 Аквапарки',
+    isActive: true,
+    items: {
+      splash_jungle_water_park: {
+        title: 'Аквапарк Splash Jungle',
+        images: [
+          { type: 'photo', media: 'images/surroundings/splash_jungle_water_park_aquapark/splash_jungle_water_park.jpeg' },
+          { type: 'photo', media: 'images/surroundings/splash_jungle_water_park_aquapark/splash_jungle_water_park2.jpeg' },
+          { type: 'photo', media: 'images/surroundings/splash_jungle_water_park_aquapark/splash_jungle_water_park3.jpeg' },
+        ],
+        callback: 'elephant_retirement_park_phuket',
+        description: `Хотите провести день в воде с максимальным релаксом или получить заряд адреналина? Аквапарк Splash Jungle предлагает всё и сразу! Это настоящий водный оазис для всей семьи, где вас ждут захватывающие аттракционы, освежающие напитки и вкусные закуски. Это лучшее место для отдыха на Пхукете!
+        В аквапарке вас ждут захватывающие горки, такие как Super Bowl и Boomerango, бассейн с волнами, ленивая река длиной 335 метров, игровая зона для детей Aqua Play Pool и Aqua Park, шестиполосная горка Whizzard, семейный сплав на рафтах и многое другое!`,
+        latitude: 12.345,
+        longtitude: 14.435,
+        isActive: true
+      }, 
+      andamanda_phuket: {
+        title: 'Аквапарк Andamanda Phuket',
+        images: [
+          { type: 'photo', media: 'images/surroundings/andamanda_phuket_aquapark/andamanda_phuket.jpeg' },
+          { type: 'photo', media: 'images/surroundings/andamanda_phuket_aquapark/andamanda_phuket2.jpeg' },
+          { type: 'photo', media: 'images/surroundings/andamanda_phuket_aquapark/andamanda_phuket3.png' },
+        ],
+        callback: 'elephant_retirement_park_phuket',
+        description: `Andamanda Phuket — уникальный аквапарк, где дух тайской культуры встречается с захватывающими водными приключениями! Это одно из лучших мест в Таиланде для семейного отдыха, веселья и ярких впечатлений.
+        🌊 Великолепные водные горки, атмосфера древних мифов и легенд, вдохновлённых культурой Таиланда — всё это ждёт вас в аквапарке Andamanda Phuket, оформленном в стиле традиционного тайского наследия.
+        💎 Погрузитесь в увлекательное путешествие по мирам Андаманского моря, открывая сокровища и тайны водного королевства, раскинувшегося на 100 000 квадратных метров!
+        Здесь каждый найдёт что-то для себя — от спокойного отдыха у бассейна до головокружительных спусков на лучших водных аттракционах Пхукета. Andamanda Phuket — это не просто аквапарк, это настоящее приключение в сердце Таиланда!`,
+        latitude: 12.345,
+        longtitude: 14.435,
+        isActive: true
+      }, 
+    }
+  },
 }
-
+// добавить обменники/ магазины / тир / 
 const surroundingsTexts = {
-  main_message: 'Вот что есть вокруг',
-  sub_main_message: 'Вот что мы можем предложить',
+  main_message: '🌴 Откройте для себя удивительные места рядом',
+  sub_main_message: '📍 Исследуйте наши рекомендации',
 }
 
 module.exports = {surroundingsDescriptions, surroundingsTexts}
