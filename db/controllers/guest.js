@@ -1,11 +1,33 @@
-const { createLocalUser, userStates } = require('../../mainBot/components/currentUsers')
+const { createLocalUser } = require('../../mainBot/components/currentUsers')
 const handleManagerBotMessage = require('../../managerBot/components/managerBotMessageHandler')
 const { updateProfileMenu, profileMainMenu } = require('../../managerBot/keyboards/managerBotKeyboards')
+const { errorMessage_userNotFound } = require('../../managerBot/texts/managerBotDescriptions')
 const managerBotDescriptions = require('../../managerBot/texts/managerBotDescriptions')
 const User = require('../models/user')
 
 
-const updateGuestDetailsDB = (chatId, managerBot, guestId, guestRoom, changingData, msg, keyRequest) => {
+const updateGuestDetailsDB = async (chatId, managerBot, guestId, guestRoom, changingData, msg, keyRequest) => {
+  // try {
+  //   const user = await User.findOneAndUpdate(
+  //     { chatId: guestId, room: guestRoom },
+  //     { $set: { [changingData]: msg.text } },
+  //     { new:true }
+  //   );
+  //   if (user) {
+  //     await managerBot.sendMessage(chatId, handleManagerBotMessage(chatId, user, keyRequest), {
+  //       reply_markup: {
+  //         inline_keyboard: updateProfileMenu,
+  //       }
+  //     });
+  //     createLocalUser(user);
+  //   } else {
+  //     managerBot.sendMessage(chatId, errorMessage_userNotFound);
+  //   }
+  // } catch (error) {
+  //   console.log(errorMessage_userNotFound, err);
+  //   managerBot.sendMessage(chatId, errorMessage_userNotFound);
+  // }
+
   User.findOneAndUpdate({ chatId: guestId, room: guestRoom}, { $set: {[changingData]: msg.text}}, {new:true})
   .then(user => {
     managerBot.sendMessage(chatId, handleManagerBotMessage(chatId, user, keyRequest), {
@@ -14,6 +36,10 @@ const updateGuestDetailsDB = (chatId, managerBot, guestId, guestRoom, changingDa
       }
     })
     createLocalUser(user)
+  })
+  .catch(err => {
+    console.log(errorMessage_userNotFound, err)
+    managerBot.sendMessage(chatId, errorMessage_userNotFound)
   })
 }
 
@@ -33,6 +59,10 @@ const findGuestDB = (chatId, managerBot, searchingData, msg, keyRequest) => {
       })
 
     })
+    .catch(err => {
+      console.log(errorMessage_userNotFound, err)
+      managerBot.sendMessage(chatId, errorMessage_userNotFound)
+    })
 }
 
 const registerGuestDB = (originalChatId, guestDetails) => {
@@ -51,8 +81,11 @@ const registerGuestDB = (originalChatId, guestDetails) => {
         .then(updatedUser => {
           createLocalUser(updatedUser)
         })
+        .catch(err => {
+          console.log(errorMessage_userNotCreated, err)
+        })
       } else {
-        console.log('Пользователь не найден')
+        console.log(errorMessage_userNotFound)
         return
       }
     })

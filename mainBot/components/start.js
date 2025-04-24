@@ -1,10 +1,9 @@
 const {mainKeyboardFull, mainKeyboardShort} = require("../keyboards/mainKeyboard");
-const startTexts = require("../texts/startTexts");
+const { startTexts } = require("../texts/commonTexts");
 const { userStates } = require("./currentUsers");
 
 
 const sendMainMenu = (bot, chatId) => {
-
   if (userStates[chatId]) {
     // console.log(userStates[chatId])
   }

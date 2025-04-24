@@ -1,30 +1,23 @@
-
-const requestsList = {}
+//rewieved on 24.04
+const requestsList = { };
 
 const handleCounter = (data) => {
-  let keyRequest 
+  let keyRequest;
 
   if (typeof(data) === 'string') {
-    keyRequest = data
+    keyRequest = data;
   } else if (typeof(data) === 'object' && data !== null) {
-    keyRequest = data.keyRequest
+    keyRequest = data.keyRequest;
   }
 
   if (keyRequest) {
     if (requestsList[keyRequest]) {
-      requestsList[keyRequest] +=1
+      requestsList[keyRequest] +=1;
     } else {
-      requestsList[keyRequest] = 1
+      requestsList[keyRequest] = 1;
     }
   }
+  return requestsList;
+};
 
-
-return requestsList
-
-}
-
-
-
-
-
-module.exports = handleCounter
+module.exports = handleCounter;

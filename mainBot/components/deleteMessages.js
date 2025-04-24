@@ -1,3 +1,5 @@
+// CURRENTLY DO NOT USE
+
 const deleteMessage = (bot, chatId, id) => {
   bot.deleteMessage(chatId, id)
 }

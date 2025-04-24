@@ -1,11 +1,13 @@
-const userStates = {}
-const User = require('../../db/models/user')
+//NEED TO REVIEW
+
+const userStates = { };
+const User = require('../../db/models/user');
+const { errorTexts } = require('../texts/commonTexts');
 
 // функция на случай перезапуска приложения чтобы локальные поьзователи обновились
-const syncUserStates = async () => {
+const syncUserStates = async ( ) => {
   try {
-    const usersFromDB = await User.find()
-    // console.log(usersFromDB)
+    const usersFromDB = await User.find();
     Object.keys(userStates).forEach(key => delete userStates[key]);
 
     usersFromDB.forEach(user => {
@@ -23,9 +25,9 @@ const syncUserStates = async () => {
     })
   } 
   catch (error) {
-    console.log(error)
+    console.error(errorTexts.consoleMsgFailedToSyncDB, error);
   }
-}
+};
 
 const createLocalUser = (user) => {
   userStates[user.chatId] = {
@@ -37,18 +39,25 @@ const createLocalUser = (user) => {
     arrival: user.arrival,
     departure: user.departure
   }
-}
+};
 
 const checkOutGuest = (guestId) => {
-  delete userStates[guestId]
-}
+  delete userStates[guestId];
+};
 
 const setKeyRequest = (chatId, keyRequest) => {
   userStates[chatId].keyRequest = keyRequest
-}
+};
 
 const getKeyRequest = (chatId) => {
   return userStates[chatId].keyRequest || ''
-}
+};
 
-module.exports = {userStates, createLocalUser, setKeyRequest, getKeyRequest, syncUserStates, checkOutGuest}
+module.exports = {
+  userStates, 
+  createLocalUser, 
+  setKeyRequest,
+  getKeyRequest, 
+  syncUserStates, 
+  checkOutGuest,
+};

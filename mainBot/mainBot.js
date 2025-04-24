@@ -3,8 +3,8 @@ const { sendWithLoading, hideMainMenu, checkUserAndSendWithLoading } = require('
 const { sendRestaurantsList, sendRestaurantInfo } = require('./components/fnb');
 const sendHotelLocation = require('./components/hotelLocation');
 const { sendInfrastructureList, sendInfrastructureInfo } = require('./components/infrastructure');
-const { sendEngeners, sengHousekeeping } = require('./components/requests');
-const { sendPlatformsForReview, getReview } = require('./components/review');
+const { sendEngeners, sendHousekeeping } = require('./components/requests');
+const { sendPlatformsForReview, submitReview } = require('./components/review');
 const { sendRoomsList, sendRoomInfo } = require('./components/rooms');
 const { sendServicesList, sendServiceDescription } = require('./components/services');
 const { checkIfRegistered } = require('./components/signUp');
@@ -23,7 +23,7 @@ const { servicesDescription } = require('./texts/servicesText');
 const { spaDescriptions } = require('./texts/spaTexts');
 const { specialOffersDescription } = require('./texts/specialOffersText');
 const { surroundingsDescriptions } = require('./texts/surroundText');
-const startTexts = require('./texts/startTexts');
+const startTexts = require('./texts/commonTexts');
 const roomsTitles = Object.values(roomsDescriptions).filter(room => room.isActive).map(room => room.title)
 const roomsRegex = new RegExp(`^(${roomsTitles.join('|')})$`);
 const restaurantsTitles = Object.values(restaurantsDescriptions).filter(restaurant => restaurant.isActive).map(restaurant => restaurant.title)
@@ -42,30 +42,13 @@ const surroundingsTitles = Object.values(surroundingsDescriptions).filter(surrou
 const surroundingsRegex = new RegExp(`^(${surroundingsTitles.join('|')})$`)
 const surroundingsTitlesAll = Object.values(surroundingsDescriptions).flatMap(section => Object.values(section.items).filter(item => item.isActive).map(item => item.title))
 const surroundingsTitlesAllRegEx = new RegExp(`^(${surroundingsTitlesAll.join('|')})$`)
-
-const managerChatId = 317138824
-// const userStates = {}
-
-// const setUserState = (chatId, keyRequest) => {
-//   userStates[chatId] = keyRequest
-// }
-
-// const getKeyRequest = (chatId) => {
-//   return userStates[chatId] || ''
-// }
-console.log('HUUUUUHUH', spaTitlesAllRegEx)
-
-
+const managerChatId = process.env.MANAGERBOT_CHAT_ID
 const User = require('../db/models/user');
 const { userStates, setKeyRequest, getKeyRequest, createLocalUser } = require('./components/currentUsers');
 const sendWeeklyGroup = require('./components/weeklyGroup');
 const sendCarRent = require('./components/carRent');
 
 const startMainBot = (mainBot, managerBot) => {
-
-  mainBot.setMyCommands([
-    { command: '/start', description: startTexts.show_menu },
-  ]);
 
   mainBot.on('message', (msg) => {
     const chatId = msg.chat.id;
@@ -75,14 +58,12 @@ const startMainBot = (mainBot, managerBot) => {
 
     if (/\/start/.test(text)) {
       sendWithLoading(mainBot, chatId, sendMainMenu)
-
+      // if user already exist in DB create local copy 
       User.findOne({chatId: chatId})
       .then(user => {
         if (user) {
           console.log('Пользователь уже существует', userStates); //check here if exist in userStates
           createLocalUser(user)
-
-
           return
         } else {
           User.create({chatId: chatId, keyRequest: '', lastname: '', name: '', room: '', arrival: '', departure: '' })
@@ -130,7 +111,7 @@ const startMainBot = (mainBot, managerBot) => {
     else if (regexMenuButtons.housekeeping.test(text)) {
       setKeyRequest(chatId, keyRequests.housekeeping)
       const keyRequest = getKeyRequest(chatId)
-      checkUserAndSendWithLoading(mainBot, chatId, sengHousekeeping, keyRequest)
+      checkUserAndSendWithLoading(mainBot, chatId, sendHousekeeping, keyRequest)
     } 
     else if (regexMenuButtons.restaurants.test(text)) {
       setKeyRequest(chatId, keyRequests.restaurants)
@@ -238,7 +219,7 @@ const startMainBot = (mainBot, managerBot) => {
         managerBot.sendMessage(managerChatId, messageData)
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.review) {
-        getReview(mainBot, managerBot, chatId, msg)
+        submitReview(mainBot, managerBot, chatId, msg)
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.sign_in) {
         const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)

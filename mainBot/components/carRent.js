@@ -1,15 +1,17 @@
-const sendCarRent = (mainBot, chatId) => {
-  mainBot.sendMessage(chatId, `<b>🛻 Аренда автомобиля или байка — легко!</b>
+//rewieved on 24.04
+const carRentDescriptions = require("../texts/carRent");
 
-Укажите, пожалуйста:
+const { errorTexts } = require("../texts/commonTexts");
 
-📞 ваш номер телефона
-🚙 тип транспорта
-📅 даты аренды
+const sendCarRent = async (mainBot, chatId) => {
+  try {
+    await mainBot.sendMessage(chatId, carRentDescriptions.mainMessage, {
+      parse_mode: "HTML",
+    });
+  } catch (error) {
+    console.error(errorTexts.consoleMsgCarRent, error);
+    await mainBot.sendMessage(chatId, errorTexts.userTryAgainMsg);
+  }
+};
 
-— и мы всё оформим для вас в пару кликов.`, {
-    parse_mode: "HTML"
-  })
-}
-
-module.exports = sendCarRent
+module.exports = sendCarRent;
