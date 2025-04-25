@@ -5,12 +5,19 @@ const { errorTexts } = require('../texts/commonTexts');
 
 const sendRestaurantsList = async (bot, chatId) => {
   try {
+    if (
+      !restaurantsNameList ||
+      typeof restaurantsNameList !== 'string'
+    ) {
+      throw new Error(errorTexts.invalidData);
+    }
+
     await bot.sendMessage(chatId, restaurantsNameList, {
       reply_markup: {
         keyboard: [...restaurantsKeyboards.restaurantsListKeyboard],
         resize_keyboard: true
       }
-    })
+    });
   } catch (error) {
     console.error(errorTexts.consoleMsgRestaurantsList, error);
     await bot.sendMessage(chatId, errorTexts.userTryAgainMsg);

@@ -1,19 +1,37 @@
-const {mainKeyboardFull, mainKeyboardShort} = require("../keyboards/mainKeyboard");
-const { startTexts } = require("../texts/commonTexts");
+const { mainKeyboardFull, mainKeyboardShort } = require("../keyboards/mainKeyboard");
+const { startTexts, errorTexts } = require("../texts/commonTexts");
 const { userStates } = require("./currentUsers");
 
 
-const sendMainMenu = (bot, chatId) => {
-  if (userStates[chatId]) {
-    // console.log(userStates[chatId])
-  }
+const sendMainMenu = async (bot, chatId) => {
+  // if (userStates[chatId]) {
+  //   // console.log(userStates[chatId])
+  // }
 
-  bot.sendMessage(chatId, startTexts.main_message, {
-    reply_markup: {
-      keyboard: userStates[chatId].room !== '' ? mainKeyboardFull : mainKeyboardShort,
-    resize_keyboard: true,
-    one_time_keyboard: false
-    } 
-  });
-}
-module.exports = sendMainMenu
+  try {
+    if(
+      !startTexts ||
+      !startTexts.main_message ||
+      typeof startTexts.main_message !== 'string' ||
+      !userStates ||
+      !userStates[chatId] ||
+      !mainKeyboardFull || 
+      !mainKeyboardShort
+    ) {
+      throw new Error(errorTexts.invalidData);
+    }
+
+    await bot.sendMessage(chatId, startTexts.main_message, {
+      reply_markup: {
+        keyboard: userStates[chatId].room && userStates[chatId].room !== '' ? mainKeyboardFull : mainKeyboardShort,
+      resize_keyboard: true,
+      one_time_keyboard: false
+      } 
+    });
+  } catch (error) {
+    console.error(errorTexts.consoleMsgMainMenu, error);
+    await bot.sendMessage(chatId, errorTexts.userTryAgainMsg);
+  }
+};
+
+module.exports = sendMainMenu;

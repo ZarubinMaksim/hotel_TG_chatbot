@@ -1,4 +1,4 @@
-// const roomsListMainPhoto = 'images/rooms/roomsListMainImage.jpeg'
+//rewieved on 24.04
 const { roomsKeyboard, bookingButton } = require('../keyboards/roomsKeyboard');
 const { errorTexts } = require('../texts/commonTexts');
 const { roomsText } = require('../texts/roomsText');
@@ -49,6 +49,6 @@ const sendRoomInfo = async (bot, chatId, data) => {
     console.error(`${errorTexts.consoleMsgRoomInfo} ${data.title}`, error);
     await bot.sendMessage(chatId, errorTexts.userTryAgainMsg)
   }
-}
+};
 
 module.exports = { sendRoomsList, sendRoomInfo };

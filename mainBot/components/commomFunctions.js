@@ -28,6 +28,12 @@ const createTwoLinedKeyboard = (data) => {
 
 const sendWithLoading = async (mainBot, chatId, nextFunction, data) => {
   try {
+    if (
+      !data ||
+      typeof nextFunction !== 'function'
+    ) {
+      throw new Error(errorTexts.invalidData);
+    }
     await mainBot.sendChatAction(chatId, 'typing');
     await nextFunction(mainBot, chatId, data)
     await handleCounter(data)
@@ -39,13 +45,19 @@ const sendWithLoading = async (mainBot, chatId, nextFunction, data) => {
 
 const checkUserAndSendWithLoading = async (mainBot, chatId, nextFunction, data) => {
   try {
+    if (
+      !data ||
+      typeof nextFunction !== 'function'
+    ) {
+      throw new Error(errorTexts.invalidData);
+    }
     await mainBot.sendChatAction(chatId, 'typing');
     if (userStates[chatId] && userStates[chatId].room !== '') {
       await nextFunction(mainBot, chatId, data);
+      await handleCounter(data);
     } else{
       await mainBot.sendMessage(chatId, errorTexts.userNotRegisteredForThisOption);
     }
-    await handleCounter(data);
   } catch (error) {
     console.error(errorTexts.consoleMsgSendWithLoading, error)
     await mainBot.sendMessage(chatId, errorTexts.userTryAgainMsg)
@@ -53,6 +65,14 @@ const checkUserAndSendWithLoading = async (mainBot, chatId, nextFunction, data) 
 };
 
 const hideMainMenu = async (mainBot, chatID) => {
+  if (
+    !startTexts ||
+    !startTexts.hide_menu ||
+    typeof startTexts.hide_menu !== 'string'
+  ) {
+    throw new Error(errorTexts.invalidData);
+  }
+
   await mainBot.sendMessage(chatID, startTexts.hide_menu, {
     reply_markup: {
       remove_keyboard: true,

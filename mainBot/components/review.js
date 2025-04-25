@@ -1,3 +1,4 @@
+//rewieved on 24.04
 const reviewsKeyboards = require("../keyboards/reviewsKeyboards");
 const { errorTexts } = require("../texts/commonTexts");
 const { hotelEmail, newReviewSubject } = require("../texts/emailSettings");
