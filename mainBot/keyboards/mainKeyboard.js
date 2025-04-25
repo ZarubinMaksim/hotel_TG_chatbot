@@ -1,5 +1,6 @@
 const menuButtons = require("../texts/menuButtons");
 
+// Полная клавиатура для зарегистрированных гостей
 const mainKeyboardFull = [
   [menuButtons.restaurants, menuButtons.rooms],
   [menuButtons.engeneers, menuButtons.housekeeping],
@@ -9,8 +10,9 @@ const mainKeyboardFull = [
   [menuButtons.spa, menuButtons.leave_review],
   [menuButtons.location, menuButtons.about_hotel],
   [menuButtons.close_menu]
-]
+];
 
+// Клавиатура для незарегистрированных гостей
 const mainKeyboardShort = [
   [menuButtons.sign_in],
   [menuButtons.restaurants, menuButtons.rooms],
@@ -19,6 +21,6 @@ const mainKeyboardShort = [
   [menuButtons.special_offers, menuButtons.spa],
   [menuButtons.about_hotel, menuButtons.location],
   [menuButtons.close_menu]
-]
+];
 
-module.exports = {mainKeyboardFull, mainKeyboardShort}
+module.exports = { mainKeyboardFull, mainKeyboardShort };

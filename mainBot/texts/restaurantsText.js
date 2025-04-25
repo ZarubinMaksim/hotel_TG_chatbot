@@ -113,7 +113,13 @@ const restaurantsDescriptions = {
   }
 }
 
+const commonRestaurantTexts = {
+  menu: 'Меню',
+  happy_hours: 'Счастливые часы',
+}
+
 module.exports = {
   restaurantsNameList,
   restaurantsDescriptions,
+  commonRestaurantTexts,
 }

@@ -1,4 +1,3 @@
-
 const reviewsKeyboards = {
   reviewsPlatformsList: [
     [{
@@ -15,6 +14,6 @@ const reviewsKeyboards = {
     },
     ]
   ]
-}
+};
 
-module.exports = reviewsKeyboards
+module.exports = reviewsKeyboards;
