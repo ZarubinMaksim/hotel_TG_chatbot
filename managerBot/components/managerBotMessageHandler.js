@@ -1,27 +1,32 @@
-const {servicesDescription} = require("../../mainBot/texts/servicesText")
-const requestDescriptions = require("../../mainBot/texts/requestsText")
+const { servicesDescription } = require("../../mainBot/texts/servicesText");
+const requestDescriptions = require("../../mainBot/texts/requestsText");
 
 const handleManagerBotMessage = (msg, guestDetails, keyRequest) => {
+  console.log('handle data', msg, guestDetails, keyRequest)
+  const description = servicesDescription[keyRequest] || requestDescriptions[keyRequest] || {};
+  
+  if (!description) {
+    console.error(`No description found for keyRequest: ${keyRequest}`);
+  }
 
-  const description = servicesDescription[keyRequest] || requestDescriptions[keyRequest]
-
-  const messageTitle = description?.managerBotMessage || ''
-  const guestInfo = `
+  const messageTitle = description?.managerBotMessage || '';
+  const guestInfo = guestDetails ? `
   🆔 ChatId - ${guestDetails.chatId}
 👤 Guest name - ${guestDetails.lastname} ${guestDetails.name}
 🚪 Room - ${guestDetails.room}
 🛬 Arrival - ${guestDetails.arrival} 
 🛫 Departure - ${guestDetails.departure}
-  `
-  const guestRequest = msg.text && description ? `Request - ${msg.text}` : ''
+  ` : 'Guest details are not available';
+
+  const guestRequest = msg.text && description ? `Request - ${msg.text}` : '';
   
   const messageData = `
   ${messageTitle} 
   ${guestInfo}
   ${guestRequest}
-  `
+  `;
   
-    return messageData
-} 
+  return messageData;
+};
 
-module.exports = handleManagerBotMessage
+module.exports = handleManagerBotMessage;

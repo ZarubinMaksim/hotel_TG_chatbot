@@ -8,6 +8,6 @@ const carRentDescriptions = {
   📅 даты аренды
   
   — и мы всё оформим для вас в пару кликов.`
-}
+};
 
-module.exports = carRentDescriptions
+module.exports = carRentDescriptions;

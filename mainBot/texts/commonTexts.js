@@ -2,7 +2,7 @@ const startTexts = {
   main_message: 'Всё, что вам нужно – в одном меню! 👇🏻 Выберите категорию, и мы подскажем нужную информацию.',
   hide_menu: 'Готовы продолжить? Нажмите /start, чтобы вернуться в меню',
   show_menu: 'Нажмите, чтобы начать!'
-}
+};
 
 const errorTexts = {
   consoleMsgAbout: 'Failed to send about message:',
@@ -33,6 +33,6 @@ const errorTexts = {
   invalidData: 'Invalid data',
   userNotRegisteredForThisOption: 'Кажется, что вы еще не зарегистрированы чтобы пользоваться данной опцией',
   userTryAgainMsg: '❗️Sorry, something went wrong. Please try again later.',
-}
+};
 
-module.exports = {startTexts, errorTexts}
+module.exports = { startTexts, errorTexts };

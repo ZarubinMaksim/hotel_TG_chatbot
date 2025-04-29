@@ -1,4 +1,4 @@
-const hotelOnlineMenu = require("./hotelMenues")
+const hotelOnlineMenu = require("../config/hotelMenues");
 
 const spaTexts = {
   main_message: `
@@ -19,7 +19,7 @@ const spaTexts = {
 
 Погрузитесь в атмосферу абсолютного спокойствия. Время заботиться о себе начинается здесь! 💆‍♂️💖`,
   menu: 'Представляем меню для вашего полного расслабления и гармонии 🌿',
-}
+};
 
 const spaDescriptions = {
   spaMenu: {
@@ -134,6 +134,6 @@ const spaDescriptions = {
       }
     ]
   },
+};
 
-}
-module.exports = {spaTexts, spaDescriptions}
+module.exports = { spaTexts, spaDescriptions };

@@ -3,6 +3,6 @@ const weeklyGroupDeskription = {
   images: [
     {type: 'photo', media: 'images/weeklyGroup.jpeg'},
   ]
-}
+};
 
-module.exports = weeklyGroupDeskription
+module.exports = weeklyGroupDeskription;

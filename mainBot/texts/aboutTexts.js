@@ -18,7 +18,5 @@ const aboutMainMsg = `
 Если у вас возникнут вопросы, наша команда всегда готова помочь! Приятного отдыха! 💚
 `;
 
-module.exports = {
-  aboutMainMsg,
-}
+module.exports = { aboutMainMsg };
 

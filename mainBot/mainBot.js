@@ -15,8 +15,8 @@ const sendPromotion = require('./components/sendPromotion');
 const { sendSurroundingsList, sendSurrounding, sendExactSurrounding } = require('./components/surround');
 const handleManagerBotMessage = require('../managerBot/components/managerBotMessageHandler')
 const { infrastructureDescriptions } = require('./texts/infrastructureTexts');
-const keyRequests = require('./texts/keyRequests');
-const regexMenuButtons = require('./texts/regexMenuButtons');
+const keyRequests = require('./config/keyRequests');
+const regexMenuButtons = require('./config/regexMenuButtons');
 const { restaurantsDescriptions } = require('./texts/restaurantsText');
 const { roomsDescriptions } = require('./texts/roomsText');
 const { servicesDescription } = require('./texts/servicesText');
@@ -50,14 +50,15 @@ const sendCarRent = require('./components/carRent');
 
 const startMainBot = (mainBot, managerBot) => {
 
-  mainBot.on('message', (msg) => {
+  mainBot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const text = msg.text;
-  
+    console.log(msg)
+    
     sendPromotion(chatId)
 
     if (/\/start/.test(text)) {
-      sendWithLoading(mainBot, chatId, sendMainMenu)
+      sendWithLoading(mainBot, chatId, sendMainMenu, text)
       // if user already exist in DB create local copy 
       User.findOne({chatId: chatId})
       .then(user => {
@@ -93,7 +94,7 @@ const startMainBot = (mainBot, managerBot) => {
       sendWithLoading(mainBot, chatId, sendAbout, keyRequest)
     } 
     else if (regexMenuButtons.rooms.test(text)) {
-      setKeyRequest(chatId, keyRequests.room)
+      setKeyRequest(chatId, keyRequests.rooms)
       const keyRequest = getKeyRequest(chatId)
       sendWithLoading(mainBot, chatId, sendRoomsList, keyRequest)
     } 
@@ -166,7 +167,6 @@ const startMainBot = (mainBot, managerBot) => {
     else if (spaTitlesAllRegEx.test(text)) {
       const spaOfferTitle = msg.text
       const callback = Object.values(spaDescriptions).flatMap(section => section.offers ? Object.values(section.offers) : []).find(offer => offer.title === spaOfferTitle);      
-      console.log('spa', callback)
       sendWithLoading(mainBot, chatId, sendSpaOffer, callback)
     } 
     else if (regexMenuButtons.location.test(text)) {
@@ -213,10 +213,12 @@ const startMainBot = (mainBot, managerBot) => {
       if (keyRequest === keyRequests.housekeeping) {
         const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
+        mainBot.sendMessage(chatId, 'We will send team to your room!')
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.engeneers) {
-        const messageData = handleManagerBotMessage(msg, keyRequest)
+        const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
+        mainBot.sendMessage(chatId, 'We will send team to your room!')
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.review) {
         submitReview(mainBot, managerBot, chatId, msg)
@@ -228,18 +230,22 @@ const startMainBot = (mainBot, managerBot) => {
       } else if (keyRequest === keyRequests.transportation) {
         const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
+        mainBot.sendMessage(chatId, 'We will call you back to confirm if car is available')
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.wake_up_call) {
         const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
+        mainBot.sendMessage(chatId, 'We will call or knock to your room at this time')
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.breakfast_box) {
         const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
+        mainBot.sendMessage(chatId, 'We will prepare breakfast box for you')
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.luggage) {
         const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)
         managerBot.sendMessage(managerChatId, messageData)
+        mainBot.sendMessage(chatId, 'We will send team to your room!')
         setKeyRequest(chatId, '')
       } else if (keyRequest === keyRequests.car_rent) {
         const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest)

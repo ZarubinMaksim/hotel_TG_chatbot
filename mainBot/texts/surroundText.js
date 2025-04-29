@@ -160,11 +160,12 @@ const surroundingsDescriptions = {
       }, 
     }
   },
-}
+};
+
 // добавить обменники/ магазины / тир / 
 const surroundingsTexts = {
   main_message: '🌴 Откройте для себя удивительные места рядом',
   sub_main_message: '📍 Исследуйте наши рекомендации',
-}
+};
 
-module.exports = {surroundingsDescriptions, surroundingsTexts}
+module.exports = { surroundingsDescriptions, surroundingsTexts };

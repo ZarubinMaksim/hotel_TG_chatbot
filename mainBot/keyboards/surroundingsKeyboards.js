@@ -1,5 +1,5 @@
 const { createTwoLinedKeyboard } = require("../components/commomFunctions");
-const menuButtons = require("../texts/menuButtons");
+const menuButtons = require("../config/menuButtons");
 const { surroundingsDescriptions } = require("../texts/surroundText");
 
 const activeSurroundings = Object.values(surroundingsDescriptions).filter(surrounding => surrounding.isActive).map(surrounding => surrounding.title);

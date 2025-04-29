@@ -1,7 +1,7 @@
 //rewieved on 24.04
 const { errorTexts } = require("../texts/commonTexts");
 const { infrastructureMainText, infrastructureDescriptions } = require("../texts/infrastructureTexts");
-const menuButtons = require("../texts/menuButtons");
+const menuButtons = require("../config/menuButtons");
 const { createTwoLinedKeyboard } = require("./commomFunctions");
 
 const sendInfrastructureList = async (bot, chatId) => {

@@ -6,7 +6,7 @@ const restaurantsNameList = `
 🍹 Overgrown | Лаунж и Коктейльный Бар
 
 🏖 Manaw Manaw | Пул Бар
-`
+`;
 
 const restaurantsDescriptions = {
   jaakdin: {
@@ -111,15 +111,15 @@ const restaurantsDescriptions = {
 
 Просто расслабьтесь и наслаждайтесь летом в каждом глотке! 🍹☀️🌴`
   }
-}
+};
 
 const commonRestaurantTexts = {
   menu: 'Меню',
   happy_hours: 'Счастливые часы',
-}
+};
 
 module.exports = {
   restaurantsNameList,
   restaurantsDescriptions,
   commonRestaurantTexts,
-}
+};

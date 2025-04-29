@@ -118,6 +118,6 @@ const infrastructureDescriptions = {
     `,
     isActive: true
   },
-}
+};
 
-module.exports = { infrastructureMainText, infrastructureDescriptions }
+module.exports = { infrastructureMainText, infrastructureDescriptions };

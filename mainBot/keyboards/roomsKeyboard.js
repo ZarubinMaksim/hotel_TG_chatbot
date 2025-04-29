@@ -1,5 +1,5 @@
 const { createOneLinedKeyboard } = require("../components/commomFunctions");
-const menuButtons = require("../texts/menuButtons");
+const menuButtons = require("../config/menuButtons");
 const { roomsDescriptions } = require("../texts/roomsText");
 const activeRooms = Object.values(roomsDescriptions).filter(room => room.isActive).map(room => room.title);
 const roomListKeyboard = createOneLinedKeyboard(activeRooms);

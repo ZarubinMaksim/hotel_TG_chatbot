@@ -1,6 +1,6 @@
 const { createTwoLinedKeyboard } = require("../components/commomFunctions");
-const hotelOnlineMenu = require("../texts/hotelMenues");
-const menuButtons = require("../texts/menuButtons");
+const hotelOnlineMenu = require("../config/hotelMenues");
+const menuButtons = require("../config/menuButtons");
 const { restaurantsDescriptions, commonRestaurantTexts } = require("../texts/restaurantsText");
 const activeRestaurants = Object.values(restaurantsDescriptions)
   .filter(restaurant => restaurant.isActive)

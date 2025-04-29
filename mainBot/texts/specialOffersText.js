@@ -130,10 +130,10 @@ Book now! available exclusively at Sanook Restaurant on November 15, 2024.
     isActive: true,
     callback: 'aperol'
   },
-}
+};
 
 const specialOffersTexts = {
   main_message: 'Ловите лучшие предложения! 🎉 Вот список актуальных акций:'
-}
+};
 
-module.exports = {specialOffersDescription, specialOffersTexts}
+module.exports = { specialOffersDescription, specialOffersTexts };

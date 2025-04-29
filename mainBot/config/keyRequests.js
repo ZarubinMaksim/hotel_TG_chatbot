@@ -22,6 +22,6 @@ const keyRequests = {
   breakfast_box: 'breakfastBox',
   luggage: 'luggageDown',
   unidentified: 'unidentified'
-}
+};
 
-module.exports = keyRequests
+module.exports = keyRequests;

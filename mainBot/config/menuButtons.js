@@ -5,7 +5,10 @@ const menuButtons = {
   back: 'Назад к выбору 🔙',
   spa_menu: 'Меню',
   about_hotel: '🏨 Об Отеле',
-  rooms: '🛏 Наши номера',
+  rooms: {
+    rus: '🛏 Наши номера',
+    eng: '🛏 rooms',
+  },
   engeneers: '🛠 Что-то не работает',
   housekeeping: '🧹 Нужна уборка',
   services: '📋 Услуги',

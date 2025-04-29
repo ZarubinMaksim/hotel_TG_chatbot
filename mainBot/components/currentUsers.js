@@ -46,11 +46,12 @@ const checkOutGuest = (guestId) => {
 };
 
 const setKeyRequest = (chatId, keyRequest) => {
+  console.log('4545454', keyRequest)
   userStates[chatId].keyRequest = keyRequest
 };
 
 const getKeyRequest = (chatId) => {
-  return userStates[chatId].keyRequest || ''
+  return userStates[chatId]?.keyRequest || ''
 };
 
 module.exports = {

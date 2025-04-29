@@ -1,5 +1,5 @@
 const { createTwoLinedKeyboard } = require("../components/commomFunctions");
-const menuButtons = require("../texts/menuButtons");
+const menuButtons = require("../config/menuButtons");
 const { servicesDescription } = require("../texts/servicesText");
 const activeServices = Object.values(servicesDescription).filter(service => service.isActive).map(service => service.title);
 const activeServicesKeyboard = createTwoLinedKeyboard(activeServices);

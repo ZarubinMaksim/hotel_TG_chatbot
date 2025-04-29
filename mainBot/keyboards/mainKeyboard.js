@@ -1,8 +1,8 @@
-const menuButtons = require("../texts/menuButtons");
+const menuButtons = require("../config/menuButtons");
 
 // Полная клавиатура для зарегистрированных гостей
 const mainKeyboardFull = [
-  [menuButtons.restaurants, menuButtons.rooms],
+  [menuButtons.restaurants, menuButtons.rooms.eng],
   [menuButtons.engeneers, menuButtons.housekeeping],
   [menuButtons.services, menuButtons.weeklyGroup],
   [menuButtons.surroundings, menuButtons.car_rent],

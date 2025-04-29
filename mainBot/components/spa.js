@@ -1,6 +1,6 @@
 const { spaKeyboards, spaSubKeyboard } = require("../keyboards/spaKeyboards");
 const { errorTexts } = require("../texts/commonTexts");
-const menuButtons = require("../texts/menuButtons");
+const menuButtons = require("../config/menuButtons");
 const { spaTexts } = require("../texts/spaTexts");
 const spaMainPhoto = 'images/spa/spaMainPhoto.jpeg';
 
@@ -51,6 +51,7 @@ const sendSpaOffer = async (bot, chatId, data) => {
 };
 
 const sendSpaDescription = async (bot, chatId, data) => {
+  console.log('ya tut', data)
   try {
     if(
       !data ||
@@ -59,10 +60,7 @@ const sendSpaDescription = async (bot, chatId, data) => {
       !spaTexts ||
       !spaTexts.menu ||
       typeof spaTexts.menu !== 'string' ||
-      !menuButtons.spa_menu ||
-      !data.url ||
-      !data.description ||
-      typeof data.description !== 'string'
+      !menuButtons.spa_menu
     ) {
       throw new Error(errorTexts.invalidData);
     }

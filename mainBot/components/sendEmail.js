@@ -1,7 +1,7 @@
 //updated 25.04 - try/catch
 const nodemailer = require('nodemailer');
 const { errorTexts } = require('../texts/commonTexts');
-const { emailService, botMail, botMailPass, mailContext } = require('../texts/emailSettings');
+const { emailService, botMail, botMailPass, mailContext } = require('../config/emailSettings');
 
 const transporter = nodemailer.createTransport({
   service: emailService,

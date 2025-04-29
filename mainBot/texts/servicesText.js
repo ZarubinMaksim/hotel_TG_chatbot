@@ -41,10 +41,10 @@ const servicesDescription = {
     isActive: true,
     description: 'Если нужна помощь с багажем напишите во сколько нам нужно подойти.'
   }
-}
+};
 
 const servicesText = {
-  main_message: 'Вот что мы можем предложить'
-}
+  main_message: 'Вот что мы можем предложить',
+};
 
-module.exports = {servicesDescription, servicesText}
+module.exports = { servicesDescription, servicesText };

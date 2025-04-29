@@ -27,6 +27,7 @@ const createTwoLinedKeyboard = (data) => {
 }
 
 const sendWithLoading = async (mainBot, chatId, nextFunction, data) => {
+  console.log('hhh', data)
   try {
     if (
       !data ||

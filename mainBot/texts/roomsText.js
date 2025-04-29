@@ -452,6 +452,6 @@ const roomsDescriptions = {
 
 const roomsText = {
   main_message: 'Посмотрите все наши номера 👇🏻'
-}
+};
 
-module.exports = {roomsDescriptions, roomsText}
+module.exports = { roomsDescriptions, roomsText };

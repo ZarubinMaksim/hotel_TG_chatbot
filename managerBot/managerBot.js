@@ -1,14 +1,12 @@
-
 const { updateGuestDetailsDB, findGuestDB, registerGuestDB } = require('../db/controllers/guest');
 const User = require('../db/models/user');
-const { createLocalUser, checkOutGuest, userStates } = require('../mainBot/components/currentUsers');
+const { checkOutGuest } = require('../mainBot/components/currentUsers');
 const handleManagerBotMessage = require('./components/managerBotMessageHandler');
 const { profileMainMenu, updateProfileMenu, deleteGuestMenu, checkoutAllGuests } = require('./keyboards/managerBotKeyboards');
 const managerBotDescriptions = require('./texts/managerBotDescriptions');
-let keyRequest 
-let changingUser
-const allowedUsers = [317138824]
-
+let keyRequest;
+let changingUser;
+const allowedUsers = process.env.ALLOWED_USERS.split(',').map(id => id.trim());
 
 async function setMessageReaction(token, chatId, messageId, emoji) {
   await fetch(`https://api.telegram.org/bot${token}/setMessageReaction`, {
@@ -20,13 +18,13 @@ async function setMessageReaction(token, chatId, messageId, emoji) {
           reaction: [{ type: "emoji", emoji: emoji }]
       })
   });
-}
+};
 
 const setRequestUserAndSendMsg = (chatId, managerBot, callback_data, userData) => {
-  keyRequest = callback_data
-  changingUser = userData
-  changeField = keyRequest.split('_').pop()
-  managerBot.sendMessage(chatId, `${managerBotDescriptions.sendNewInfo} ${changeField}`)
+  keyRequest = callback_data;
+  changingUser = userData;
+  changeField = keyRequest.split('_').pop();
+  managerBot.sendMessage(chatId, `${managerBotDescriptions.sendNewInfo} ${changeField}`);
 }
 
 const updateGuestDetails = (chatId, managerBot, changingData, msg, keyRequest ) => {
@@ -100,7 +98,8 @@ const startManagerBot = (mainBot, managerBot, token) => {
   managerBot.on('message', async (msg) => {
 
     const chatId = msg.chat.id;
-    if (!allowedUsers.includes(chatId)) {
+
+    if (!allowedUsers.includes(chatId.toString())) {
       managerBot.sendMessage(chatId, 'You are not allowed to use this bot')
       return
     }

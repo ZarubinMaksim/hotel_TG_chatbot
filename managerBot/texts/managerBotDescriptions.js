@@ -3,6 +3,6 @@ const managerBotDescriptions = {
   sendNewInfo: 'Now please send new',
   errorMessage_userNotFound: 'User is not found',
   errorMessage_userNotCreated: 'User is not created',
-}
+};
 
-module.exports = managerBotDescriptions
+module.exports = managerBotDescriptions;
