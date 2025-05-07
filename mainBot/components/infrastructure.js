@@ -1,7 +1,7 @@
 //rewieved on 24.04
 const { errorTexts } = require("../texts/commonTexts");
 const { infrastructureMainText, infrastructureDescriptions } = require("../texts/infrastructureTexts");
-const menuButtons = require("../config/menuButtons");
+const { menuButtons }= require("../config/appItems");
 const { createTwoLinedKeyboard } = require("./commomFunctions");
 
 const sendInfrastructureList = async (bot, chatId) => {
@@ -23,7 +23,7 @@ const sendInfrastructureList = async (bot, chatId) => {
     await bot.sendMessage(chatId, infrastructureMainText, {
       reply_markup: {
         keyboard: [
-          [menuButtons.to_main_menu],
+          [menuButtons.main_menu],
           ...keyboard
         ],
         resize_keyboard: true,

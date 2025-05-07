@@ -6,13 +6,13 @@ const requestDescriptions = require("../texts/requestsText");
 const sendEngeners = async (bot, chatId) => {
   try { 
     if (
-      !requestDescriptions.eng.userMessage ||
-      typeof requestDescriptions.eng.userMessage !== 'string'
+      !requestDescriptions.engineer.userMessage ||
+      typeof requestDescriptions.engineer.userMessage !== 'string'
     ) {
       throw new Error(errorTexts.invalidData);
     }
 
-    await bot.sendMessage(chatId, requestDescriptions.eng.userMessage);
+    await bot.sendMessage(chatId, requestDescriptions.engineer.userMessage);
   } catch (error) {
     console.error(errorTexts.consoleMsgEngeneers, error);
     await bot.sendMessage(chatId, errorTexts.userTryAgainMsg);
@@ -22,13 +22,13 @@ const sendEngeners = async (bot, chatId) => {
 const sendHousekeeping = async (bot, chatId) => {
   try {
     if (
-      !requestDescriptions.hsk.userMessage ||
-      typeof requestDescriptions.hsk.userMessage !== 'string'
+      !requestDescriptions.housekeeping.userMessage ||
+      typeof requestDescriptions.housekeeping.userMessage !== 'string'
     ) {
       throw new Error(errorTexts.invalidData);
     }
 
-    await bot.sendMessage(chatId, requestDescriptions.hsk.userMessage)
+    await bot.sendMessage(chatId, requestDescriptions.housekeeping.userMessage)
   } catch (error) {
     console.error(errorTexts.consoleMsgHK, error);
     await bot.sendMessage(chatId, errorTexts.userTryAgainMsg);

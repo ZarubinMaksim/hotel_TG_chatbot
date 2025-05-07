@@ -1,6 +1,6 @@
 const { spaKeyboards, spaSubKeyboard } = require("../keyboards/spaKeyboards");
 const { errorTexts } = require("../texts/commonTexts");
-const menuButtons = require("../config/menuButtons");
+const { menuButtons }= require("../config/appItems");
 const { spaTexts } = require("../texts/spaTexts");
 const spaMainPhoto = 'images/spa/spaMainPhoto.jpeg';
 
@@ -75,7 +75,7 @@ const sendSpaDescription = async (bot, chatId, data) => {
       });
     } else if (data.callback === 'spaOffers') {
       await bot.sendChatAction(chatId, 'typing');
-      await bot.sendMessage(chatId, 'Вот наши акции', {
+      await bot.sendMessage(chatId, spaTexts.offers, {
         reply_markup: {
           keyboard: spaSubKeyboard(data)
         }

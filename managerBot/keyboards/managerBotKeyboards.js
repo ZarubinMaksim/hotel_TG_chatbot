@@ -1,4 +1,5 @@
-const menuButtons = require("../config/menuButtons")
+const menuButtons = require("../config/menuButtons");
+
 
 const profileMainMenu = [
   [{ text: menuButtons.update_guest, callback_data: 'update_guest_details'}],

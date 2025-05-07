@@ -1,5 +1,6 @@
 //updated 25.04 - try catch
 const { errorTexts } = require('../texts/commonTexts');
+const signUpTexts = require('../texts/signUpTexts');
 const { userStates } = require('./currentUsers');
 
 const checkIfRegistered = async (bot, chatId) => {
@@ -12,9 +13,9 @@ const checkIfRegistered = async (bot, chatId) => {
     }
 
     if (userStates[chatId].room == '') {
-      await bot.sendMessage(chatId, 'Если вы уже в отеле, то отправьте в чат номер вашей комнаты и фамилию');
+      await bot.sendMessage(chatId, signUpTexts.detailsRequest);
     } else {
-      await bot.sendMessage(chatId, `${userStates[chatId].lastname} ${userStates[chatId].name}, Вы уже зарегистрированны в номере ${userStates[chatId].room}`)
+      await bot.sendMessage(chatId, `${userStates[chatId].lastname} ${userStates[chatId].name}${signUpTexts.alreadyRegisteredIn} ${userStates[chatId].room}`)
     }
   } catch(error) {
     console.error(errorTexts.consoleMsgCheckRegistered, error);
@@ -26,4 +27,4 @@ const checkPersonalDetails = () => {
 
 }
 
-module.exports = {checkIfRegistered, checkPersonalDetails};
+module.exports = { checkIfRegistered, checkPersonalDetails };

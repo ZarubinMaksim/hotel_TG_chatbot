@@ -30,6 +30,7 @@ const errorTexts = {
   consoleMsgMainMenu: 'Failed to send main menu',
   consoleMsgSurroundings: 'Failed to send surroundings',
   consoleMsgWeeklyActivities: 'Failed to send weekly activities',
+  consoleMsgFollowingMsg: 'Failed to handle following message',
   invalidData: 'Invalid data',
   userNotRegisteredForThisOption: 'Кажется, что вы еще не зарегистрированы чтобы пользоваться данной опцией',
   userTryAgainMsg: '❗️Sorry, something went wrong. Please try again later.',

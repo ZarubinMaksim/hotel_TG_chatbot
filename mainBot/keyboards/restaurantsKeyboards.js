@@ -1,6 +1,6 @@
 const { createTwoLinedKeyboard } = require("../components/commomFunctions");
 const hotelOnlineMenu = require("../config/hotelMenues");
-const menuButtons = require("../config/menuButtons");
+const { menuButtons } = require("../config/appItems");
 const { restaurantsDescriptions, commonRestaurantTexts } = require("../texts/restaurantsText");
 const activeRestaurants = Object.values(restaurantsDescriptions)
   .filter(restaurant => restaurant.isActive)
@@ -10,7 +10,7 @@ const restaurantTitlesKeyboard = createTwoLinedKeyboard(activeRestaurants);
 const restaurantsKeyboards = {
   //формируем клавиатуру с кнопкой назад и списком ресторанов
   restaurantsListKeyboard: [
-    [menuButtons.to_main_menu],
+    [menuButtons.main_menu],
     ...restaurantTitlesKeyboard
   ],
   

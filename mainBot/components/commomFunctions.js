@@ -1,9 +1,10 @@
 //reviewed on 26.12
 //rewieved on 24.04
 
+const handleManagerBotMessage = require("../../managerBot/components/managerBotMessageHandler");
 const { startTexts, errorTexts } = require("../texts/commonTexts");
 const handleCounter = require("./counter");
-const { userStates } = require("./currentUsers");
+const { userStates, setKeyRequest } = require("./currentUsers");
 
 const createOneLinedKeyboard = (data) => {
   const keyboard = [];
@@ -27,7 +28,6 @@ const createTwoLinedKeyboard = (data) => {
 }
 
 const sendWithLoading = async (mainBot, chatId, nextFunction, data) => {
-  console.log('hhh', data)
   try {
     if (
       !data ||
@@ -36,13 +36,13 @@ const sendWithLoading = async (mainBot, chatId, nextFunction, data) => {
       throw new Error(errorTexts.invalidData);
     }
     await mainBot.sendChatAction(chatId, 'typing');
-    await nextFunction(mainBot, chatId, data)
-    await handleCounter(data)
+    await nextFunction(mainBot, chatId, data);
+    await handleCounter(data);
   } catch (error) {
-    console.error(errorTexts.consoleMsgSendWithLoading, error)
-    await mainBot.sendMessage(chatId, errorTexts.userTryAgainMsg)
+    console.error(errorTexts.consoleMsgSendWithLoading, error);
+    await mainBot.sendMessage(chatId, errorTexts.userTryAgainMsg);
   }
-}
+};
 
 const checkUserAndSendWithLoading = async (mainBot, chatId, nextFunction, data) => {
   try {
@@ -60,8 +60,8 @@ const checkUserAndSendWithLoading = async (mainBot, chatId, nextFunction, data) 
       await mainBot.sendMessage(chatId, errorTexts.userNotRegisteredForThisOption);
     }
   } catch (error) {
-    console.error(errorTexts.consoleMsgSendWithLoading, error)
-    await mainBot.sendMessage(chatId, errorTexts.userTryAgainMsg)
+    console.error(errorTexts.consoleMsgSendWithLoading, error);
+    await mainBot.sendMessage(chatId, errorTexts.userTryAgainMsg);
   }
 };
 
@@ -81,10 +81,27 @@ const hideMainMenu = async (mainBot, chatID) => {
   });
 };
 
+const handleFollowingRequest = async (mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, requestReply) => {
+  try {
+    if ([mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, requestReply].some(v => v == null)) {
+      throw new Error(errorTexts.invalidData);
+    }
+
+    const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest);
+    await managerBot.sendMessage(managerChatId, messageData);
+    await mainBot.sendMessage(chatId, requestReply);
+    setKeyRequest(chatId, '');
+  } catch (error) {
+    console.error(errorTexts.consoleMsgFollowingMsg, error);
+    await mainBot.sendMessage(chatId, errorTexts.userTryAgainMsg);
+  }
+};
+
 module.exports = {
   createTwoLinedKeyboard, 
   createOneLinedKeyboard, 
   sendWithLoading, 
   hideMainMenu, 
   checkUserAndSendWithLoading,
+  handleFollowingRequest,
 };

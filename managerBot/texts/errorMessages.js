@@ -1,0 +1,25 @@
+const errorMessages = {
+  callback_mainError: 'Error handling callback query',
+  receivedMessage_mainError: 'Error handling received message',
+  unauthorizedUser: 'You are not allowed to use this bot',
+  unrecognizedCommand: 'Unrecognized command. Please use the menu or /start',
+  updateGuestMenu: 'Failed to handle update guest menu',
+  tryAgain: '❗️Sorry, something went wrong. Please try again later.',
+  checkOut: 'Failed to check out guest',
+  guestNotFound: 'Guest not found in database.',
+  DBAcess: 'Failed to access database. Please try again.',
+  checkOutToday: 'No guests found to delete for today.',
+  signIn: 'Failed to access database for sing in. Please try again.',
+  handleGuest: 'Failed to handle guest room and name',
+  findAllGuests: 'Failed to find IHG',
+  askDepartureDate: 'Failed to send message for check out by date',
+  findGuestByDate: 'Guests not found for this date.',
+  confirmCheckOutByDate: 'Failed to confirm check out all for today',
+  confirmCheckOut: 'Failed to set request & send delete & confirm',
+  setRequest: 'Failed to set request and user and message',
+  updateGuestDetails: 'Failed to update guest details',
+  noDescription: 'No description found for keyRequest:',
+  noGuestDetails: 'Guest details are not available',
+}
+
+module.exports = errorMessages;

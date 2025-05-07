@@ -46,7 +46,6 @@ const checkOutGuest = (guestId) => {
 };
 
 const setKeyRequest = (chatId, keyRequest) => {
-  console.log('4545454', keyRequest)
   userStates[chatId].keyRequest = keyRequest
 };
 
