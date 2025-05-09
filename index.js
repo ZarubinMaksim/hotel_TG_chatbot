@@ -11,11 +11,31 @@ const express = require('express')
 const mongoose = require('mongoose');
 const { syncUserStates } = require('./mainBot/components/currentUsers');
 const app = express()
-
-mongoose.connect('mongodb://localhost:27017/laGreenBot')
+const cors = require('cors')
+// mongoose.connect('mongodb://localhost:27017/laGreenBot')
+mongoose.connect('mongodb://lagreen_user:245064163@38.244.150.204:27017/laGreenBot', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 
 
 app.listen(3000)
+app.use(cors());
+app.use(express.json());
+
+app.post('/send-order', (req, res) => {
+  const {guestDetailsTEMPORARY, data} = req.body
+  const orderList = data
+  .map(item => `${item.name} - ${item.amount}`)
+  .join('\n');
+  managerBot.sendMessage(guestDetailsTEMPORARY.chatId, `
+    Guest ordered room service!
+Guest room - ${guestDetailsTEMPORARY.room}
+Guest name - ${guestDetailsTEMPORARY.lastname} ${guestDetailsTEMPORARY.name}
+Guest order: 
+${orderList} 
+  `)
+})
 
 const startApp = async () => {
   await syncUserStates() //синхронизируем при запуске приложения пользователей локально

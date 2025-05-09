@@ -12,13 +12,14 @@ const startMainBot = (mainBot, managerBot) => {
   mainBot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const text = msg.text;
+    const guestDetails = userStates[chatId];
     let matched = false;
-
     sendPromotion(chatId);
+    
 
     for (const { regex, action } of regexHandlers) {
       if (regex.test(text)) {
-        await action(mainBot, chatId, msg);
+        await action(mainBot, chatId, msg, guestDetails);
         matched = true;
         break;
       } 

@@ -165,7 +165,22 @@ const regexHandlers = [
     action: async (bot, chatId, msg) => {
       const restaurantTitle = msg.text
       const callback = Object.values(restaurantsDescriptions).find(value => value.title === restaurantTitle)
-      await sendWithLoading(bot, chatId, sendRestaurantInfo, callback)
+      await sendWithLoading(bot, chatId, sendRestaurantInfo, callback);
+    }
+  },
+  //ROOM SERVICE
+  {
+    regex: regexMenuButtons.roomService,
+    action: async (bot, chatId, msg, guestDetails) => {
+      const encodedGuestDetails = encodeURIComponent(JSON.stringify(guestDetails));
+      console.log(guestDetails)
+      await bot.sendMessage(chatId, 'Вот наше менб для заказа в номер', {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: 'я меню11', web_app: { url: `https://81b5-147-50-181-90.ngrok-free.app/?guestDetails=${encodedGuestDetails}` }}]
+          ]
+        },
+      });
     }
   },
   //SPECIL OFFERS

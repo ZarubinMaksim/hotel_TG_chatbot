@@ -110,7 +110,8 @@ const restaurantsDescriptions = {
 ⏳ Последний заказ: 18:30
 
 Просто расслабьтесь и наслаждайтесь летом в каждом глотке! 🍹☀️🌴`
-  }
+  },
+  
 };
 
 const commonRestaurantTexts = {

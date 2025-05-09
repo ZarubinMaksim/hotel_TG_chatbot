@@ -2,6 +2,7 @@ const { menuButtons }= require("../config/appItems");
 
 // Полная клавиатура для зарегистрированных гостей
 const mainKeyboardFull = [
+  [menuButtons.roomService],
   [menuButtons.restaurants, menuButtons.rooms],
   [menuButtons.engineer, menuButtons.housekeeping],
   [menuButtons.services, menuButtons.weeklyGroup],

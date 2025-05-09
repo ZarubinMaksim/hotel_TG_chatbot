@@ -119,10 +119,10 @@ const appItems = {
     regex: /unidentified/,
     keyRequest: 'unidentified',
   },
-  test: {
-    label: 'TEST',
-    regex: /test/,
-    keyRequest: 'test',
+  roomService: {
+    label: 'Room Service',
+    regex: /Room Service|roomService/,
+    keyRequest: 'roomService',
   },
 };
 
