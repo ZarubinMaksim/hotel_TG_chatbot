@@ -16,7 +16,7 @@ const requestDescriptions = {
   sign_in: {
     keyRequest: keyRequests.sign_in,
     managerBotMessage: 'Guest wants to sign in! Please reply for this message to confirm. Message shuld be ROOM NUMBER/LAST NAME/FIRST NAME/CHECK IN DATE/CHECK OUT DAY',
-    userReplyMsg: 'Инженер скоро будет у вас в номере ✅',
+    userReplyMsg: 'Мы скоро вас зарегистрируем!',
   },
   car_rent: {
     keyRequest: keyRequests.car_rent,

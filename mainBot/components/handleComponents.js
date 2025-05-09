@@ -177,7 +177,7 @@ const regexHandlers = [
       await bot.sendMessage(chatId, 'Вот наше менб для заказа в номер', {
         reply_markup: {
           inline_keyboard: [
-            [{ text: 'я меню11', web_app: { url: `https://81b5-147-50-181-90.ngrok-free.app/?guestDetails=${encodedGuestDetails}` }}]
+            [{ text: 'я меню11', web_app: { url: `http://38.244.150.204/?guestDetails=${encodedGuestDetails}` }}]
           ]
         },
       });
