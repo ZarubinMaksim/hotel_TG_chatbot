@@ -6,11 +6,14 @@ const { errorTexts } = require('../texts/commonTexts');
 
 // функция на случай перезапуска приложения чтобы локальные поьзователи обновились
 const syncUserStates = async ( ) => {
+
   try {
     const usersFromDB = await User.find();
     Object.keys(userStates).forEach(key => delete userStates[key]);
 
     usersFromDB.forEach(user => {
+      console.log('!!!!!!', user)
+      console.error('!!!!!!!@@@', user)
       if (!userStates[user.chatId]) {
         userStates[user.chatId] = {
           chatId: user.chatId,
