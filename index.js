@@ -17,7 +17,7 @@ const cors = require('cors')
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true
 // })
-const uri = 'mongodb://lagreen_user:245064163@38.244.150.204:27017/laGreenBot';
+const uri = 'mongodb://lagreen_user:245064163@38.244.150.204:27017/lagreen_bot';
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
