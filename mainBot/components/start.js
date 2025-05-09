@@ -4,6 +4,7 @@ const { userStates } = require("./currentUsers");
 
 
 const sendMainMenu = async (bot, chatId) => {
+  console.error('USERSTATES', userStates)
   // if (userStates[chatId]) {
   //   // console.log(userStates[chatId])
   // }
