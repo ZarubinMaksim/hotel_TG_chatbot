@@ -13,11 +13,22 @@ const { syncUserStates } = require('./mainBot/components/currentUsers');
 const app = express()
 const cors = require('cors')
 // mongoose.connect('mongodb://localhost:27017/laGreenBot')
-mongoose.connect('mongodb://lagreen_user:245064163@38.244.150.204:27017/laGreenBot', {
+// mongoose.connect('mongodb://lagreen_user:245064163@38.244.150.204:27017/laGreenBot', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// })
+const uri = 'mongodb://lagreen_user:245064163@38.244.150.204:27017/laGreenBot';
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-
+  .then(() => {
+    console.log('Successfully connected to MongoDB');
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+  });
 
 app.listen(3000)
 app.use(cors());

@@ -12,8 +12,6 @@ const syncUserStates = async ( ) => {
     Object.keys(userStates).forEach(key => delete userStates[key]);
 
     usersFromDB.forEach(user => {
-      console.log('!!!!!!', user)
-      console.error('!!!!!!!@@@', user)
       if (!userStates[user.chatId]) {
         userStates[user.chatId] = {
           chatId: user.chatId,
