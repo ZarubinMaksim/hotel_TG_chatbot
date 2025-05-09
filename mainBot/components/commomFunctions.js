@@ -29,12 +29,6 @@ const createTwoLinedKeyboard = (data) => {
 
 const sendWithLoading = async (mainBot, chatId, nextFunction, data) => {
   try {
-    if (
-      !data ||
-      typeof nextFunction !== 'function'
-    ) {
-      throw new Error(errorTexts.invalidData);
-    }
     await mainBot.sendChatAction(chatId, 'typing');
     await nextFunction(mainBot, chatId, data);
     await handleCounter(data);
