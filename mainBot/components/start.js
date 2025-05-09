@@ -9,17 +9,17 @@ const sendMainMenu = async (bot, chatId) => {
   // }
 
   try {
-    if(
-      !startTexts ||
-      !startTexts.main_message ||
-      typeof startTexts.main_message !== 'string' ||
-      !userStates ||
-      !userStates[chatId] ||
-      !mainKeyboardFull || 
-      !mainKeyboardShort
-    ) {
-      throw new Error(errorTexts.invalidData);
-    }
+    // if(
+    //   !startTexts ||
+    //   !startTexts.main_message ||
+    //   typeof startTexts.main_message !== 'string' ||
+    //   !userStates ||
+    //   !userStates[chatId] ||
+    //   !mainKeyboardFull || 
+    //   !mainKeyboardShort
+    // ) {
+    //   throw new Error(errorTexts.invalidData);
+    // }
 
     await bot.sendMessage(chatId, startTexts.main_message, {
       reply_markup: {
