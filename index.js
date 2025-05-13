@@ -60,16 +60,16 @@ app.post('/send-order', (req, res) => {
   const {guestDetailsTEMPORARY, orderList} = req.body
   console.log('GD', guestDetailsTEMPORARY)
   console.log('orderList', orderList)
-//   const orderList = data
-//   .map(item => `${item.name} - ${item.amount}`)
-//   .join('\n');
-//   managerBot.sendMessage(guestDetailsTEMPORARY.chatId, `
-//     Guest ordered room service!
-// Guest room - ${guestDetailsTEMPORARY.room}
-// Guest name - ${guestDetailsTEMPORARY.lastname} ${guestDetailsTEMPORARY.name}
-// Guest order: 
-// ${orderList} 
-//   `)
+  const orderListItems = data
+  .map(item => `${item.name} - ${item.amount}`)
+  .join('\n');
+  managerBot.sendMessage(guestDetailsTEMPORARY.chatId, `
+    Guest ordered room service!
+Guest room - ${guestDetailsTEMPORARY.room}
+Guest name - ${guestDetailsTEMPORARY.lastname} ${guestDetailsTEMPORARY.name}
+Guest order: 
+${orderListItems} 
+  `)
 })
 
 const startApp = async () => {
