@@ -34,6 +34,10 @@ app.listen(3000)
 app.use(cors());
 app.use(express.json());
 
+app.get('/test', (req, res) => {
+  console.log("HYYYYYU")
+})
+
 app.post('/send-order', (req, res) => {
   const {guestDetailsTEMPORARY, data} = req.body
   const orderList = data
