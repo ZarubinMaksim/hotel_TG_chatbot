@@ -60,7 +60,7 @@ app.post('/send-order', (req, res) => {
   const {guestDetailsTEMPORARY, orderList} = req.body
   console.log('GD', guestDetailsTEMPORARY)
   console.log('orderList', orderList)
-  const orderListItems = data
+  const orderListItems = orderList
   .map(item => `${item.name} - ${item.amount}`)
   .join('\n');
   managerBot.sendMessage(guestDetailsTEMPORARY.chatId, `
