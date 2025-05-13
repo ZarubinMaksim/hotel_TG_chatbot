@@ -30,8 +30,18 @@ mongoose.connect(uri, {
     console.error('Error connecting to MongoDB:', err);
   });
 
+const allowedOrigins = [
+  'https://www.yunobot.com',
+  'https://yunobot.com',
+  'http://www.yunobot.com',
+  'http://yunobot.com',
+]  
+
 app.listen(3000)
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true       
+}));
 app.use(express.json());
 
 app.post('/send-order', (req, res) => {
