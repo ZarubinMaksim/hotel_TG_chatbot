@@ -57,16 +57,16 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.post('/send-order', (req, res) => {
-  const {guestDetailsTEMPORARY, orderList} = req.body
-  console.log('GD', guestDetailsTEMPORARY)
+  const {guestDetails, orderList} = req.body
+  console.log('GD', guestDetails)
   console.log('orderList', orderList)
   const orderListItems = orderList
   .map(item => `${item.name} - ${item.amount}`)
   .join('\n');
-  managerBot.sendMessage(guestDetailsTEMPORARY.chatId, `
+  managerBot.sendMessage(guestDetails.chatId, `
     Guest ordered room service!
-Guest room - ${guestDetailsTEMPORARY.room}
-Guest name - ${guestDetailsTEMPORARY.lastname} ${guestDetailsTEMPORARY.name}
+Guest room - ${guestDetails.room}
+Guest name - ${guestDetails.lastname} ${guestDetails.name}
 Guest order: 
 ${orderListItems} 
   `)
