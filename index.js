@@ -39,8 +39,10 @@ const allowedOrigins = [
 
 app.listen(3000)
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true       
+  origin: ['https://www.yunobot.com', 'https://yunobot.com'],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
 }));
 app.use(express.json());
 
