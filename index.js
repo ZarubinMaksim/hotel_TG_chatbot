@@ -35,6 +35,8 @@ const allowedOrigins = [
   'https://yunobot.com',
   'http://www.yunobot.com',
   'http://yunobot.com',
+  'https://api.yunobot.com/',
+  'http://api.yunobot.com/'
 ]  
 
 app.listen(3000)
