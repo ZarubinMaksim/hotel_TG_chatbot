@@ -58,16 +58,18 @@ app.use(express.json());
 
 app.post('/send-order', (req, res) => {
   const {guestDetailsTEMPORARY, data} = req.body
-  const orderList = data
-  .map(item => `${item.name} - ${item.amount}`)
-  .join('\n');
-  managerBot.sendMessage(guestDetailsTEMPORARY.chatId, `
-    Guest ordered room service!
-Guest room - ${guestDetailsTEMPORARY.room}
-Guest name - ${guestDetailsTEMPORARY.lastname} ${guestDetailsTEMPORARY.name}
-Guest order: 
-${orderList} 
-  `)
+  console.log('GD', guestDetailsTEMPORARY)
+  console.log('data', data)
+//   const orderList = data
+//   .map(item => `${item.name} - ${item.amount}`)
+//   .join('\n');
+//   managerBot.sendMessage(guestDetailsTEMPORARY.chatId, `
+//     Guest ordered room service!
+// Guest room - ${guestDetailsTEMPORARY.room}
+// Guest name - ${guestDetailsTEMPORARY.lastname} ${guestDetailsTEMPORARY.name}
+// Guest order: 
+// ${orderList} 
+//   `)
 })
 
 const startApp = async () => {
