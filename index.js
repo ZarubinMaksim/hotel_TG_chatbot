@@ -57,9 +57,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.post('/send-order', (req, res) => {
-  const {guestDetailsTEMPORARY, data} = req.body
+  const {guestDetailsTEMPORARY, orderList} = req.body
   console.log('GD', guestDetailsTEMPORARY)
-  console.log('data', data)
+  console.log('orderList', orderList)
 //   const orderList = data
 //   .map(item => `${item.name} - ${item.amount}`)
 //   .join('\n');
