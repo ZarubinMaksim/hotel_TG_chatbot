@@ -1,7 +1,8 @@
 //rewieved on 24.04
-const { restaurantsNameList } = require('../texts/restaurantsText');
+const { restaurantsNameList, commonRestaurantTexts } = require('../texts/restaurantsText');
 const restaurantsKeyboards = require('../keyboards/restaurantsKeyboards');
 const { errorTexts } = require('../texts/commonTexts');
+const hotelOnlineMenu = require('../config/hotelMenues');
 
 const sendRestaurantsList = async (bot, chatId) => {
   try {
@@ -47,4 +48,27 @@ const sendRestaurantInfo = async (bot, chatId, data) => {
     await bot.sendMessage(chatId, errorTexts.userTryAgainMsg);
   }
 };
-module.exports = { sendRestaurantsList, sendRestaurantInfo };
+
+const sendRoomDiningMenu = async (bot, chatId, encodedGuestDetails) => {
+  const roomServiceUrl = hotelOnlineMenu.roomService(encodedGuestDetails);
+  console.log(roomServiceUrl)
+  try {
+    await bot.sendMessage(chatId, commonRestaurantTexts.room_service, {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: commonRestaurantTexts.roomServiceMenu, 
+              web_app: { url: roomServiceUrl}
+            }
+          ]
+        ]
+
+      }
+    })
+  } catch (error) {
+    console.error(errorTexts.consoleMsgRoomService, error);
+    await bot.sendMessage(chatId, errorTexts.userTryAgainMsg);
+  }
+}
+module.exports = { sendRestaurantsList, sendRestaurantInfo, sendRoomDiningMenu };

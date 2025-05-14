@@ -25,7 +25,7 @@ const roomsTitles = Object.values(roomsDescriptions)
   .map(room => room.title)
 const roomsRegex = new RegExp(`^(${roomsTitles.join('|')})$`)
 // ==== Restaurants ====
-const { sendRestaurantsList, sendRestaurantInfo } = require("./fnb")
+const { sendRestaurantsList, sendRestaurantInfo, sendRoomDiningMenu } = require("./fnb")
 const { restaurantsDescriptions } = require("../texts/restaurantsText")
 const restaurantsTitles = Object.values(restaurantsDescriptions)
   .filter(restaurant => restaurant.isActive)
@@ -173,14 +173,7 @@ const regexHandlers = [
     regex: regexMenuButtons.roomService,
     action: async (bot, chatId, msg, guestDetails) => {
       const encodedGuestDetails = encodeURIComponent(JSON.stringify(guestDetails));
-      console.log(guestDetails)
-      await bot.sendMessage(chatId, 'Вот наше менб для заказа в номер', {
-        reply_markup: {
-          inline_keyboard: [
-            [{ text: 'я меню11', web_app: { url: `https://www.yunobot.com/?guestDetails=${encodedGuestDetails}` }}]
-          ]
-        },
-      });
+      await sendWithLoading(bot, chatId, sendRoomDiningMenu, encodedGuestDetails);
     }
   },
   //SPECIL OFFERS

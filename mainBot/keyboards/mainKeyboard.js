@@ -2,15 +2,14 @@ const { menuButtons }= require("../config/appItems");
 
 // Полная клавиатура для зарегистрированных гостей
 const mainKeyboardFull = [
-  [menuButtons.roomService],
-  [menuButtons.restaurants, menuButtons.rooms],
+  [menuButtons.restaurants, menuButtons.roomService],
+  [menuButtons.services, menuButtons.rooms],
   [menuButtons.engineer, menuButtons.housekeeping],
-  [menuButtons.services, menuButtons.weeklyGroup],
   [menuButtons.surroundings, menuButtons.car_rent],
   [menuButtons.special_offers, menuButtons.infrastructure],
-  [menuButtons.spa, menuButtons.leave_review],
-  [menuButtons.location, menuButtons.about_hotel],
-  [menuButtons.hide_menu]
+  [menuButtons.spa, menuButtons.weeklyGroup],
+  [menuButtons.location, menuButtons.leave_review],
+  [menuButtons.hide_menu, menuButtons.about_hotel]
 ];
 
 // Клавиатура для незарегистрированных гостей

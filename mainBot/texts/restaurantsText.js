@@ -116,7 +116,9 @@ const restaurantsDescriptions = {
 
 const commonRestaurantTexts = {
   menu: 'Меню',
+  roomServiceMenu: 'Заказать в номер',
   happy_hours: 'Счастливые часы',
+  room_service: 'Никуда идти не нужно — всё вкусное уже рядом! Вот наше меню для заказа в номер 🍕🛎️'
 };
 
 module.exports = {

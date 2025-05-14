@@ -27,7 +27,7 @@ const restaurantsKeyboards = {
   manawKeyboard: [
     [{text: commonRestaurantTexts.menu, web_app: { url: hotelOnlineMenu.manawMain}}],
     [{text: commonRestaurantTexts.happy_hours, web_app: { url: hotelOnlineMenu.manawHappyHour}}],
-  ], 
+  ],
 }
 
 module.exports = restaurantsKeyboards;

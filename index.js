@@ -18,6 +18,7 @@ const cors = require('cors')
 //   useUnifiedTopology: true
 // })
 const uri = 'mongodb://lagreen_user:245064163@38.244.150.204:27017/lagreen_bot';
+// const uri = 'mongodb://localhost:27017/laGreenBot';
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -36,7 +37,8 @@ const allowedOrigins = [
   'http://www.yunobot.com',
   'http://yunobot.com',
   'https://api.yunobot.com/',
-  'http://api.yunobot.com/'
+  'http://api.yunobot.com/',
+  'localhost:3000'
 ]  
 
 app.listen(3000)

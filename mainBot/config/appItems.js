@@ -120,8 +120,8 @@ const appItems = {
     keyRequest: 'unidentified',
   },
   roomService: {
-    label: 'Room Service',
-    regex: /Room Service|roomService/,
+    label: '🍽️ Заказать в номер',
+    regex: /🍽️ Заказать в номер|roomService/,
     keyRequest: 'roomService',
   },
 };
