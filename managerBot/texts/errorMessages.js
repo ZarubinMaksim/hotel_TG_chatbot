@@ -4,7 +4,7 @@ const errorMessages = {
   unauthorizedUser: 'You are not allowed to use this bot',
   unrecognizedCommand: 'Unrecognized command. Please use the menu or /start',
   updateGuestMenu: 'Failed to handle update guest menu',
-  tryAgain: '❗️Sorry, something went wrong. Please try again later.',
+  tryAgain: '❗️Упс! Что-то пошло не так. Пожалуйста, попробуйте ещё раз /start',
   checkOut: 'Failed to check out guest',
   guestNotFound: 'Guest not found in database.',
   DBAcess: 'Failed to access database. Please try again.',

@@ -34,7 +34,7 @@ const errorTexts = {
   consoleMsgRoomService: 'Failed to send room service menu',
   invalidData: 'Invalid data',
   userNotRegisteredForThisOption: 'Кажется, что вы еще не зарегистрированы чтобы пользоваться данной опцией',
-  userTryAgainMsg: '❗️Sorry, something went wrong. Please try again later.',
+  userTryAgainMsg: '❗️Упс! Что-то пошло не так. Пожалуйста, попробуйте ещё раз /start',
 };
 
 module.exports = { startTexts, errorTexts };

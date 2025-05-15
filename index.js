@@ -6,17 +6,12 @@ const mainToken = process.env.MAIN_TOKEN
 const managerToken = process.env.MANAGER_TOKEN
 const managerBot = new TelegramBot(managerToken, { polling: true })
 const mainBot = new TelegramBot(mainToken, { polling: true, parse_mode: "HTML" })
-
 const express = require('express')
 const mongoose = require('mongoose');
 const { syncUserStates } = require('./mainBot/components/currentUsers');
 const app = express()
 const cors = require('cors')
-// mongoose.connect('mongodb://localhost:27017/laGreenBot')
-// mongoose.connect('mongodb://lagreen_user:245064163@38.244.150.204:27017/laGreenBot', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// })
+
 const uri = 'mongodb://lagreen_user:245064163@38.244.150.204:27017/lagreen_bot';
 // const uri = 'mongodb://localhost:27017/laGreenBot';
 

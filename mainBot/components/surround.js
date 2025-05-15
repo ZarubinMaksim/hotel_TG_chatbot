@@ -38,7 +38,8 @@ const sendSurrounding =  async (bot, chatId, data) => {
 
     await bot.sendMessage(chatId, surroundingsTexts.sub_main_message,{ 
       reply_markup: {
-        keyboard: surroundingsSubKeyboard(data)
+        keyboard: surroundingsSubKeyboard(data),
+        resize_keyboard: true
       },
     });
   } catch (error) {

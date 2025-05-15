@@ -1,6 +1,6 @@
 const roomsDescriptions = {
   deluxe: {
-    title: 'Deluxe, 28 м²',
+    title: '🚪 Deluxe, 28 м²',
     callback: 'deluxe',
     isActive: true,
     keyRequest: 'Deluxe',
@@ -41,7 +41,7 @@ const roomsDescriptions = {
     
   },
   lg_js: { 
-    title: 'Junior Suite 45 м²', 
+    title: '🚪 Junior Suite 45 м²', 
     callback: 'lg_js',
     isActive: true,
     keyRequest: 'Junior Suite',
@@ -80,7 +80,7 @@ const roomsDescriptions = {
     ]
   },
   studio: { 
-    title: 'Studio 30 м²',
+    title: '🚪 Studio 30 м²',
     callback: 'studio',
     isActive: true,
     keyRequest: 'Studio',
@@ -119,7 +119,7 @@ const roomsDescriptions = {
     ]
   },
   studio_dzh: { 
-    title: 'Studio с джакузи, 30 м²',
+    title: '🚪 Studio с джакузи, 30 м²',
     callback: 'studio_dzh',
     isActive: true,
     keyRequest: 'Studio with Jacuzzi',
@@ -159,7 +159,7 @@ const roomsDescriptions = {
     ]
   },
   lg_js_dzh: { 
-    title: 'Junior Suite с джакузи, 45 м²',
+    title: '🚪 Junior Suite с джакузи, 45 м²',
     callback: 'lg_js_dzh',
     isActive: true,
     keyRequest: 'Junior Suite with Jacuzzi',
@@ -198,7 +198,7 @@ const roomsDescriptions = {
     ]
   },
   lg_js_pl: { 
-    title: 'Junior Suite с доступом к бассейну, 45 м².',
+    title: '🚪 Junior Suite с доступом к бассейну, 45 м².',
     callback: 'lg_js_pl',
     isActive: true,
     keyRequest: 'Junior Suite Pool Access',
@@ -237,7 +237,7 @@ const roomsDescriptions = {
     ]
   },
   lg_js_2br: { 
-    title: 'Junior Suite с 2 спальнями, 90 м².',
+    title: '🚪 Junior Suite с 2 спальнями, 90 м².',
     callback: 'lg_js_2br',
     isActive: true,
     keyRequest: 'Junior Suite 2 bedroom',
@@ -281,7 +281,7 @@ const roomsDescriptions = {
     ]
   },
   lg_js_2br_dzh: { 
-    title: 'Junior Suite с 2 спальнями с джакузи, 90 м².',
+    title: '🚪 Junior Suite с 2 спальнями с джакузи, 90 м².',
     callback: 'lg_js_2br_dzh',
     isActive: true,
     keyRequest: 'Junior Suite 2 bedroom with jacuzzi',
@@ -325,7 +325,7 @@ const roomsDescriptions = {
     ]
   },
   lg_js_2br_pl: { 
-    title: 'Junior Suite с 2 спальнями с доступом к бассейну, 90 м².',
+    title: '🚪 Junior Suite с 2 спальнями с доступом к бассейну, 90 м².',
     callback: 'lg_js_2br_pl',
     isActive: true,
     keyRequest: 'Junior Suite 2 bedroom Pool Access',
@@ -364,7 +364,7 @@ const roomsDescriptions = {
     ]
   },
   duplex_2br_pl: { 
-    title: 'Duplex Suite с 2 спальнями с доступом к бассейну, 109 м².',
+    title: '🚪 Duplex Suite с 2 спальнями с доступом к бассейну, 109 м².',
     callback: 'duplex_2br_pl',
     isActive: true,
     keyRequest: 'Duplex Suite 2 bedroom Pool Access',
@@ -405,7 +405,7 @@ const roomsDescriptions = {
     ]
   },
   lg_suite_3br: {
-    title: 'La Green Suite с 3 спальнями, 130 м².',
+    title: '🚪 La Green Suite с 3 спальнями, 130 м².',
     callback: 'lg_suite_3br',
     isActive: true,
     keyRequest: 'La Green Suite 3 bedroom',
@@ -451,7 +451,7 @@ const roomsDescriptions = {
 };
 
 const roomsText = {
-  main_message: 'Посмотрите все наши номера 👇🏻'
+  main_message: 'Добро пожаловать в мир комфорта и уюта — взгляните на все наши номера и выберите тот, что идеально подойдёт именно вам 👇🏻'
 };
 
 module.exports = { roomsDescriptions, roomsText };

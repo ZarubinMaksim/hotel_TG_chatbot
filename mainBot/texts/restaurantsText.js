@@ -1,11 +1,11 @@
 const restaurantsNameList = `
-🥐 Ресторан и пекарня JaakDin | Полезные органические продукты и свежая выпечка.
+🥐 Ресторан и пекарня <b>JaakDin</b> | Полезные органические продукты и свежая выпечка.
 
-🍜 Ресторан Sanook | Южнотайская Кухня.
+🍜 Ресторан <b>Sanook</b> | Южнотайская Кухня.
 
-🍹 Overgrown | Лаунж и Коктейльный Бар
+🍹 <b>Overgrown</b> | Лаунж и Коктейльный Бар
 
-🏖 Manaw Manaw | Пул Бар
+🏖 <b>Manaw Manaw</b> | Пул Бар
 `;
 
 const restaurantsDescriptions = {

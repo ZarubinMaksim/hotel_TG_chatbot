@@ -51,7 +51,6 @@ const sendSpaOffer = async (bot, chatId, data) => {
 };
 
 const sendSpaDescription = async (bot, chatId, data) => {
-  console.log('ya tut', data)
   try {
     if(
       !data ||
@@ -70,14 +69,16 @@ const sendSpaDescription = async (bot, chatId, data) => {
         reply_markup: {
           inline_keyboard: [
             [{ text: menuButtons.spa_menu, web_app: { url: data.url }}]
-          ]
+          ],
+          resize_keyboard: true
         },
       });
     } else if (data.callback === 'spaOffers') {
       await bot.sendChatAction(chatId, 'typing');
       await bot.sendMessage(chatId, spaTexts.offers, {
         reply_markup: {
-          keyboard: spaSubKeyboard(data)
+          keyboard: spaSubKeyboard(data),
+          resize_keyboard: true
         }
       })
     } else {

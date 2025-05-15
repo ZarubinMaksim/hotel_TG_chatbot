@@ -17,7 +17,8 @@ const sendRestaurantsList = async (bot, chatId) => {
       reply_markup: {
         keyboard: [...restaurantsKeyboards.restaurantsListKeyboard],
         resize_keyboard: true
-      }
+      },
+      parse_mode: "HTML" 
     });
   } catch (error) {
     console.error(errorTexts.consoleMsgRestaurantsList, error);
