@@ -18,7 +18,6 @@ const sendServicesList = async (bot, chatId) => {
         keyboard: servicesKeyboards.servicesList,
         resize_keyboard: true
       },
-      parse_mode: "HTML",
     });
   } catch (error) {
     console.error(errorTexts.consoleMsgServices, error);
@@ -36,7 +35,9 @@ const sendServiceDescription = async (bot, chatId, data) => {
       throw new Error(errorTexts.invalidData);
     }
 
-    await bot.sendMessage(chatId, data.description);
+    await bot.sendMessage(chatId, data.description, {
+      parse_mode: "HTML",
+    });
   } catch (error) {
     console.error(errorTexts.consoleMsgServices, error);
     await bot.sendMessage(chatId, errorTexts.userTryAgainMsg);
