@@ -14,8 +14,7 @@ const surroundingsKeyboards = {
 };
 
 const surroundingsSubKeyboard = (data) => [
-  [menuButtons.main_menu],
-  [menuButtons.back],
+  [menuButtons.main_menu, menuButtons.back],
   ...Object.values(data.items).filter(item => item.isActive).map(item => [item.title])
 ];
 
