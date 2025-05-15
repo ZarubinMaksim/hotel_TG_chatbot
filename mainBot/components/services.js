@@ -18,6 +18,7 @@ const sendServicesList = async (bot, chatId) => {
         keyboard: servicesKeyboards.servicesList,
         resize_keyboard: true
       },
+      parse_mode: "HTML",
     });
   } catch (error) {
     console.error(errorTexts.consoleMsgServices, error);
