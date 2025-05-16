@@ -43,7 +43,8 @@ const startMainBot = (mainBot, managerBot) => {
             body: JSON.stringify({
               chatId: msg.chat.id,
               text: msg.text,
-            }, guestDetails),
+              guestDetails: guestDetails
+            }),
           });
         } catch (error) {
           console.error('❌ Ошибка при отправке сообщения на панель:', error.message);
