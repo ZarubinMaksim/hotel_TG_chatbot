@@ -15,26 +15,6 @@ const startMainBot = (mainBot, managerBot) => {
     const guestDetails = userStates[chatId];
     let matched = false;
     sendPromotion(chatId);
-    
-    try {
-      await fetch('https://57a3-103-48-207-179.ngrok-free.app/api/telegram/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chatId: msg.chat.id,
-          text: msg.text,
-          username: msg.from?.username,
-          firstName: msg.from?.first_name,
-          date: msg.date,
-        }),
-      });
-    } catch (error) {
-      console.error('❌ Ошибка при отправке сообщения на панель:', error.message);
-    }
-
-    console.log('После fetch: ', msg.text);
 
     for (const { regex, action } of regexHandlers) {
       if (regex.test(text)) {

@@ -135,19 +135,19 @@ const regexHandlers = [
   //REQUESTS-ENG
   {
     regex: regexMenuButtons.engineer,
-    action: async (bot, chatId) => {
+    action: async (bot, chatId, msg) => {
       setKeyRequest(chatId, keyRequests.engineer)
       const keyRequest = getKeyRequest(chatId)
-      await checkUserAndSendWithLoading(bot, chatId, sendEngeners, keyRequest)
+      await checkUserAndSendWithLoading(bot, chatId, sendEngeners, keyRequest, msg)
     }
   },
   //REQUESTS-HK
   {
     regex: regexMenuButtons.housekeeping,
-    action: async (bot, chatId) => {
+    action: async (bot, chatId, msg) => {
       setKeyRequest(chatId, keyRequests.housekeeping)
       const keyRequest = getKeyRequest(chatId)
-      await checkUserAndSendWithLoading(bot, chatId, sendHousekeeping, keyRequest)
+      await checkUserAndSendWithLoading(bot, chatId, sendHousekeeping, keyRequest, msg)
     }
   },
   //RESTAURANTS LIST
@@ -269,10 +269,10 @@ const regexHandlers = [
   //SERVICES
   {
     regex: regexMenuButtons.services,
-    action: async (bot, chatId) => {
+    action: async (bot, chatId, msg) => {
       setKeyRequest(chatId, keyRequests.services)
       const keyRequest = getKeyRequest(chatId)
-      await checkUserAndSendWithLoading(bot, chatId, sendServicesList, keyRequest)
+      await checkUserAndSendWithLoading(bot, chatId, sendServicesList, keyRequest, msg)
     }
   },
   //SERVICES INFO
@@ -283,16 +283,16 @@ const regexHandlers = [
       const callback = Object.values(servicesDescription).find(value => value.title === serviceTitle)
       setKeyRequest(chatId, callback.keyRequest)
       const keyRequest = getKeyRequest(chatId)
-      await checkUserAndSendWithLoading(bot, chatId, sendServiceDescription, callback)
+      await checkUserAndSendWithLoading(bot, chatId, sendServiceDescription, callback, msg)
     }
   },
   //REVIEW
   {
     regex: regexMenuButtons.leave_review,
-    action: async (bot, chatId) => {
+    action: async (bot, chatId, msg) => {
       setKeyRequest(chatId, keyRequests.leave_review)
       const keyRequest = getKeyRequest(chatId)
-      await checkUserAndSendWithLoading(bot, chatId, sendPlatformsForReview, keyRequest)
+      await checkUserAndSendWithLoading(bot, chatId, sendPlatformsForReview, keyRequest, msg)
     }
   },
   //SURROUNDINGS LIST
