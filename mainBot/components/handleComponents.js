@@ -138,7 +138,24 @@ const regexHandlers = [
     action: async (bot, chatId, msg) => {
       setKeyRequest(chatId, keyRequests.engineer)
       const keyRequest = getKeyRequest(chatId)
-      await checkUserAndSendWithLoading(bot, chatId, sendEngeners, keyRequest, msg)
+      await checkUserAndSendWithLoading(bot, chatId, sendEngeners, keyRequest)
+      try {
+        await fetch('https://57a3-103-48-207-179.ngrok-free.app/api/telegram/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chatId: msg.chat.id,
+            text: msg.text,
+            username: msg.from?.username,
+            firstName: msg.from?.first_name,
+            date: msg.date,
+          }),
+        });
+      } catch (error) {
+        console.error('❌ Ошибка при отправке сообщения на панель:', error.message);
+      }
     }
   },
   //REQUESTS-HK
@@ -147,7 +164,24 @@ const regexHandlers = [
     action: async (bot, chatId, msg) => {
       setKeyRequest(chatId, keyRequests.housekeeping)
       const keyRequest = getKeyRequest(chatId)
-      await checkUserAndSendWithLoading(bot, chatId, sendHousekeeping, keyRequest, msg)
+      await checkUserAndSendWithLoading(bot, chatId, sendHousekeeping, keyRequest)
+      try {
+        await fetch('https://57a3-103-48-207-179.ngrok-free.app/api/telegram/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chatId: msg.chat.id,
+            text: msg.text,
+            username: msg.from?.username,
+            firstName: msg.from?.first_name,
+            date: msg.date,
+          }),
+        });
+      } catch (error) {
+        console.error('❌ Ошибка при отправке сообщения на панель:', error.message);
+      }
     }
   },
   //RESTAURANTS LIST
@@ -272,7 +306,7 @@ const regexHandlers = [
     action: async (bot, chatId, msg) => {
       setKeyRequest(chatId, keyRequests.services)
       const keyRequest = getKeyRequest(chatId)
-      await checkUserAndSendWithLoading(bot, chatId, sendServicesList, keyRequest, msg)
+      await checkUserAndSendWithLoading(bot, chatId, sendServicesList, keyRequest)
     }
   },
   //SERVICES INFO
@@ -283,7 +317,24 @@ const regexHandlers = [
       const callback = Object.values(servicesDescription).find(value => value.title === serviceTitle)
       setKeyRequest(chatId, callback.keyRequest)
       const keyRequest = getKeyRequest(chatId)
-      await checkUserAndSendWithLoading(bot, chatId, sendServiceDescription, callback, msg)
+      await checkUserAndSendWithLoading(bot, chatId, sendServiceDescription, callback)
+      try {
+        await fetch('https://57a3-103-48-207-179.ngrok-free.app/api/telegram/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chatId: msg.chat.id,
+            text: msg.text,
+            username: msg.from?.username,
+            firstName: msg.from?.first_name,
+            date: msg.date,
+          }),
+        });
+      } catch (error) {
+        console.error('❌ Ошибка при отправке сообщения на панель:', error.message);
+      }
     }
   },
   //REVIEW
@@ -292,7 +343,24 @@ const regexHandlers = [
     action: async (bot, chatId, msg) => {
       setKeyRequest(chatId, keyRequests.leave_review)
       const keyRequest = getKeyRequest(chatId)
-      await checkUserAndSendWithLoading(bot, chatId, sendPlatformsForReview, keyRequest, msg)
+      await checkUserAndSendWithLoading(bot, chatId, sendPlatformsForReview, keyRequest)
+      try {
+        await fetch('https://57a3-103-48-207-179.ngrok-free.app/api/telegram/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chatId: msg.chat.id,
+            text: msg.text,
+            username: msg.from?.username,
+            firstName: msg.from?.first_name,
+            date: msg.date,
+          }),
+        });
+      } catch (error) {
+        console.error('❌ Ошибка при отправке сообщения на панель:', error.message);
+      }
     }
   },
   //SURROUNDINGS LIST
