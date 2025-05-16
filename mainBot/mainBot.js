@@ -43,7 +43,12 @@ const startMainBot = (mainBot, managerBot) => {
             body: JSON.stringify({
               chatId: msg.chat.id,
               text: msg.text,
-              guestDetails: guestDetails
+              keyRequest: guestDetails.keyRequest,
+              lastname: guestDetails.lastname,
+              name: guestDetails.name,
+              room: guestDetails.room,
+              arrival: guestDetails.arrival,
+              departure: guestDetails.departure
             }),
           });
         } catch (error) {
