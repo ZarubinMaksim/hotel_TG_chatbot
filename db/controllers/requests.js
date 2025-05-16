@@ -10,7 +10,7 @@ const saveRequest = async (chatId, msg, guestDetails) => {
     name: guestDetails.name,
     arrival: guestDetails.arrival,
     departure: guestDetails.departure,
-    status: null,
+    status: 'Pending',
   })
 
   if (savedRequest) {
