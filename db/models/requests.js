@@ -9,7 +9,7 @@ const requestSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  deprtment: {
+  department: {
     type: String,
   },
   room: {
