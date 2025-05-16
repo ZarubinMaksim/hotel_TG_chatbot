@@ -1,6 +1,7 @@
 const Request = require('../models/requests')
 
 const saveRequest = async (chatId, msg, guestDetails) => {
+  console.log('DETAILS ', guestDetails)
   const savedRequest = await Request.create({
     chatId: chatId,
     request: msg.text,
