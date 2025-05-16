@@ -80,7 +80,6 @@ const handleFollowingRequest = async (mainBot, managerBot, chatId, msg, guestDet
     if ([mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, requestReply].some(v => v == null)) {
       throw new Error(errorTexts.invalidData);
     }
-
     const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest);
     await managerBot.sendMessage(managerChatId, messageData);
     await mainBot.sendMessage(chatId, requestReply);
