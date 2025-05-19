@@ -1,7 +1,15 @@
 const Request = require('../models/requests')
 
 const saveRequest = async (chatId, msg, guestDetails) => {
-  console.log('DETAILS ', guestDetails)
+  
+  const now = new Date();
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = now.toLocaleString('en-US', { month: 'short' });
+  const year = now.getFullYear();
+  const time = now.toTimeString().slice(0, 8);
+  const formatted = `${day} ${month} ${year} ${time}`;
+
+
   const savedRequest = await Request.create({
     chatId: chatId,
     request: msg.text,
@@ -12,6 +20,7 @@ const saveRequest = async (chatId, msg, guestDetails) => {
     arrival: guestDetails.arrival,
     departure: guestDetails.departure,
     status: 'Pending',
+    receiveDate: formatted,
   })
 
   if (savedRequest) {
