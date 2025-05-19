@@ -7,7 +7,8 @@ const requestDescriptions = require('./texts/requestsText');
 const { handleFollowingRequest } = require('./components/commomFunctions');
 const { keyRequests } = require('./config/appItems');
 const { saveRequest } = require('../db/controllers/requests');
-const handleManagerBotMessage = require('../managerBot/components/managerBotMessageHandler');
+const { servicesDescription } = require('./texts/servicesText');
+const  requestDescriptions  = require('./texts/requestsText');
 
 const startMainBot = (mainBot, managerBot) => {
   mainBot.on('message', async (msg) => {
@@ -34,9 +35,10 @@ const startMainBot = (mainBot, managerBot) => {
         setKeyRequest(chatId, '');
       } else {
         const replyMsg = replyMap[keyRequest] ?? requestDescriptions.unidentified.userReplyMsg;
-        const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest);
-        handleFollowingRequest(mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, replyMsg, messageData);
-        saveRequest(chatId, msg, guestDetails, messageData);
+        // const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest);
+        handleFollowingRequest(mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, replyMsg);
+        const replyMsg = servicesDescription[keyRequest].managerBotDescriptions || requestDescriptions[keyRequest].managerBotDescriptions || 'Here is guests request:';
+        saveRequest(chatId, msg, guestDetails, replyMsg);
         try {
           await fetch('https://4fb3-103-48-207-179.ngrok-free.app/api/telegram/messages', {
             method: 'POST',
