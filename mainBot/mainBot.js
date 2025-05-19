@@ -33,7 +33,7 @@ const startMainBot = (mainBot, managerBot) => {
         submitReview(mainBot, managerBot, chatId, msg);
         setKeyRequest(chatId, '');
       } else {
-        console.log('ya tut', keyRequest)
+        console.log('ya tut', servicesDescription[keyRequest], requestDescriptions[keyRequest])
         const replyMsg = replyMap[keyRequest] ?? requestDescriptions.unidentified.userReplyMsg;
         // const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest);
         handleFollowingRequest(mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, replyMsg);
