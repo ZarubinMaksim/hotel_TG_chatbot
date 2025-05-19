@@ -37,7 +37,7 @@ const startMainBot = (mainBot, managerBot) => {
         const replyMsg = replyMap[keyRequest] ?? requestDescriptions.unidentified.userReplyMsg;
         // const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest);
         handleFollowingRequest(mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, replyMsg);
-        const replyMsg = servicesDescription[keyRequest].managerBotDescriptions || requestDescriptions[keyRequest].managerBotDescriptions || 'Here is guests request:';
+        const replyMsg = servicesDescription[keyRequest].managerBotMessage || requestDescriptions[keyRequest].managerBotMessage || 'Here is guests request:';
         saveRequest(chatId, msg, guestDetails, replyMsg);
         try {
           await fetch('https://4fb3-103-48-207-179.ngrok-free.app/api/telegram/messages', {
