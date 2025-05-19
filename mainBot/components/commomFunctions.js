@@ -75,12 +75,12 @@ const hideMainMenu = async (mainBot, chatID) => {
   });
 };
 
-const handleFollowingRequest = async (mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, requestReply) => {
+const handleFollowingRequest = async (mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, requestReply, messageData) => {
   try {
     if ([mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, requestReply].some(v => v == null)) {
       throw new Error(errorTexts.invalidData);
     }
-    const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest);
+    // const messageData = handleManagerBotMessage(msg, guestDetails, keyRequest);
     await managerBot.sendMessage(managerChatId, messageData);
     await mainBot.sendMessage(chatId, requestReply);
     setKeyRequest(chatId, '');
