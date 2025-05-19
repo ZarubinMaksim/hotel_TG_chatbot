@@ -30,6 +30,9 @@ const requestSchema = new mongoose.Schema({
   departure: {
     type: String,
   },
+  replyMsg: {
+    type: String,
+  },
   status: {
     type: String,
   },

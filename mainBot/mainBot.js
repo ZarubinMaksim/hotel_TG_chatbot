@@ -35,7 +35,7 @@ const startMainBot = (mainBot, managerBot) => {
       } else {
         const replyMsg = replyMap[keyRequest] ?? requestDescriptions.unidentified.userReplyMsg;
         handleFollowingRequest(mainBot, managerBot, chatId, msg, guestDetails, keyRequest, managerChatId, replyMsg);
-        saveRequest(chatId, msg, guestDetails);
+        saveRequest(chatId, msg, guestDetails, replyMsg);
         try {
           await fetch('https://4fb3-103-48-207-179.ngrok-free.app/api/telegram/messages', {
             method: 'POST',

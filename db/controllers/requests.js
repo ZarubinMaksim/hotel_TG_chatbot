@@ -1,6 +1,6 @@
 const Request = require('../models/requests')
 
-const saveRequest = async (chatId, msg, guestDetails) => {
+const saveRequest = async (chatId, msg, guestDetails, replyMsg) => {
   
   const now = new Date();
   const day = String(now.getDate()).padStart(2, '0');
@@ -19,6 +19,7 @@ const saveRequest = async (chatId, msg, guestDetails) => {
     name: guestDetails.name,
     arrival: guestDetails.arrival,
     departure: guestDetails.departure,
+    replyMsg: replyMsg,
     status: 'Pending',
     receiveDate: formatted,
   })
