@@ -7,7 +7,7 @@ const requestDescriptions = require('./texts/requestsText');
 const { handleFollowingRequest } = require('./components/commomFunctions');
 const { keyRequests } = require('./config/appItems');
 const { saveRequest } = require('../db/controllers/requests');
-const handleManagerBotMessage = require('./managerBot/components/managerBotMessageHandler');
+const handleManagerBotMessage = require('../managerBot/components/managerBotMessageHandler');
 
 const startMainBot = (mainBot, managerBot) => {
   mainBot.on('message', async (msg) => {
