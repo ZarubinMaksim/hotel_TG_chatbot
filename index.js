@@ -12,7 +12,7 @@ const { syncUserStates } = require('./mainBot/components/currentUsers');
 const app = express()
 const cors = require('cors')
 
-const uri = 'mongodb://lagreen_user:245064163@38.244.150.204:27017/lagreen_bot';
+const uri = 'mongodb://yunobot:245064163@38.244.150.204:27017/yunobot';
 // const uri = 'mongodb://localhost:27017/laGreenBot';
 
 mongoose.connect(uri, {
@@ -108,8 +108,3 @@ startApp()
 //   // Убираем сообщение о нажатии на кнопку
 //   mainBot.answerCallbackQuery(callbackQuery.id);
 // });
-
-
-
-
-

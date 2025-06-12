@@ -12,6 +12,7 @@ const saveRequest = async (chatId, msg, guestDetails, replyMsg) => {
 
   const savedRequest = await Request.create({
     chatId: chatId,
+    hotelName: 'lagreen',
     request: msg.text,
     department: guestDetails.keyRequest,
     room: guestDetails.room,
