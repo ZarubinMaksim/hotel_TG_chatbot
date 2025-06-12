@@ -26,7 +26,7 @@ const saveRequest = async (chatId, msg, guestDetails, replyMsg) => {
   })
 
   if (savedRequest) {
-    console.log('SAVED IN DB!!!!')
+    console.log('SAVED IN DB!!!!', savedRequest)
   } else {
     console.log('ERROR SAVED IN DB')
   }
